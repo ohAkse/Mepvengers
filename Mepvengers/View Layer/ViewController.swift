@@ -24,8 +24,7 @@ class ViewController: UIViewController {
         btn?.backgroundColor = .blue
         btn?.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         self.view.addSubview(btn!)
-      let url = "https://api.example.com/data"
-
+// let url = "https://api.example.com/data"
         // Alamofire를 사용하여 GET 요청 보내기
 //        AF.request(url).responseJSON { response in
 //            switch response.result {
@@ -45,8 +44,7 @@ class ViewController: UIViewController {
 //        imageView!.kf.setImage(with: url_)
 //relam
 //let realm = try! Realm()
-    
-        
+
         
     }
 
