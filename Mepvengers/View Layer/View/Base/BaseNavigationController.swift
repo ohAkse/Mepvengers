@@ -7,10 +7,7 @@
 
 import UIKit
 class BaseNavigationController: UINavigationController {
-    
-    var barButtonItem : UIBarButtonItem?
-        
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updatedTheme()
@@ -23,6 +20,7 @@ class BaseNavigationController: UINavigationController {
     
     private func updatedTheme() {
         //navigationBar.barStyle = UIBarStyle.yellow
+
         navigationBar.isTranslucent = false
         navigationBar.backgroundColor = .gray
         navigationBar.barTintColor = ThemeColor.pureBlack.color

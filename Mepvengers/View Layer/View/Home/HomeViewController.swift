@@ -33,6 +33,7 @@ class HomeViewController: BaseViewController {
             return UIBarButtonItem(customView: button)
         }
         self.navigationItem.rightBarButtonItems = buttonItems!
+        self.navigationItem.title = "메인 화면"
     }
     
     @objc func Search(){
@@ -44,8 +45,6 @@ class HomeViewController: BaseViewController {
     }
     
 }
-
-
 
 //
 //#if DEBUG // UI 레이아웃 잡기..

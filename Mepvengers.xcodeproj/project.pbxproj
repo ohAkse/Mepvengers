@@ -22,6 +22,7 @@
 		5FE1654D2A64F5C90016C79D /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1654C2A64F5C90016C79D /* HomeCollectionView.swift */; };
 		5FE1654F2A6501ED0016C79D /* HomeBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1654E2A6501ED0016C79D /* HomeBarButton.swift */; };
 		5FE165522A652CF40016C79D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165512A652CF40016C79D /* UIImage.swift */; };
+		5FE165542A6550B80016C79D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165532A6550B80016C79D /* Logger.swift */; };
 		613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D5040AF080804EBA38775F /* Pods_Mepvengers.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		5FE1654C2A64F5C90016C79D /* HomeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
 		5FE1654E2A6501ED0016C79D /* HomeBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarButton.swift; sourceTree = "<group>"; };
 		5FE165512A652CF40016C79D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		5FE165532A6550B80016C79D /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		68A7AAEDA7EADAEC5FC6CFDA /* Pods-Mepvengers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.debug.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.debug.xcconfig"; sourceTree = "<group>"; };
 		9A42A90DA341D908A0BA45F7 /* Pods-Mepvengers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.release.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				5FE165352A64EEE80016C79D /* Extension */,
+				5FE165532A6550B80016C79D /* Logger.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				5FE1654F2A6501ED0016C79D /* HomeBarButton.swift in Sources */,
 				5FE1654B2A64F5B20016C79D /* HomeTabBarView.swift in Sources */,
 				5FE165302A64E4CB0016C79D /* HomeSceneBuilder.swift in Sources */,
+				5FE165542A6550B80016C79D /* Logger.swift in Sources */,
 				5FE165522A652CF40016C79D /* UIImage.swift in Sources */,
 				5FE1654D2A64F5C90016C79D /* HomeCollectionView.swift in Sources */,
 			);
