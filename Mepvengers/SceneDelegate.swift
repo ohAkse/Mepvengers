@@ -16,9 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //Target 13 이상부터 AppDelegate에 있는 코드가 SceneDelegate로 이전됨
         guard let _windowscene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: _windowscene)
-        //window?.rootViewController = ShoesListViewBuilder().buildWithNavigationController()
-        window?.rootViewController = ViewController()
-        window?.rootViewController!.view.backgroundColor = .white
+
+        window?.rootViewController = HomeSceneBuilder().WithNavigationController()
+//        /window?.rootViewController?.navigationController = WithNavigationController()
+       
         window?.makeKeyAndVisible()
        
     }
