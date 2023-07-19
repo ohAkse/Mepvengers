@@ -1,15 +1,14 @@
 //
-//  HomeTagCollectionView.swift
+//  MTagCollectionView.swift
 //  Mepvengers
 //
-//  Created by 박유경 on 2023/07/18.
+//  Created by 박유경 on 2023/07/19.
 //
-
 
 import UIKit
 
-class HomeTagCollectionView: UICollectionView {
-
+class MTagCollectionView: UICollectionView {
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -21,7 +20,8 @@ class HomeTagCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-class HomeTagCollectionViewCell: UICollectionViewCell {
+
+class MTagCollectionViewCell: UICollectionViewCell {
     // 프로퍼티
     var _ImageName : String = ""
     var ImageName: String {
@@ -110,3 +110,4 @@ class HomeTagCollectionViewCell: UICollectionViewCell {
         ])
     }
 }
+

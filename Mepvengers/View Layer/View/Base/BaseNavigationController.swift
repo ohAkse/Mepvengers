@@ -34,22 +34,4 @@ class BaseNavigationController: UINavigationController {
         navigationBar.tintColor = ThemeColor.pureWhite.color
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
-    func WithabBarController() ->UITabBarController{
-        let first = rootViewController!
-        let second = CousinViewController() // Todo - 여기도 build패턴으로..
-        second.view.backgroundColor = .white
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([first,second], animated: true)
-        
-        if let items = tabBarController.tabBar.items{
-            items[0].selectedImage = UIImage(systemName: "folder.fill")
-            items[0].image = UIImage(systemName: "folder")
-            items[0].title = "추천요리"
-            
-            items[1].selectedImage = UIImage(systemName: "star.fill")
-            items[1].image = UIImage(systemName: "star")
-            items[1].title = "요리법"
-        }
-        return tabBarController
-    }
 }

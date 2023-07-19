@@ -1,13 +1,13 @@
 //
-//  HomeBarButton.swift
+//  MNavigationItem.swift
 //  Mepvengers
 //
-//  Created by 박유경 on 2023/07/17.
+//  Created by 박유경 on 2023/07/19.
 //
 
 import UIKit
 
-class HomeBarButton: UIBarButtonItem {
+class MNavigationBarButton: UIBarButtonItem {
     var TopBarButtonItemList : [UIButton] = []
     
     override init(){
@@ -34,7 +34,7 @@ class HomeBarButton: UIBarButtonItem {
                 Image = UIImage(named:"question")
                 customButtonIdentifier = "question"
             default:
-                Image = UIImage(systemName: "star")
+                Image = UIImage(systemName: "")
                 customButtonIdentifier = "default"
             }
 

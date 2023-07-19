@@ -8,7 +8,7 @@
 import UIKit
 
 class CousinViewController: BaseViewController {
-
+    var CousinViewPresenter : CousinViewPresenterSpec!
     override func viewDidLoad() {
         super.viewDidLoad()
 

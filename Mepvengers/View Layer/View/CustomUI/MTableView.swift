@@ -1,13 +1,13 @@
 //
-//  HomeTableView.swift
+//  MTableView.swift
 //  Mepvengers
 //
-//  Created by 박유경 on 2023/07/17.
+//  Created by 박유경 on 2023/07/19.
 //
 
 import UIKit
 
-class HomeTableView: UITableView{
+class MTableView: UITableView{
 
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -20,7 +20,7 @@ class HomeTableView: UITableView{
 }
 
 
-class HomeTableViewController: UIViewController{
+class MTableViewController: UIViewController{
     
     // ...
     
@@ -37,7 +37,7 @@ class HomeTableViewController: UIViewController{
 
 
 
-class HomeTopicCollectionViewCell: UICollectionViewCell {
+class MTopicCollectionViewCell: UICollectionViewCell {
 
      override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,7 +49,7 @@ class HomeTopicCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-class HomeTableCell: UITableViewCell {
+class MTableCell: UITableViewCell {
     
     let label = UILabel()
     
