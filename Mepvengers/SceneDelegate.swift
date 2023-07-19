@@ -33,8 +33,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let items = tabBarController.tabBar.items {
             let tabBarItems: [(imageName: String, title: String)] = [
-                (imageName: "folder.fill", title: "추천요리"),
-                (imageName: "fork.knife.circle.fill", title: "요리법"),
+                (imageName: "fork.knife.circle.fill", title: "블로그 추천"),
+                (imageName: "play.rectangle", title: "요리법"),
                 (imageName: "star.fill", title: "좋아요")
             ]
             

@@ -23,6 +23,8 @@
 		5FAED96A2A67A59D006E89FC /* LikeSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAED9692A67A59D006E89FC /* LikeSceneBuilder.swift */; };
 		5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAED96B2A67C39A006E89FC /* MButton.swift */; };
 		5FAED9702A67FC2E006E89FC /* GlobalDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAED96F2A67FC2E006E89FC /* GlobalDummy.swift */; };
+		5FAED9752A6834AB006E89FC /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAED9742A6834AB006E89FC /* QuestionViewController.swift */; };
+		5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAED9762A6834C1006E89FC /* QuestionSceneBuilder.swift */; };
 		5FC05BFE2A66565900B12A03 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05BFD2A66565900B12A03 /* ReviewViewController.swift */; };
 		5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C022A66B02B00B12A03 /* CousinViewController.swift */; };
 		5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */; };
@@ -64,6 +66,8 @@
 		5FAED9692A67A59D006E89FC /* LikeSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeSceneBuilder.swift; sourceTree = "<group>"; };
 		5FAED96B2A67C39A006E89FC /* MButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MButton.swift; sourceTree = "<group>"; };
 		5FAED96F2A67FC2E006E89FC /* GlobalDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDummy.swift; sourceTree = "<group>"; };
+		5FAED9742A6834AB006E89FC /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		5FAED9762A6834C1006E89FC /* QuestionSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSceneBuilder.swift; sourceTree = "<group>"; };
 		5FC05BFD2A66565900B12A03 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		5FC05C022A66B02B00B12A03 /* CousinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CousinViewController.swift; sourceTree = "<group>"; };
 		5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CousinSceneBuilder.swift; sourceTree = "<group>"; };
@@ -210,6 +214,15 @@
 			path = LikeView;
 			sourceTree = "<group>";
 		};
+		5FAED9732A683480006E89FC /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				5FAED9742A6834AB006E89FC /* QuestionViewController.swift */,
+				5FAED9762A6834C1006E89FC /* QuestionSceneBuilder.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
 		5FC05BFC2A66563B00B12A03 /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +274,7 @@
 		5FE1651F2A64D5CF0016C79D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5FAED9732A683480006E89FC /* Question */,
 				5FC05BFC2A66563B00B12A03 /* Review */,
 				5FE1652F2A64E4CB0016C79D /* HomeSceneBuilder.swift */,
 				5FE1652A2A64DCD00016C79D /* HomeViewController.swift */,
@@ -454,6 +468,7 @@
 			files = (
 				5FAED9702A67FC2E006E89FC /* GlobalDummy.swift in Sources */,
 				5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */,
+				5FAED9752A6834AB006E89FC /* QuestionViewController.swift in Sources */,
 				5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */,
 				5FAED9582A67A2CB006E89FC /* MTableView.swift in Sources */,
 				5FC05BFE2A66565900B12A03 /* ReviewViewController.swift in Sources */,
@@ -464,6 +479,7 @@
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
+				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
 				5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */,
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,

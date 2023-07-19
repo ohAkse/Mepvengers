@@ -31,7 +31,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
-        print(Logger.Write(LogLevel.Info)("HomeViewController")(34)("더미 데이터를 API데이터 변환 필요"))
         if collectionView === homeTagCollectionView {
             cell = homeTagCollectionView!.dequeueReusableCell(withReuseIdentifier: "HomeTagCollectionViewCell", for: indexPath)
             if let tagCell = cell as? MTagCollectionViewCell  {
@@ -131,6 +130,7 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
         
         NavigationLayout()
         SetupLayout()
+        
     }
     func SetupLayout(){
         
@@ -183,9 +183,7 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
     
     func NavigationLayout(){
         let buttonItems = homeTopBarButton?.TopBarButtonItemList.map { button in
-            if button.accessibilityIdentifier == "search" {
-                button.addTarget(self, action: #selector(Search), for: .touchDown)
-            } else {
+            if button.accessibilityIdentifier == "question" {
                 button.addTarget(self, action: #selector(Question), for: .touchDown)
             }
             return UIBarButtonItem(customView: button)
@@ -198,42 +196,19 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.sizeToFit()
-
         self.navigationItem.titleView = titleLabel
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "뒤로 가기"
+        self.navigationItem.backBarButtonItem = backItem
+     
     }
-    
-    @objc func Search(){
-        print("search cliekd")
-    }
+
     
     @objc func Question(){
-        print("question cliekd")
+        let baseController = QuestionSceneBuilder().WithNavigationController()
+        let questionController = baseController.rootViewController as? QuestionViewController
+        navigationController?.pushViewController(questionController!, animated: true)
     }
     
 }
-
-
-//#if DEBUG // UI 레이아웃 잡기..
-//extension HomeViewController {
-//    private struct Preview: UIViewControllerRepresentable {
-//        let viewController: HomeViewController
-//
-//        func makeUIViewController(context: Context) -> HomeViewController {
-//            return viewController
-//        }
-//
-//        func updateUIViewController(_ uiViewController: HomeViewController, context: Context) {
-//        }
-//    }
-//
-//    func toPreview() -> some View {
-//        Preview(viewController: self)
-//    }
-//}
-//
-//struct MyViewController_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeViewController().toPreview()
-//    }
-//}
-//#endif

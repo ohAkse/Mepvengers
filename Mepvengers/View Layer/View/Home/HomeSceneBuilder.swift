@@ -13,9 +13,9 @@ struct HomeSceneBuilder : ViewBuilderSpec{
         rootViewController.homeTagCollectionView = MTagCollectionView()
         rootViewController.homeTabBarView = MTabbarView()
         rootViewController.homeSearchTextField = MTextField()
-        rootViewController.homeTopBarButton = MNavigationBarButton(width : 40,height : 40,buttonType : ["search","question"])
+        rootViewController.homeTopBarButton = MNavigationBarButton(width : 40,height : 40,buttonType : ["question"])
         rootViewController.homeViewPresenter = HomeViewPresenter()
-        rootViewController.homeRecommendLabel = MTextLabel(text : "블로그 추천 음식", isBold: true)
+        rootViewController.homeRecommendLabel = MTextLabel(text : "블로그 추천 음식", isBold: true, fontSize : 20)
         rootViewController.homeMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 150, height: 150))
     
  

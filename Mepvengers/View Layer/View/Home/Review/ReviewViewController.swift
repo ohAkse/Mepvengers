@@ -8,39 +8,39 @@
 import UIKit
 
 extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return dummyData.count
+        return dummyData.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
-            cell = reviewRecommendCollectionView!.dequeueReusableCell(withReuseIdentifier: "ReviewMainCollectionViewCell", for: indexPath)
-            if let tagCell = cell as? MMainCollectionViewCell  {
-                if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
-                    let data = dummyData[indexPath.item]
-                    tagCell.titleLabel.text = data
-                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])?.resized(toWidth: 150, toHeight: 100)
-                }
+        cell = reviewRecommendCollectionView!.dequeueReusableCell(withReuseIdentifier: "ReviewMainCollectionViewCell", for: indexPath)
+        if let tagCell = cell as? MMainCollectionViewCell  {
+            if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
+                let data = dummyData[indexPath.item]
+                tagCell.titleLabel.text = data
+                tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])?.resized(toWidth: 150, toHeight: 100)
             }
+        }
         return cell ?? UICollectionViewCell()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var cellSize: CGSize = CGSize(width: 50, height: 50) // 기본 셀 크기
-            let width = collectionView.frame.width
-            let itemsPerRow: CGFloat = 2
-            let widthPadding: CGFloat = 5
-            let availableWidth = width - (widthPadding * (itemsPerRow - 1))
-            let cellWidth = availableWidth / itemsPerRow
-            cellSize.width = cellWidth
+        let width = collectionView.frame.width
+        let itemsPerRow: CGFloat = 2
+        let widthPadding: CGFloat = 5
+        let availableWidth = width - (widthPadding * (itemsPerRow - 1))
+        let cellWidth = availableWidth / itemsPerRow
+        cellSize.width = cellWidth
         return cellSize
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                print(Logger.Write(LogLevel.Info)("ReviewViewController")(42)("더미 데이터를 API데이터 변환 필요"))
-            }
+        if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
+            print(Logger.Write(LogLevel.Info)("ReviewViewController")(42)("더미 데이터를 API데이터 변환 필요"))
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -57,42 +57,42 @@ class ReviewViewController: BaseViewController {
     //프로퍼티
     var _blogName : String = ""
     var BlogName: String {
-       get {
-          return _blogName
-       }
-       set(newVal) {
-           _blogName = newVal
-       }
+        get {
+            return _blogName
+        }
+        set(newVal) {
+            _blogName = newVal
+        }
     }
     
     var _docUrl : String = ""
     var DocUrl: String {
-       get {
-          return _docUrl
-       }
-       set(newVal) {
-           _docUrl = newVal
-       }
+        get {
+            return _docUrl
+        }
+        set(newVal) {
+            _docUrl = newVal
+        }
     }
     
     var _imageUrl : String = ""
     var ImageURl: String {
-       get {
-          return _imageUrl
-       }
-       set(newVal) {
-           _imageUrl = newVal
-       }
+        get {
+            return _imageUrl
+        }
+        set(newVal) {
+            _imageUrl = newVal
+        }
     }
     
     var _isLike : Bool = false
     var IsLike: Bool {
-       get {
-          return _isLike
-       }
-       set(newVal) {
-           _isLike = newVal
-       }
+        get {
+            return _isLike
+        }
+        set(newVal) {
+            _isLike = newVal
+        }
     }
     
     //기본 이미지뷰
@@ -100,7 +100,7 @@ class ReviewViewController: BaseViewController {
     var reviewFoodImageView: UIImageView? //맨위 사진
     var reviewContentHeaderLabel : MTextLabel? // 내용
     var reviewContentLabel : MTextLabel? // 내용적는 라벨
-    //var reviewMoreButton : MTextLabel? // 내용적는 라벨
+    var reviewMoreButton : MButton? // 내용적는 라벨
     var reviewShareButton : MButton? //공유 버튼
     var reviewLikeButton : MButton? //좋아요 버튼
     var reviewRecommenHeaderLabel : MTextLabel?//추천 블로그
@@ -113,7 +113,7 @@ class ReviewViewController: BaseViewController {
         view.addSubview(reviewFoodImageView!)
         view.addSubview(reviewContentHeaderLabel!)
         view.addSubview(reviewContentLabel!)
-        //view.addSubview(reviewMoreButton!)
+        view.addSubview(reviewMoreButton!)
         view.addSubview(reviewShareButton!)
         view.addSubview(reviewLikeButton!)
         view.addSubview(reviewRecommenHeaderLabel!)
@@ -125,6 +125,31 @@ class ReviewViewController: BaseViewController {
         
         SetupLayout()
         NavigationLayout()
+        SetupButtonClickEvent()
+        
+
+        
+        //self.navigationItem.backBarButtonItem?.title = "이전"
+        
+    }
+    
+    func SetupButtonClickEvent(){
+        reviewMoreButton?.addTarget(self, action: #selector(reviewMoreButtonClick), for: .touchUpInside)
+        reviewShareButton?.addTarget(self, action: #selector(reviewShareButtonClick), for: .touchUpInside)
+        reviewLikeButton?.addTarget(self, action: #selector(reviewLikeButtonClick), for: .touchUpInside)
+        
+    }
+    
+    @objc func reviewMoreButtonClick(){
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(140)("웹뷰 링크로 전환하는 기능 필요"))
+    }
+    
+    @objc func reviewShareButtonClick(){
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(144)("공유 버튼 추가 필요"))
+    }
+    
+    @objc func reviewLikeButtonClick(){
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(148)("로컬DB에 저장 및 좋아요 페이지에 기능 추가 필요"))
     }
     
     func NavigationLayout(){
@@ -169,7 +194,7 @@ class ReviewViewController: BaseViewController {
             reviewShareButton.topAnchor.constraint(equalTo: reviewFoodImageView.bottomAnchor,constant: 20),
             reviewShareButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             //reviewShareButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 20),
-
+            
         ])
         //좋아요
         guard let reviewLikeButton = reviewLikeButton else {
@@ -207,29 +232,28 @@ class ReviewViewController: BaseViewController {
             
         ])
         
-        //더보기
-//        guard let reviewMoreButton = reviewMoreButton else {
-//            return
-//        }
-//        reviewMoreButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            reviewMoreButton.leadingAnchor.constraint(equalTo: reviewContentLabel.trailingAnchor, constant: 20),
-//            reviewMoreButton.centerYAnchor.constraint(equalTo: reviewContentLabel.centerYAnchor),
-//            reviewMoreButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
-//            reviewMoreButton.heightAnchor.constraint(equalToConstant: 10)
-//        ])
         
-
+        //더보기
+        guard let reviewMoreButton = reviewMoreButton else {
+            return
+        }
+        reviewMoreButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            reviewMoreButton.topAnchor.constraint(equalTo: reviewContentLabel.bottomAnchor,constant: 5),
+            reviewMoreButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            reviewMoreButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
+        ])
+        
+        
         //다른 블로그 글 보기
         guard let reviewRecommenHeaderLabel = reviewRecommenHeaderLabel else {
             return
         }
         reviewRecommenHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            reviewRecommenHeaderLabel.topAnchor.constraint(equalTo: reviewContentLabel.bottomAnchor,constant: 20),
+            reviewRecommenHeaderLabel.topAnchor.constraint(equalTo: reviewMoreButton.bottomAnchor,constant: 20),
             reviewRecommenHeaderLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 20),
             reviewRecommenHeaderLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            //reviewRecommenHeaderLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20), // contentView를 아래
             
         ])
         
@@ -239,10 +263,10 @@ class ReviewViewController: BaseViewController {
         }
         reviewRecommendCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            reviewRecommendCollectionView.topAnchor.constraint(equalTo: reviewRecommenHeaderLabel.bottomAnchor,constant: 20),
+            reviewRecommendCollectionView.topAnchor.constraint(equalTo: reviewRecommenHeaderLabel.bottomAnchor,constant: 10),
             reviewRecommendCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             reviewRecommendCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            reviewRecommendCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            reviewRecommendCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
 }

@@ -33,5 +33,6 @@ class BaseNavigationController: UINavigationController {
         navigationBar.barTintColor = ThemeColor.pureBlack.color
         navigationBar.tintColor = ThemeColor.pureWhite.color
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
     }
 }

@@ -7,21 +7,22 @@
 
 import UIKit
 
-class LikeViewController: UIViewController {
+class LikeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        NavigationLayout()
     }
     
+    func NavigationLayout(){
 
-    /*
-    // MARK: - Navigation
+        let titleLabel = UILabel()
+        titleLabel.text = "좋아요"
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.sizeToFit()
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        self.navigationItem.titleView = titleLabel
+     
     }
-    */
 
 }

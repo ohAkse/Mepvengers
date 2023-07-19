@@ -10,6 +10,7 @@ import UIKit
 class MTextLabel: UILabel {
     var labelText : String?
     var IsBold : Bool?
+    var fontSize : CGFloat?
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLabel()
@@ -20,22 +21,23 @@ class MTextLabel: UILabel {
         
     }
     
-    init(text: String, isBold : Bool) {
+    init(text: String, isBold : Bool, fontSize : CGFloat ) {
         super.init(frame: .zero)
         self.labelText = text
         self.IsBold = isBold
+        self.fontSize = fontSize
         setupLabel()
     }
     
     func setupLabel(){
         text = labelText
         if IsBold == true{
-            font = UIFont.boldSystemFont(ofSize: 16) // 굵은 폰트로 설정
+            font = UIFont.boldSystemFont(ofSize: fontSize!) // 굵은 폰트로 설정
         }else{
-            font = UIFont.systemFont(ofSize: 16)
+            font = UIFont.systemFont(ofSize: fontSize!)
         }
         textColor = UIColor.black // 빨간색으로 설정
-        numberOfLines = 10
+        numberOfLines = 3
     }
 }
 

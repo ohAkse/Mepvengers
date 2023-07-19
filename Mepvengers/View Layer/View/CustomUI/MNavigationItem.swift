@@ -21,15 +21,15 @@ class MNavigationBarButton: UIBarButtonItem {
     init (width : CGFloat, height : CGFloat, buttonType : [String])
     {
         super.init()
+        
+
+        
         for i in 0..<buttonType.count {
             let customButton = UIButton()
             var customButtonIdentifier = ""
             var Image : UIImage?
             
             switch buttonType[i]{
-            case "search":
-                Image = UIImage(named:"search")
-                customButtonIdentifier = "search"
             case "question":
                 Image = UIImage(named:"question")
                 customButtonIdentifier = "question"
