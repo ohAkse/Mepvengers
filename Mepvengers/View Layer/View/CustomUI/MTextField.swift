@@ -19,15 +19,19 @@ class MTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    convenience init(placeHolderText : String)
+    {
+        self.init()
+        setupTextField(placeHolderText : placeHolderText)
+    }
     
-    private func setupTextField() {
-        // 예시: 배경색과 테두리 스타일 설정
+    private func setupTextField(placeHolderText : String = "") {
+
         backgroundColor = .white
         layer.cornerRadius = 5.0
         layer.borderWidth = 1.0
         layer.borderColor = UIColor.lightGray.cgColor
         
-        // 예시: 텍스트 색상과 폰트 설정
         textColor = .black
         font = UIFont.systemFont(ofSize: 14.0)
         
@@ -39,9 +43,14 @@ class MTextField: UITextField {
         let attributedString = NSAttributedString(string: "플레이스홀더", attributes: [
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
+
         attributedPlaceholder = attributedString
-        // 예시: 플레이스홀더 텍스트 설정
-        placeholder = "검색 하고자 하는 음식을 입력 해주세요"
+  
+        if placeHolderText != ""{
+            placeholder = placeHolderText
+        }else{
+            placeholder = "검색 하고자 하는 음식을 입력 해주세요"
+        }
     }
     
     override func layoutSubviews() {

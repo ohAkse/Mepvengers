@@ -15,7 +15,7 @@ struct ReviewSceneBuilder : ViewBuilderSpec{
         reviewController.reviewFoodImageView = UIImageView() //맨위 사진
         reviewController.reviewContentHeaderLabel = MTextLabel(text : "본문", isBold: true, fontSize: 20) // 내용
         reviewController.reviewContentLabel =  MTextLabel(text : "", isBold: false, fontSize: 16) // 내용적는 라벨
-        reviewController.reviewMoreButton = MButton(name : "", titleText: "더 보기")
+        reviewController.reviewMoreButton = MButton(name : "", titleText: "더 보기", IsMoreButton: true)
         reviewController.reviewShareButton =  MButton(name : "square.and.arrow.up") //공유 버튼
         reviewController.reviewLikeButton = MButton(name : "heart") //좋아요 버튼
         reviewController.reviewRecommenHeaderLabel =  MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)

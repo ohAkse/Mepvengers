@@ -127,10 +127,6 @@ class ReviewViewController: BaseViewController {
         NavigationLayout()
         SetupButtonClickEvent()
         
-
-        
-        //self.navigationItem.backBarButtonItem?.title = "이전"
-        
     }
     
     func SetupButtonClickEvent(){
