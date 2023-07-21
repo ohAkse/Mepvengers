@@ -7,14 +7,18 @@
 
 import UIKit
 class BaseNavigationController: UINavigationController {
-    
-    var barButtonItem : UIBarButtonItem?
+    var rootViewController: UIViewController?
+    override init(rootViewController: UIViewController) {
+        super.init(rootViewController: rootViewController)
+        self.rootViewController = rootViewController
+        updatedTheme()
         
-    
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        updatedTheme()
-        interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -23,10 +27,12 @@ class BaseNavigationController: UINavigationController {
     
     private func updatedTheme() {
         //navigationBar.barStyle = UIBarStyle.yellow
+        interactivePopGestureRecognizer?.isEnabled = true
         navigationBar.isTranslucent = false
         navigationBar.backgroundColor = .gray
         navigationBar.barTintColor = ThemeColor.pureBlack.color
         navigationBar.tintColor = ThemeColor.pureWhite.color
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
     }
 }

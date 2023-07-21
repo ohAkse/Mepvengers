@@ -1,13 +1,13 @@
 //
-//  HomeBarButton.swift
+//  MNavigationItem.swift
 //  Mepvengers
 //
-//  Created by 박유경 on 2023/07/17.
+//  Created by 박유경 on 2023/07/19.
 //
 
 import UIKit
 
-class HomeBarButton: UIBarButtonItem {
+class MNavigationBarButton: UIBarButtonItem {
     var TopBarButtonItemList : [UIButton] = []
     
     override init(){
@@ -21,20 +21,20 @@ class HomeBarButton: UIBarButtonItem {
     init (width : CGFloat, height : CGFloat, buttonType : [String])
     {
         super.init()
+        
+
+        
         for i in 0..<buttonType.count {
             let customButton = UIButton()
             var customButtonIdentifier = ""
             var Image : UIImage?
             
             switch buttonType[i]{
-            case "search":
-                Image = UIImage(named:"search")
-                customButtonIdentifier = "search"
             case "question":
                 Image = UIImage(named:"question")
                 customButtonIdentifier = "question"
             default:
-                Image = UIImage(systemName: "star")
+                Image = UIImage(systemName: "")
                 customButtonIdentifier = "default"
             }
 

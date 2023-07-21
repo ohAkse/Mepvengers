@@ -1,13 +1,13 @@
 //
-//  HomeTabBarView.swift
+//  MTabbarView.swift
 //  Mepvengers
 //
-//  Created by 박유경 on 2023/07/17.
+//  Created by 박유경 on 2023/07/19.
 //
 
 import UIKit
 
-class HomeTabBarView: UITabBar {
+class MTabbarView: UITableView {
 
     /*
     // Only override draw() if you perform custom drawing.
