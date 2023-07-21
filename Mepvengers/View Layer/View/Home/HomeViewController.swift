@@ -102,7 +102,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 
-class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewDataSource*/   {
+class HomeViewController: BaseViewController, EmailAuthDelegate{
+    func didReceiveResult(_ result: EmailResult) {
+        switch result {
+        case EmailResult.Success:
+            Toast.showToast(message: "제출이 완료되었습니다.", errorMessage: [], font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
+        default:
+            print("")
+        }
+    }
+    
     var homeViewPresenter : HomeViewPresenterSpec!
     var homeTableView : MTableView? //밑에 사진, 글 등
     var homeTableViewController : MTableViewController? //
@@ -119,7 +128,6 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
         view.addSubview(homeSearchTextField!)
         view.addSubview(homeRecommendLabel!)
         view.addSubview(homeMainCollectionView!)
-        
         homeTagCollectionView!.delegate = self
         homeTagCollectionView!.dataSource = self
         homeTagCollectionView!.register(MTagCollectionViewCell.self, forCellWithReuseIdentifier: "HomeTagCollectionViewCell")
@@ -132,6 +140,7 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
         SetupLayout()
         
     }
+    
     func SetupLayout(){
         
         guard let TagcollectionView = homeTagCollectionView else {
@@ -139,9 +148,9 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
         }
         TagcollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            TagcollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            TagcollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            TagcollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: 10),
+            TagcollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            TagcollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            TagcollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             TagcollectionView.heightAnchor.constraint(equalToConstant: 70) // 콜렉션 뷰의 높이 설정
         ])
         
@@ -208,6 +217,7 @@ class HomeViewController: BaseViewController/*,UITableViewDelegate, UITableViewD
     @objc func Question(){
         let baseController = QuestionSceneBuilder().WithNavigationController()
         let questionController = baseController.rootViewController as? QuestionViewController
+        questionController?.AuthDelegate = self
         navigationController?.pushViewController(questionController!, animated: true)
     }
     

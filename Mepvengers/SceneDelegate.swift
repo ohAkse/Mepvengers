@@ -17,38 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print(Logger.Write(LogLevel.Info)("SceneDelegate")(16)("13버전부터 바뀐 부분 확인"))
         guard let _windowscene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: _windowscene)
-        window?.rootViewController = getRootViewControllerInfo()
+        window?.rootViewController = LoginSceneBuilder().WithNavigationController()
         window?.makeKeyAndVisible()
     }
     
-    func getRootViewControllerInfo() -> UITabBarController{
-        let first = HomeSceneBuilder().WithNavigationController()
-        let third = LikeSceneBuilder().WithNavigationController()
-        let second = CousinSceneBuilder().WithNavigationController()
-     
-        
-        let tabBarController = UITabBarController()
-        let viewControllers = [first, second,third].map { $0 as UIViewController }
-        tabBarController.setViewControllers(viewControllers, animated: true)
-        
-        if let items = tabBarController.tabBar.items {
-            let tabBarItems: [(imageName: String, title: String)] = [
-                (imageName: "fork.knife.circle.fill", title: "블로그 추천"),
-                (imageName: "play.rectangle", title: "요리법"),
-                (imageName: "star.fill", title: "좋아요")
-            ]
-            
-            for (index, item) in items.enumerated() {
-                let tabBarInfo = tabBarItems[index]
-                item.selectedImage = UIImage(systemName: tabBarInfo.imageName)
-                item.image = UIImage(systemName: tabBarInfo.imageName)
-                item.title = tabBarInfo.title
-            }
-        }
-        
-        return tabBarController
-        
-    }
+
     
 //    func sceneDidDisconnect(_ scene: UIScene) {
 //        // Called as the scene is being released by the system.

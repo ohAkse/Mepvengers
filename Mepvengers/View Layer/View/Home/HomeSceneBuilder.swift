@@ -17,8 +17,6 @@ struct HomeSceneBuilder : ViewBuilderSpec{
         rootViewController.homeViewPresenter = HomeViewPresenter()
         rootViewController.homeRecommendLabel = MTextLabel(text : "블로그 추천 음식", isBold: true, fontSize : 20)
         rootViewController.homeMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 150, height: 150))
-    
- 
         return rootViewController
     }
     

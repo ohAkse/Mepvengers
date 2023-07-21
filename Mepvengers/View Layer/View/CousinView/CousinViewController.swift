@@ -12,6 +12,7 @@ class CousinViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NavigationLayout()
+        
     }
     
     func NavigationLayout(){

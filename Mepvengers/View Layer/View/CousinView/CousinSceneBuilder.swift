@@ -11,9 +11,6 @@ struct CousinSceneBuilder : ViewBuilderSpec{
         let cousinViewController = CousinViewController()
         cousinViewController.view.backgroundColor = .white
         cousinViewController.CousinViewPresenter = CousinViewPresenter()
-
-    
         return cousinViewController
     }
-    
 }
