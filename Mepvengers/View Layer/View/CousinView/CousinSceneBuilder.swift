@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import UIKit
 struct CousinSceneBuilder : ViewBuilderSpec{
     func build()->  CousinViewController {
         let cousinViewController = CousinViewController()
-        cousinViewController.view.backgroundColor = .white
-        cousinViewController.CousinViewPresenter = CousinViewPresenter()
+        cousinViewController.CousinTagCollectionView = MTagCollectionView()
+        cousinViewController.CousinMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 350, height: 200))
+        
         return cousinViewController
     }
+    
 }

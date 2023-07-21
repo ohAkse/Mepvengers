@@ -84,7 +84,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         if let items = tabBarController.tabBar.items {
             let tabBarItems: [(imageName: String, title: String)] = [
                 (imageName: "fork.knife.circle.fill", title: "블로그 추천"),
-                (imageName: "play.rectangle", title: "요리법"),
+                (imageName: "play.rectangle", title: "추천 영상"),
                 (imageName: "star.fill", title: "좋아요")
             ]
             

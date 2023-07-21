@@ -103,14 +103,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 class HomeViewController: BaseViewController, EmailAuthDelegate{
-    func didReceiveResult(_ result: EmailResult) {
-        switch result {
-        case EmailResult.Success:
-            Toast.showToast(message: "제출이 완료되었습니다.", errorMessage: [], font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
-        default:
-            print("")
-        }
-    }
     
     var homeViewPresenter : HomeViewPresenterSpec!
     var homeTableView : MTableView? //밑에 사진, 글 등
@@ -139,6 +131,15 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         NavigationLayout()
         SetupLayout()
         
+    }
+    
+    func didReceiveResult(_ result: EmailResult) {
+        switch result {
+        case EmailResult.Success:
+            Toast.showToast(message: "제출이 완료되었습니다.", errorMessage: [], font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
+        default:
+            print("")
+        }
     }
     
     func SetupLayout(){
@@ -222,3 +223,29 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
     }
     
 }
+
+
+//#if DEBUG // UI 레이아웃 잡기..
+//extension HomeViewController {
+//    private struct Preview: UIViewControllerRepresentable {
+//        let viewController: UIViewController
+//
+//        func makeUIViewController(context: Context) -> UIViewController {
+//            return viewController
+//        }
+//
+//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//        }
+//    }
+//
+//    func toPreview() -> some View {
+//        Preview(viewController: self)
+//    }
+//}
+//
+//struct MyViewController_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeViewController().toPreview()
+//    }
+//}
+//#endif

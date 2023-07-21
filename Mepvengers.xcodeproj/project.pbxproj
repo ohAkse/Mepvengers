@@ -42,6 +42,9 @@
 		5FE165522A652CF40016C79D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165512A652CF40016C79D /* UIImage.swift */; };
 		5FE165542A6550B80016C79D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165532A6550B80016C79D /* Logger.swift */; };
 		5FED38082A6A547800CADAA3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38072A6A547800CADAA3 /* Toast.swift */; };
+		5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */; };
+		5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */; };
+		5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */; };
 		613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D5040AF080804EBA38775F /* Pods_Mepvengers.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +91,11 @@
 		5FE165512A652CF40016C79D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		5FE165532A6550B80016C79D /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5FED38072A6A547800CADAA3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		5FED38092A6A9FC600CADAA3 /* kakao_movie_api.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = kakao_movie_api.geojson; sourceTree = "<group>"; };
+		5FED380A2A6A9FE800CADAA3 /* kakao_movie_header_content.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = kakao_movie_header_content.md; sourceTree = "<group>"; };
+		5FED380B2A6AC4F100CADAA3 /* google_video_api.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = google_video_api.geojson; sourceTree = "<group>"; };
+		5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSceneBuilder.swift; sourceTree = "<group>"; };
 		68A7AAEDA7EADAEC5FC6CFDA /* Pods-Mepvengers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.debug.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.debug.xcconfig"; sourceTree = "<group>"; };
 		9A42A90DA341D908A0BA45F7 /* Pods-Mepvengers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.release.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +107,7 @@
 			files = (
 				5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */,
 				613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */,
+				5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +213,9 @@
 				5FAED9522A677B79006E89FC /* kakao_api_header_content.md */,
 				5FAED9532A677BF7006E89FC /* kakao_sample_image_api.geojson */,
 				5FAED96F2A67FC2E006E89FC /* GlobalDummy.swift */,
+				5FED38092A6A9FC600CADAA3 /* kakao_movie_api.geojson */,
+				5FED380A2A6A9FE800CADAA3 /* kakao_movie_header_content.md */,
+				5FED380B2A6AC4F100CADAA3 /* google_video_api.geojson */,
 			);
 			path = Dummy;
 			sourceTree = "<group>";
@@ -253,6 +265,7 @@
 		5FC05C012A66B01400B12A03 /* CousinView */ = {
 			isa = PBXGroup;
 			children = (
+				5FED380F2A6AD2E100CADAA3 /* VideoPlayerView */,
 				5FC05C022A66B02B00B12A03 /* CousinViewController.swift */,
 				5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */,
 			);
@@ -354,6 +367,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		5FED380F2A6AD2E100CADAA3 /* VideoPlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */,
+				5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */,
+			);
+			path = VideoPlayerView;
+			sourceTree = "<group>";
+		};
 		66970EC637CACC2DB5EB4CAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +413,7 @@
 			name = Mepvengers;
 			packageProductDependencies = (
 				5F1F9C272A69336500E3FB00 /* SwiftSMTP */,
+				5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = Mepvengers;
 			productReference = 5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */;
@@ -422,6 +445,7 @@
 			mainGroup = 5FA04F522A63E0CA006E6FA6;
 			packageReferences = (
 				5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
+				5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 5FA04F5C2A63E0CA006E6FA6 /* Products */;
 			projectDirPath = "";
@@ -502,6 +526,7 @@
 				5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */,
 				5FAED95E2A67A377006E89FC /* MTextField.swift in Sources */,
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
+				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
 				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
@@ -509,6 +534,7 @@
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
+				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
 				5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
@@ -742,6 +768,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -749,6 +783,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
 			productName = SwiftSMTP;
+		};
+		5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

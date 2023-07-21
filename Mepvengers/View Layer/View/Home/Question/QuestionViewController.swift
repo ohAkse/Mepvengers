@@ -338,29 +338,4 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
     
 }
 
-//
-//#if DEBUG // UI 레이아웃 잡기..
-//extension QuestionViewController {
-//    private struct Preview: UIViewControllerRepresentable {
-//        let viewController: UIViewController
-//
-//        func makeUIViewController(context: Context) -> UIViewController {
-//            return viewController
-//        }
-//
-//        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//        }
-//    }
-//
-//    func toPreview() -> some View {
-//        Preview(viewController: self)
-//    }
-//}
-//
-//struct MyViewController_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuestionViewController().toPreview()
-//    }
-//}
-//#endif
 

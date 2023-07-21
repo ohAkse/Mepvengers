@@ -12,7 +12,7 @@ class MTagCollectionView: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 50)
+        layout.itemSize = CGSize(width: 70, height: 50)
         super.init(frame: .zero, collectionViewLayout: layout)
     }
 
