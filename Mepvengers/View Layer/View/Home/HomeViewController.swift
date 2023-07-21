@@ -72,7 +72,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let availableWidth = width - (widthPadding * (itemsPerRow - 1))
             let cellWidth = availableWidth / itemsPerRow
             cellSize.width = cellWidth + 50
-            var test = 0
         }
         
         return cellSize
