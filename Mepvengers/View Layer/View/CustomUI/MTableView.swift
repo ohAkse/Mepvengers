@@ -41,7 +41,6 @@ class MTopicCollectionViewCell: UICollectionViewCell {
 
      override init(frame: CGRect) {
         super.init(frame: frame)
-         print("Zzzzzz")
         // Initialize your cell here
     }
 

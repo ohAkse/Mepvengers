@@ -10,6 +10,7 @@
 		5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1F9C272A69336500E3FB00 /* SwiftSMTP */; };
 		5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F9C4C2A696E8A00E3FB00 /* LoginViewController.swift */; };
 		5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */; };
+		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
 		5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA04F5E2A63E0CA006E6FA6 /* AppDelegate.swift */; };
 		5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA04F602A63E0CA006E6FA6 /* SceneDelegate.swift */; };
 		5FA04F682A63E0CB006E6FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FA04F672A63E0CB006E6FA6 /* Assets.xcassets */; };
@@ -106,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */,
+				5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */,
 				613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */,
 				5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
@@ -414,6 +416,7 @@
 			packageProductDependencies = (
 				5F1F9C272A69336500E3FB00 /* SwiftSMTP */,
 				5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */,
+				5F8B1CE42A6E38E70023BA85 /* Tabman */,
 			);
 			productName = Mepvengers;
 			productReference = 5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */;
@@ -446,6 +449,7 @@
 			packageReferences = (
 				5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 				5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = 5FA04F5C2A63E0CA006E6FA6 /* Products */;
 			projectDirPath = "";
@@ -768,6 +772,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
@@ -783,6 +795,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
 			productName = SwiftSMTP;
+		};
+		5F8B1CE42A6E38E70023BA85 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 		5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */ = {
 			isa = XCSwiftPackageProductDependency;
