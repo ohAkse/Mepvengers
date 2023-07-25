@@ -61,13 +61,11 @@ class VideoPlayerViewController: BaseViewController {
             VideoPlayerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             VideoPlayerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             VideoPlayerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            
             VideoPlayerView.heightAnchor.constraint(equalToConstant: 300) // 콜렉션 뷰의 높이 설정
         ])
     }
-    // YTPlayerViewDelegate 메소드
+
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        // 동영상이 로드된 후에 오토레이아웃을 갱신합니다.
         self.view.layoutIfNeeded()
     }
     

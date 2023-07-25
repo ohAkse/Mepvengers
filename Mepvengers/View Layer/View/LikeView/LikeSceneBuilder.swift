@@ -7,12 +7,15 @@
 
 import Foundation
 import UIKit
+import Tabman
+import Pageboy
 struct LikeSceneBuilder : ViewBuilderSpec{
     func build()->  LikeViewController {
         let likeViewController = LikeViewController()
-        likeViewController.LikeTitleBar = MTextLabel(text : "좋아요 목룍", isBold: true, fontSize: 16) // 좋아요
-        likeViewController.LikeListView = MTableView()// 테이블뷰
- 
+        likeViewController.LikeTBbar = TMBar.ButtonBar()
+        let BlogView = BlogSceneBuilder().WithNavigationController()
+        let VideoLikeView = VideoLikeViewSpec().WithNavigationController()
+        likeViewController.TabViewControllers = [BlogView, VideoLikeView]
         return likeViewController
     }
     

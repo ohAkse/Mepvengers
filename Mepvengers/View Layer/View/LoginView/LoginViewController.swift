@@ -36,9 +36,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool){
         
-//        print(Logger.Write(LogLevel.Info)("LoginViewController")(37)("인증 작업 필요없이 바로 넘김 -> 이함수 없애면 원복"))
-//        StartHomeViewControllerInfo()
-//        navigationController?.navigationBar.isHidden = true
+        print(Logger.Write(LogLevel.Info)("LoginViewController")(37)("인증 작업 필요없이 바로 넘김 -> 이함수 없애면 원복"))
+        StartHomeViewControllerInfo()
+        navigationController?.navigationBar.isHidden = true
     }
     
     @objc func ConfirmButtonClicked(){
@@ -77,6 +77,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         let first = HomeSceneBuilder().WithNavigationController()
         let second = CousinSceneBuilder().WithNavigationController()
         let third = LikeSceneBuilder().WithNavigationController()
+        //third.isNavigationBarHidden = true
         let tabBarController = UITabBarController()
         let viewControllers = [first, second,third].map { $0 as UIViewController }
         tabBarController.setViewControllers(viewControllers, animated: true)

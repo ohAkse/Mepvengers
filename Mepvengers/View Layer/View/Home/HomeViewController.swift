@@ -11,11 +11,8 @@ import Alamofire
 import Foundation
 import Kingfisher
 import RealmSwift
-
-
 let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
 let colorSet: [UIColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .systemPurple]
-
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -164,7 +161,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
             textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -20),
             textField.heightAnchor.constraint(equalToConstant: 30) //
-        ])
+        ]) 
         
         guard let recommendLabel = homeRecommendLabel else {
             return
@@ -184,8 +181,8 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         mainCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mainCollectionView.topAnchor.constraint(equalTo: recommendLabel.bottomAnchor,constant: 20),
-            mainCollectionView.leadingAnchor.constraint(equalTo: recommendLabel.leadingAnchor, constant: 5),
-            mainCollectionView.trailingAnchor.constraint(equalTo: recommendLabel.trailingAnchor, constant: -5),
+            mainCollectionView.leadingAnchor.constraint(equalTo: recommendLabel.leadingAnchor, constant: 20),
+            mainCollectionView.trailingAnchor.constraint(equalTo: recommendLabel.trailingAnchor, constant: -20),
             mainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20), // contentView를 아래
             
         ])
