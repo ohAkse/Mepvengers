@@ -32,7 +32,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
                     let data = dummyData[indexPath.item]
                     tagCell.titleLabel.text = data
-                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])?.resized(toWidth: 150, toHeight: 100)
+                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
                 }
             }
         } else {
@@ -41,7 +41,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if indexPath.item < dummyData1.count && indexPath.item < dummyImageName1.count {
                     let data = dummyData1[indexPath.item]
                     mainCell.titleLabel.text = data
-                    mainCell.imageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 200, toHeight: 200)
+                    mainCell.imageView.image = UIImage(named: dummyImageName1[indexPath.item])
                 }
             }
         }
@@ -82,6 +82,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 reviewController?.reviewContentLabel.text = "향이 익숙하지 않았는데 <b>실비</b> <b>김치</b>는 양념만 따로 냉동해서 라면 끓여 먹을 때마다 넣어 먹어주면 너무 좋습니다. 매운 <b>실비</b> <b>김치</b> 후기 매운 음식 좋아하시는 분들은 다 아실텐데 선화동  본점은...".replacingOccurrences(of: "</b>", with:"" ).replacingOccurrences(of: "<b>", with: "")
                 navigationController?.pushViewController(reviewController!, animated: true)
             }
+        }else{
+            if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
+                print(cell.titleLabel.text!)
+            }
+            
         }
     }
 
@@ -207,11 +212,11 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
 //#if DEBUG // UI 레이아웃 잡기..
 //extension HomeViewController: UIViewControllerRepresentable {
 //    typealias UIViewControllerType = HomeViewController
-//    
+//
 //    func makeUIViewController(context: Context) -> HomeViewController {
 //        return self
 //    }
-//    
+//
 //    func updateUIViewController(_ uiViewController: HomeViewController, context: Context) {
 //    }
 //}

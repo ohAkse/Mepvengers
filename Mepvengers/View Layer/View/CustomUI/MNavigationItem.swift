@@ -21,9 +21,7 @@ class MNavigationBarButton: UIBarButtonItem {
     init (width : CGFloat, height : CGFloat, buttonType : [String])
     {
         super.init()
-        
 
-        
         for i in 0..<buttonType.count {
             let customButton = UIButton()
             var customButtonIdentifier = ""
@@ -39,6 +37,7 @@ class MNavigationBarButton: UIBarButtonItem {
             }
 
              Image = Image!.resized(toWidth: width, toHeight: height)
+            
              customButton.setBackgroundImage(Image, for: .normal)
              customButton.accessibilityIdentifier = customButtonIdentifier
              TopBarButtonItemList.append(customButton)

@@ -18,9 +18,8 @@ extension VideoLikeViewController : UITableViewDataSource{
             print(Logger.Write(LogLevel.Info)("VideoTableViewCell")(18)("더미 데이터를 API데이터 변환 필요"))
             if let cell = tableView.dequeueReusableCell(withIdentifier: "VideoTableViewCell") as? MTableCell {
                 cell.contentLabel.text = "WWW"
-                cell.saveTime.text = "CCC"
-                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 100, toHeight: 100)
-
+                //cell.saveTime = "CCC"
+                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 150, toHeight: 150)
                 return cell
             }
         }

@@ -17,8 +17,9 @@ extension BlogLikeViewController : UITableViewDataSource{
             print(Logger.Write(LogLevel.Info)("BlogLikeViewController")(18)("더미 데이터를 API데이터 변환 필요"))
             if let cell = tableView.dequeueReusableCell(withIdentifier: "BlogTableViewCell") as? MTableCell {
                 cell.contentLabel.text = "Test"
-                cell.saveTime.text = "ABC"
-                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 50, toHeight: 100)
+                //cell.saveTime.text = "ABC"
+                //cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 50, toHeight: 200)
+                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 50, toHeight: 150)
                 return cell
             }
         }

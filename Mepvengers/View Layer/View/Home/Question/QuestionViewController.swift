@@ -13,11 +13,9 @@ protocol EmailAuthDelegate : AnyObject{
     func didReceiveResult(_ result : EmailResult)
 }
 enum EmailResult{
-    
     case Success
     case Fail
     case Default
-    
 }
 
 class QuestionViewController: BaseViewController, UITextFieldDelegate {
@@ -34,18 +32,6 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
     var QuestionCancleButton = MButton(name : "", titleText: "취소", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
     weak var AuthDelegate : EmailAuthDelegate?
     
-  //  QuestionViewController.QuestionCategoryHeaderLabel = MTextLabel(text: "문의 유형", isBold: true, fontSize: 20)//문의 유형 헤더
-    //QuestionViewController.QuestionCategoryContent =  MTextField(placeHolderText : "문의 유형을 선택해주세요.")
-    //QuestionViewController.QuestionDeviceHeader = MTextLabel(text: "기종 정보", isBold: true, fontSize: 20)// 기종정보 헤더
-    //QuestionViewController.QuestionDeviceContent = MTextField(placeHolderText : " ex) 모델 : \(UIDevice.current.model),운영체제 이름 :\(UIDevice.current.systemName), 운영체제 버전\(UIDevice.current.systemVersion)") //기종정보
-    //QuestionViewController.QuestionSubjecttHeader = MTextLabel(text: "제목", isBold: true, fontSize: 20)//문의 제목 헤더
-    //QuestionViewController.QuestionSubjectContent =   MTextField(placeHolderText : "문의 제목을 적어주세요.")      //문의 내용
-    //QuestionViewController.QuestionContentHeader = MTextLabel(text: "문의 내용", isBold: true, fontSize: 20)//문의 내용 헤더
-   // QuestionViewController.QuestionContent = MTextField(placeHolderText : "문의 사항과 관련된 상세 내용을 적어주세요.")      //문의 내용
-//    QuestionViewController.QuestionConfirmButton = MButton(name : "", titleText: "제출", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
-//    QuestionViewController.QuestionCancleButton = MButton(name : "", titleText: "취소", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
-//
-//
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +53,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         QuestionContent.becomeFirstResponder()
         
         QuestionConfirmButton.addTarget(self, action: #selector(ConfirmButtonClicked), for: .touchUpInside)
-        QuestionCancleButton.addTarget(self, action: #selector(ConcelButtonClicked), for: .touchUpInside)
+        QuestionCancleButton.addTarget(self, action: #selector(CancelButtonClicked), for: .touchUpInside)
         
     }
     @objc func ConfirmButtonClicked(){
@@ -76,7 +62,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         var subject = String()
         var content = String()
         var missingTextFieldText : [String] = []
-        //        if let QuestionCategoryContent = QuestionCategoryContent{
+        
         if let categoryText = QuestionCategoryContent.text{
             if categoryText != ""{
                 QuestionCategoryHeaderLabel.textColor = .black
@@ -86,10 +72,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
                 missingTextFieldText.append("문의 유형")
                 makeAnimation(bError: true, TextHeaderLabel: QuestionCategoryHeaderLabel)
             }
-            //   }
-            
-            
-            // if let QuestionDeviceContent = QuestionDeviceContent{
+
             if let deviceText = QuestionDeviceContent.text{
                 if deviceText != "" {
                     QuestionDeviceHeader.textColor = .black
@@ -101,9 +84,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
                     
                 }
             }
-            //}
-            
-            //  if let QuestionSubjectContent = QuestionSubjectContent{
+
             if let subjectText = QuestionSubjectContent.text{
                 if subjectText != ""{
                     QuestionSubjecttHeader.textColor = .black
@@ -114,9 +95,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
                     makeAnimation(bError: true, TextHeaderLabel: QuestionSubjecttHeader)
                 }
             }
-            //  }
-            
-            // if let QuestionContent = QuestionContent{
+
             if let contentText = QuestionContent.text{
                 if contentText != "" {
                     QuestionContentHeader.textColor = .black
@@ -127,7 +106,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
                     makeAnimation(bError: true, TextHeaderLabel: QuestionContentHeader)
                 }
             }
-            //   }
+
             if(missingTextFieldText.isEmpty){
                 let smtp = SMTP(hostname: "smtp.naver.com", email: "segassdc1@naver.com", password: "dbrud0629!@")
                 let MailFrom = Mail.User(name : "맵밴져스", email: "segassdc1@naver.com")
@@ -146,16 +125,16 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
-    @objc func ConcelButtonClicked(){
+    @objc func CancelButtonClicked(){
         QuestionCategoryContent.text = ""
         QuestionDeviceContent.text = ""
         QuestionSubjectContent.text = ""
         QuestionContent.text = ""
         
-        QuestionContentHeader.backgroundColor = .black
-        QuestionDeviceHeader.backgroundColor = .black
-        QuestionSubjecttHeader.backgroundColor = .black
-        QuestionContentHeader.backgroundColor = .black
+        QuestionContentHeader.textColor = .black
+        QuestionDeviceHeader.textColor = .black
+        QuestionSubjecttHeader.textColor = .black
+        QuestionContentHeader.textColor = .black
     }
     
     func makeAnimation(bError : Bool, TextHeaderLabel : MTextLabel){

@@ -28,7 +28,7 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
                     let data = dummyData[indexPath.item]
                     tagCell.titleLabel.text = data
-                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])?.resized(toWidth: 150, toHeight: 100)
+                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
                 }
             }
         }
