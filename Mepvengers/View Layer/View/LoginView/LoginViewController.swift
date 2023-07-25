@@ -9,11 +9,13 @@ import UIKit
 import SwiftSMTP
 class LoginViewController: BaseViewController, UITextFieldDelegate {
     
-    var LoginImageView : UIImageView?
-    var LoginEmailTextHeader : MTextLabel?
-    var LoginEmailTextField : MTextField? // 이메일 내용
-    var LoginConfirmButton : MButton?
+    var LoginImageView : UIImageView = UIImageView(image: UIImage(named: "search"))
+    var LoginEmailTextHeader : MTextLabel = MTextLabel(text : "이메일", isBold: false, fontSize: 16)
+    var LoginEmailTextField : MTextField = MTextField(placeHolderText : "이메일을 입력해 주세요") // 이메일 내용
+    var LoginConfirmButton : MButton = MButton(name : "", titleText: "제출", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
     var LoginEmailAuthAlertController : UIAlertController?
+    
+    //프로퍼티
     var smtp : SMTP?
     var timer: Timer?
     var time : Int?
@@ -21,14 +23,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     var bSendAuthCode : Int?
     var bAuthCompleted : Bool?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(LoginImageView!)
-        view.addSubview(LoginEmailTextHeader!)
-        view.addSubview(LoginEmailTextField!)
-        view.addSubview(LoginConfirmButton!)
-        LoginConfirmButton!.addTarget(self, action: #selector(ConfirmButtonClicked), for: .touchUpInside)
-        LoginEmailTextField!.delegate = self
+        view.addSubview(LoginImageView)
+        view.addSubview(LoginEmailTextHeader)
+        view.addSubview(LoginEmailTextField)
+        view.addSubview(LoginConfirmButton)
+        LoginConfirmButton.addTarget(self, action: #selector(ConfirmButtonClicked), for: .touchUpInside)
+        LoginEmailTextField.delegate = self
         SetupLayout()
         NavigationLayout()
         
@@ -42,10 +45,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc func ConfirmButtonClicked(){
-        guard let idTextField = LoginEmailTextField else{
-           return
-        }
-        if idTextField.text == ""  {
+        if LoginEmailTextField.text == ""  {
             let alertController = UIAlertController(title: "에러",message: "이메일 주소를 입력해주세요.",preferredStyle: .alert)
             // 경고창에 액션을 추가합니다.
             let okAction = UIAlertAction(title: "확인",
@@ -60,7 +60,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(CheckAuthCode), userInfo: nil, repeats: true)
         time = 60
-        var bSuccess = OpenEmailAuthDialog()
+        OpenEmailAuthDialog()
     }
     @objc func CheckAuthCode() {
         time = time! - 1
@@ -77,7 +77,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         let first = HomeSceneBuilder().WithNavigationController()
         let second = CousinSceneBuilder().WithNavigationController()
         let third = LikeSceneBuilder().WithNavigationController()
-        //third.isNavigationBarHidden = true
+
         let tabBarController = UITabBarController()
         let viewControllers = [first, second,third].map { $0 as UIViewController }
         tabBarController.setViewControllers(viewControllers, animated: true)
@@ -99,14 +99,13 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
       navigationController?.pushViewController(tabBarController, animated: true)
       tabBarController.navigationController?.isNavigationBarHidden = true
     }
-    func OpenEmailAuthDialog()->Bool{
-        bAuthCompleted = false
+    func OpenEmailAuthDialog(){
         bSendAuthCode = Int.random(in: 1000...9999)
-        guard let bSendAuthCode = bSendAuthCode else {return false }
+        guard let bSendAuthCode = bSendAuthCode else {return}
         
         smtp = SMTP(hostname: "smtp.naver.com", email: "segassdc1@naver.com", password: "dbrud0629!@")
         let MailFrom = Mail.User(name : "맵밴져스", email: "segassdc1@naver.com")
-        let MailTo = Mail.User(name : "", email: LoginEmailTextField!.text!)
+        let MailTo = Mail.User(name : "", email: LoginEmailTextField.text!)
         let MailContent = Mail(from : MailFrom, to : [MailTo], subject: "인증번호 안내문입니다.", text: String(bSendAuthCode))
     
         DispatchQueue.global(qos:  .background).async{
@@ -174,7 +173,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                 }
             })
         }
-        return bAuthCompleted!
     }
     
     func NavigationLayout(){
@@ -187,10 +185,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         
     }
     func SetupLayout(){
-        //로그인 이미지
-        guard let LoginImageView = LoginImageView else {
-            return
-        }
         LoginImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             LoginImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
@@ -199,10 +193,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             LoginImageView.heightAnchor.constraint(equalToConstant: 200) //
         ])
         
-        //ID 헤더
-        guard let LoginEmailTextHeader = LoginEmailTextHeader else {
-            return
-        }
         LoginEmailTextHeader.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             LoginEmailTextHeader.topAnchor.constraint(equalTo: LoginImageView.bottomAnchor, constant: 20),
@@ -211,10 +201,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             LoginEmailTextHeader.heightAnchor.constraint(equalToConstant: 40) //
         ])
         
-        //ID 텍스트 필드
-        guard let LoginEmailTextField = LoginEmailTextField else {
-            return
-        }
         LoginEmailTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             LoginEmailTextField.topAnchor.constraint(equalTo: LoginEmailTextHeader.bottomAnchor,constant: 5),
@@ -223,9 +209,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             LoginEmailTextField.heightAnchor.constraint(equalToConstant: 40) //
         ])
         
-        guard let LoginConfirmButton = LoginConfirmButton else {
-            return
-        }
         LoginConfirmButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             LoginConfirmButton.topAnchor.constraint(equalTo: LoginEmailTextField.bottomAnchor,constant: 40),

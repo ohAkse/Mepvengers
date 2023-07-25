@@ -12,10 +12,7 @@ import Pageboy
 struct LikeSceneBuilder : ViewBuilderSpec{
     func build()->  LikeViewController {
         let likeViewController = LikeViewController()
-        likeViewController.LikeTBbar = TMBar.ButtonBar()
-        let BlogView = BlogSceneBuilder().WithNavigationController()
-        let VideoLikeView = VideoLikeViewSpec().WithNavigationController()
-        likeViewController.TabViewControllers = [BlogView, VideoLikeView]
+        //Present 및 fetch클래스 등록
         return likeViewController
     }
     

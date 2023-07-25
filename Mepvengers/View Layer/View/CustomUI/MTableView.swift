@@ -75,6 +75,7 @@ class MTableCell: UITableViewCell {
         stackView.spacing = 10 // 라벨 사이의 간격
         return stackView
     }()
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -85,21 +86,19 @@ class MTableCell: UITableViewCell {
         NSLayoutConstraint.activate([
             photoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             photoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            photoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            photoImageView.widthAnchor.constraint(equalToConstant: 160),
-            photoImageView.heightAnchor.constraint(equalToConstant: 100)
+            photoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10),
+            photoImageView.widthAnchor.constraint(equalToConstant: 140),
         ])
+        
         contentView.addSubview(stackView)
-        
-        
+
         stackView.addArrangedSubview(self.contentLabel)
         stackView.addArrangedSubview(self.saveTime)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30),
-            stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant : 20),
+            stackView.topAnchor.constraint(equalTo: photoImageView.topAnchor, constant: 30),
+            stackView.leadingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant : 20),
             stackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
-            
         ])
     }
     required init?(coder: NSCoder) {

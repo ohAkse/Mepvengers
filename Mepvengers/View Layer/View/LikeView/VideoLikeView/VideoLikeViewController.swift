@@ -30,27 +30,23 @@ extension VideoLikeViewController : UITableViewDataSource{
 
 
 class VideoLikeViewController: BaseViewController {
-    var VideoheaderTextLabel : MTextLabel?
-    var VideoTableView : MTableView?
-    var VideoTableViewCell : MTableCell?
-    
+    var VideoheaderTextLabel = MTextLabel(text : "비디오 좋아요 목록", isBold: true, fontSize: 16) // 좋아요
+    var VideoTableView = MTableView()
+    var VideoTableViewCell = MTableCell()
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        view.addSubview(VideoheaderTextLabel!)
-        view.addSubview(VideoTableView!)
-        
-        VideoTableView!.dataSource = self
-        VideoTableView!.register(MTableCell.self, forCellReuseIdentifier: "VideoTableViewCell")
+        view.addSubview(VideoheaderTextLabel)
+        view.addSubview(VideoTableView)
+        view.backgroundColor = .white
+        VideoTableView.dataSource = self
+        VideoTableView.register(MTableCell.self, forCellReuseIdentifier: "VideoTableViewCell")
         self.navigationController?.navigationBar.isHidden = true
         SetupLayout()
     }
 
     func SetupLayout(){
         //유튜브 좋아요 좋아요 라벨
-        guard let VideoheaderTextLabel = VideoheaderTextLabel else {
-            return
-        }
         VideoheaderTextLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             VideoheaderTextLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 15),
@@ -58,10 +54,7 @@ class VideoLikeViewController: BaseViewController {
             VideoheaderTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
             VideoheaderTextLabel.heightAnchor.constraint(equalToConstant: 20) //
         ])
-        
-        guard let VideoTableView = VideoTableView else {
-            return
-        }
+        //유튜브 비디오 테이블 뷰
         VideoTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             VideoTableView.topAnchor.constraint(equalTo: VideoheaderTextLabel.bottomAnchor,constant: 20),

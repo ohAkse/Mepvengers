@@ -18,7 +18,7 @@ extension BlogLikeViewController : UITableViewDataSource{
             if let cell = tableView.dequeueReusableCell(withIdentifier: "BlogTableViewCell") as? MTableCell {
                 cell.contentLabel.text = "Test"
                 cell.saveTime.text = "ABC"
-                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 100, toHeight: 100)
+                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 50, toHeight: 100)
                 return cell
             }
         }
@@ -27,17 +27,17 @@ extension BlogLikeViewController : UITableViewDataSource{
 }
 
 class BlogLikeViewController: BaseViewController {
-    var BlogheaderTextLabel : MTextLabel?
-    var BlogTableView : MTableView?
-    var BlogTableViewCell : MTableCell?
-    
+    var BlogheaderTextLabel = MTextLabel(text : "블로그 좋아요 목록", isBold: true, fontSize: 16) // 좋아요
+    var BlogTableView = MTableView()
+    var BlogTableViewCell = MTableCell()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(BlogheaderTextLabel!)
-        view.addSubview(BlogTableView!)
+        view.addSubview(BlogheaderTextLabel)
+        view.addSubview(BlogTableView)
         
-        BlogTableView!.dataSource = self
-        BlogTableView!.register(MTableCell.self, forCellReuseIdentifier: "BlogTableViewCell")
+        BlogTableView.dataSource = self
+        BlogTableView.register(MTableCell.self, forCellReuseIdentifier: "BlogTableViewCell")
         self.navigationController?.navigationBar.isHidden = true
         
         SetupLayout()
@@ -45,9 +45,6 @@ class BlogLikeViewController: BaseViewController {
     
     func SetupLayout(){
         //블로그 좋아요 라벨
-        guard let BlogheaderTextLabel = BlogheaderTextLabel else {
-            return
-        }
         BlogheaderTextLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             BlogheaderTextLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 15),
@@ -55,10 +52,7 @@ class BlogLikeViewController: BaseViewController {
             BlogheaderTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
             BlogheaderTextLabel.heightAnchor.constraint(equalToConstant: 20) //
         ])
-        
-        guard let BlogTableView = BlogTableView else {
-            return
-        }
+        //블로그 좋아요 테이블 뷰
         BlogTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             BlogTableView.topAnchor.constraint(equalTo: BlogheaderTextLabel.safeAreaLayoutGuide.bottomAnchor,constant: 20),

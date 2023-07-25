@@ -23,7 +23,7 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
         if collectionView === CousinTagCollectionView {
-            cell = CousinTagCollectionView!.dequeueReusableCell(withReuseIdentifier: "CousinTagCollectionViewCell", for: indexPath)
+            cell = CousinTagCollectionView.dequeueReusableCell(withReuseIdentifier: "CousinTagCollectionViewCell", for: indexPath)
             if let tagCell = cell as? MTagCollectionViewCell  {
                 if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
                     let data = dummyData[indexPath.item]
@@ -32,27 +32,27 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 }
             }
         }
-            else {
-                cell = CousinMainCollectionView!.dequeueReusableCell(withReuseIdentifier: "CousinMainCollectionViewCell", for: indexPath)
-                if let mainCell = cell as? MMainCollectionViewCell {
-                    if indexPath.item < dummyGoogleData.count && indexPath.item < dummyGoogleThumbNailName.count {
-                        let nameText = dummyGoogleData[indexPath.item]
-                        mainCell.titleLabel.text = nameText
-                        let imageUrl = URL(string: dummyGoogleThumbNailName[indexPath.item])
-                        let session = URLSession.shared
-                        let task = session.dataTask(with: imageUrl!) { (data, response, error) in
-                            if error == nil {
-                                let image = UIImage(data: data!)
-                                DispatchQueue.main.async {
-                                    // 이미지를 셀의 이미지 뷰에 표시
-                                    mainCell.imageView.image = image
-                                }
+        else {
+            cell = CousinMainCollectionView.dequeueReusableCell(withReuseIdentifier: "CousinMainCollectionViewCell", for: indexPath)
+            if let mainCell = cell as? MMainCollectionViewCell {
+                if indexPath.item < dummyGoogleData.count && indexPath.item < dummyGoogleThumbNailName.count {
+                    let nameText = dummyGoogleData[indexPath.item]
+                    mainCell.titleLabel.text = nameText
+                    let imageUrl = URL(string: dummyGoogleThumbNailName[indexPath.item])
+                    let session = URLSession.shared
+                    let task = session.dataTask(with: imageUrl!) { (data, response, error) in
+                        if error == nil {
+                            let image = UIImage(data: data!)
+                            DispatchQueue.main.async {
+                                // 이미지를 셀의 이미지 뷰에 표시
+                                mainCell.imageView.image = image
                             }
                         }
-                        task.resume()
                     }
+                    task.resume()
                 }
             }
+        }
         
         return cell ?? UICollectionViewCell()
     }
@@ -99,7 +99,7 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
@@ -113,21 +113,22 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 
 class CousinViewController: BaseViewController {
-  //  var CousinViewPresenter : CousinViewPresenterSpec?
-    var CousinTagCollectionView : MTagCollectionView? // 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
-    var CousinMainCollectionView : MMainCollectionView?
+    //  var CousinViewPresenter : CousinViewPresenterSpec?
+    var CousinTagCollectionView = MTagCollectionView() // 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
+    var CousinMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 350, height: 200))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(CousinTagCollectionView!)
-        view.addSubview(CousinMainCollectionView!)
+        view.addSubview(CousinTagCollectionView)
+        view.addSubview(CousinMainCollectionView)
         
-        CousinTagCollectionView!.delegate = self
-        CousinTagCollectionView!.dataSource = self
-        CousinTagCollectionView!.register(MTagCollectionViewCell.self, forCellWithReuseIdentifier: "CousinTagCollectionViewCell")
+        CousinTagCollectionView.delegate = self
+        CousinTagCollectionView.dataSource = self
+        CousinTagCollectionView.register(MTagCollectionViewCell.self, forCellWithReuseIdentifier: "CousinTagCollectionViewCell")
         
-        CousinMainCollectionView!.delegate = self
-        CousinMainCollectionView!.dataSource = self
-        CousinMainCollectionView!.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "CousinMainCollectionViewCell")
+        CousinMainCollectionView.delegate = self
+        CousinMainCollectionView.dataSource = self
+        CousinMainCollectionView.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "CousinMainCollectionViewCell")
         
         NavigationLayout()
         SetupLayout()
@@ -135,7 +136,7 @@ class CousinViewController: BaseViewController {
         
     }
     
-  
+    
     func NavigationLayout(){
         let titleLabel = UILabel()
         titleLabel.text = "추천 영상"
@@ -152,28 +153,21 @@ class CousinViewController: BaseViewController {
     func SetupLayout(){
         
         //태그 콜렉션
-        guard let CousinTagCollectionView = CousinTagCollectionView else {
-            return
-        }
         CousinTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             CousinTagCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            CousinTagCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            CousinTagCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            CousinTagCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            CousinTagCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             CousinTagCollectionView.heightAnchor.constraint(equalToConstant: 70) // 콜렉션 뷰의 높이 설정
         ])
         
         //태그 콜렉션
-        guard let CousinMainCollectionView = CousinMainCollectionView else {
-            return
-        }
         CousinMainCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             CousinMainCollectionView.topAnchor.constraint(equalTo: CousinTagCollectionView.bottomAnchor, constant: 30),
-            CousinMainCollectionView.leadingAnchor.constraint(equalTo: CousinTagCollectionView.safeAreaLayoutGuide.leadingAnchor),
-            CousinMainCollectionView.trailingAnchor.constraint(equalTo: CousinTagCollectionView.safeAreaLayoutGuide.trailingAnchor),
-            CousinMainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20), // contentView를 아래
-//            CousinMainCollectionView.heightAnchor.constraint(equalToConstant: 70) // 콜렉션 뷰의 높이 설정
+            CousinMainCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            CousinMainCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            CousinMainCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20), //
         ])
     }
 }

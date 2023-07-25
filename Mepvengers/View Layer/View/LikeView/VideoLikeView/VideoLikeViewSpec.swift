@@ -9,9 +9,7 @@ import Foundation
 struct VideoLikeViewSpec : ViewBuilderSpec{
     func build()->  VideoLikeViewController {
         let videoPlayerViewController = VideoLikeViewController()
-        videoPlayerViewController.VideoheaderTextLabel = MTextLabel(text : "비디오 좋아요 목록", isBold: true, fontSize: 16) // 좋아요
-        videoPlayerViewController.VideoTableView = MTableView()
-        videoPlayerViewController.VideoTableViewCell = MTableCell()
+        //Present 및 fetch클래스 등록
         return videoPlayerViewController
     }
     

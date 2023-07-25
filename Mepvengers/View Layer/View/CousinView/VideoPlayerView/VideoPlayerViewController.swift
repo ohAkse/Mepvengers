@@ -16,29 +16,26 @@ extension VideoPlayerViewController : YTPlayerViewDelegate{
 }
 class VideoPlayerViewController: BaseViewController {
     
-    var VideoPlayerView: YTPlayerView?
-    var VideoID : String?
+    var VideoPlayerView = YTPlayerView()
+    var VideoID = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(VideoPlayerView!)
-        VideoPlayerView!.delegate = self
-        VideoPlayerView!.isHidden = true
+        view.addSubview(VideoPlayerView)
+        VideoPlayerView.delegate = self
+        VideoPlayerView.isHidden = true
         // 오토레이아웃이 잡힐 때까지 기다립니다.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            
             self.view.layoutIfNeeded()
-            self.VideoPlayerView!.isHidden = false
+            self.VideoPlayerView.isHidden = false
         }
-        
-        
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SetupLayout()
-        // 동영상을 로드합니다.
-        VideoPlayerView!.load(withVideoId: VideoID!)
+        // 동영상 로드
+        VideoPlayerView.load(withVideoId: VideoID)
     }
     
     
@@ -53,9 +50,6 @@ class VideoPlayerViewController: BaseViewController {
     
     func SetupLayout(){
         //태그
-        guard let VideoPlayerView = VideoPlayerView else {
-            return
-        }
         VideoPlayerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             VideoPlayerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
