@@ -10,7 +10,13 @@ import UIKit
 struct LoginSceneBuilder : ViewBuilderSpec{
     func build()->  LoginViewController {
         let loginViewController = LoginViewController()
-        //Present 및 fetch클래스 등록
+ 
+        let loginViewPresenter = LoginViewPresenter()
+        loginViewPresenter.LoginViewSpec = loginViewController
+        loginViewController.LoginViewPresenterSpec = loginViewPresenter
+   
+        //fetch클래스 등록
+        
         return loginViewController
     }
 }

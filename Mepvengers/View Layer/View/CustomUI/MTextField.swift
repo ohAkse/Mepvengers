@@ -19,9 +19,12 @@ class MTextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    convenience init(placeHolderText : String)
+    convenience init(placeHolderText : String, text : String = "")
     {
         self.init()
+        if text != ""{
+            self.text = text
+        }
         setupTextField(placeHolderText : placeHolderText)
     }
     
