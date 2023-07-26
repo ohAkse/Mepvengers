@@ -10,12 +10,13 @@ import UIKit
 struct LoginSceneBuilder : ViewBuilderSpec{
     func build()->  LoginViewController {
         let loginViewController = LoginViewController()
-        loginViewController.LoginImageView = UIImageView(image: UIImage(named: "search"))
-        loginViewController.LoginEmailTextHeader =  MTextLabel(text : "이메일", isBold: false, fontSize: 16) // 내용적는 라벨
-        loginViewController.LoginEmailTextField =  MTextField(placeHolderText : "이메일을 입력해 주세요")
-        loginViewController.LoginConfirmButton = MButton(name : "", titleText: "제출", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
-
-    
+ 
+        let loginViewPresenter = LoginViewPresenter()
+        loginViewPresenter.LoginViewSpec = loginViewController
+        loginViewController.LoginViewPresenterSpec = loginViewPresenter
+   
+        //fetch클래스 등록
+        
         return loginViewController
     }
 }

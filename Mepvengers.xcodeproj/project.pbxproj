@@ -10,6 +10,13 @@
 		5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1F9C272A69336500E3FB00 /* SwiftSMTP */; };
 		5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F9C4C2A696E8A00E3FB00 /* LoginViewController.swift */; };
 		5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */; };
+		5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */; };
+		5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2912702A6FF22B000A8FCE /* UIAlertController.swift */; };
+		5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */; };
+		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
+		5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */; };
+		5F8B1CF52A6E76270023BA85 /* VideoLikeViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF42A6E76270023BA85 /* VideoLikeViewSpec.swift */; };
+		5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */; };
 		5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA04F5E2A63E0CA006E6FA6 /* AppDelegate.swift */; };
 		5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA04F602A63E0CA006E6FA6 /* SceneDelegate.swift */; };
 		5FA04F682A63E0CB006E6FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FA04F672A63E0CB006E6FA6 /* Assets.xcassets */; };
@@ -42,6 +49,9 @@
 		5FE165522A652CF40016C79D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165512A652CF40016C79D /* UIImage.swift */; };
 		5FE165542A6550B80016C79D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165532A6550B80016C79D /* Logger.swift */; };
 		5FED38082A6A547800CADAA3 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38072A6A547800CADAA3 /* Toast.swift */; };
+		5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */; };
+		5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */; };
+		5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */; };
 		613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D5040AF080804EBA38775F /* Pods_Mepvengers.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +59,12 @@
 		32D5040AF080804EBA38775F /* Pods_Mepvengers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mepvengers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F1F9C4C2A696E8A00E3FB00 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneBuilder.swift; sourceTree = "<group>"; };
+		5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogLikeViewController.swift; sourceTree = "<group>"; };
+		5F2912702A6FF22B000A8FCE /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewPresenter.swift; sourceTree = "<group>"; };
+		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
+		5F8B1CF42A6E76270023BA85 /* VideoLikeViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewSpec.swift; sourceTree = "<group>"; };
+		5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewController.swift; sourceTree = "<group>"; };
 		5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mepvengers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FA04F5E2A63E0CA006E6FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FA04F602A63E0CA006E6FA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +104,11 @@
 		5FE165512A652CF40016C79D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		5FE165532A6550B80016C79D /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5FED38072A6A547800CADAA3 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		5FED38092A6A9FC600CADAA3 /* kakao_movie_api.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = kakao_movie_api.geojson; sourceTree = "<group>"; };
+		5FED380A2A6A9FE800CADAA3 /* kakao_movie_header_content.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = kakao_movie_header_content.md; sourceTree = "<group>"; };
+		5FED380B2A6AC4F100CADAA3 /* google_video_api.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = google_video_api.geojson; sourceTree = "<group>"; };
+		5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSceneBuilder.swift; sourceTree = "<group>"; };
 		68A7AAEDA7EADAEC5FC6CFDA /* Pods-Mepvengers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.debug.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.debug.xcconfig"; sourceTree = "<group>"; };
 		9A42A90DA341D908A0BA45F7 /* Pods-Mepvengers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.release.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,7 +119,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */,
+				5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */,
 				613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */,
+				5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +135,24 @@
 				5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */,
 			);
 			path = LoginView;
+			sourceTree = "<group>";
+		};
+		5F8B1CEE2A6E75730023BA85 /* BlogLikeView */ = {
+			isa = PBXGroup;
+			children = (
+				5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */,
+				5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */,
+			);
+			path = BlogLikeView;
+			sourceTree = "<group>";
+		};
+		5F8B1CF32A6E760C0023BA85 /* VideoLikeView */ = {
+			isa = PBXGroup;
+			children = (
+				5F8B1CF42A6E76270023BA85 /* VideoLikeViewSpec.swift */,
+				5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */,
+			);
+			path = VideoLikeView;
 			sourceTree = "<group>";
 		};
 		5FA04F522A63E0CA006E6FA6 = {
@@ -138,8 +179,8 @@
 				5FAED9442A6765AD006E89FC /* Dummy */,
 				5FA04F772A63E5D1006E6FA6 /* Extension */,
 				5FA04F762A63E5C5006E6FA6 /* Util */,
-				5FA04F752A63E432006E6FA6 /* Domain Layer */,
 				5FA04F742A63E426006E6FA6 /* Data Layer */,
+				5FA04F752A63E432006E6FA6 /* Domain Layer */,
 				5FA04F732A63E41D006E6FA6 /* View Layer */,
 				5FA04F672A63E0CB006E6FA6 /* Assets.xcassets */,
 				5FA04F692A63E0CB006E6FA6 /* LaunchScreen.storyboard */,
@@ -204,6 +245,9 @@
 				5FAED9522A677B79006E89FC /* kakao_api_header_content.md */,
 				5FAED9532A677BF7006E89FC /* kakao_sample_image_api.geojson */,
 				5FAED96F2A67FC2E006E89FC /* GlobalDummy.swift */,
+				5FED38092A6A9FC600CADAA3 /* kakao_movie_api.geojson */,
+				5FED380A2A6A9FE800CADAA3 /* kakao_movie_header_content.md */,
+				5FED380B2A6AC4F100CADAA3 /* google_video_api.geojson */,
 			);
 			path = Dummy;
 			sourceTree = "<group>";
@@ -226,6 +270,8 @@
 		5FAED9652A67A542006E89FC /* LikeView */ = {
 			isa = PBXGroup;
 			children = (
+				5F8B1CF32A6E760C0023BA85 /* VideoLikeView */,
+				5F8B1CEE2A6E75730023BA85 /* BlogLikeView */,
 				5FAED9672A67A56C006E89FC /* LikeViewController.swift */,
 				5FAED9692A67A59D006E89FC /* LikeSceneBuilder.swift */,
 			);
@@ -253,6 +299,7 @@
 		5FC05C012A66B01400B12A03 /* CousinView */ = {
 			isa = PBXGroup;
 			children = (
+				5FED380F2A6AD2E100CADAA3 /* VideoPlayerView */,
 				5FC05C022A66B02B00B12A03 /* CousinViewController.swift */,
 				5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */,
 			);
@@ -278,6 +325,7 @@
 			children = (
 				5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */,
 				5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */,
+				5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -350,8 +398,18 @@
 			isa = PBXGroup;
 			children = (
 				5FE165512A652CF40016C79D /* UIImage.swift */,
+				5F2912702A6FF22B000A8FCE /* UIAlertController.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		5FED380F2A6AD2E100CADAA3 /* VideoPlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */,
+				5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */,
+			);
+			path = VideoPlayerView;
 			sourceTree = "<group>";
 		};
 		66970EC637CACC2DB5EB4CAB /* Pods */ = {
@@ -391,6 +449,8 @@
 			name = Mepvengers;
 			packageProductDependencies = (
 				5F1F9C272A69336500E3FB00 /* SwiftSMTP */,
+				5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */,
+				5F8B1CE42A6E38E70023BA85 /* Tabman */,
 			);
 			productName = Mepvengers;
 			productReference = 5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */;
@@ -422,6 +482,8 @@
 			mainGroup = 5FA04F522A63E0CA006E6FA6;
 			packageReferences = (
 				5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
+				5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = 5FA04F5C2A63E0CA006E6FA6 /* Products */;
 			projectDirPath = "";
@@ -493,7 +555,9 @@
 			files = (
 				5FAED9702A67FC2E006E89FC /* GlobalDummy.swift in Sources */,
 				5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */,
+				5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */,
 				5FAED9752A6834AB006E89FC /* QuestionViewController.swift in Sources */,
+				5F8B1CF52A6E76270023BA85 /* VideoLikeViewSpec.swift in Sources */,
 				5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */,
 				5FAED9582A67A2CB006E89FC /* MTableView.swift in Sources */,
 				5FC05BFE2A66565900B12A03 /* ReviewViewController.swift in Sources */,
@@ -502,14 +566,20 @@
 				5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */,
 				5FAED95E2A67A377006E89FC /* MTextField.swift in Sources */,
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
+				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
+				5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
+				5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */,
 				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
 				5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */,
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
+				5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */,
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
+				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
 				5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */,
+				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
 				5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */,
@@ -742,6 +812,22 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -749,6 +835,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
 			productName = SwiftSMTP;
+		};
+		5F8B1CE42A6E38E70023BA85 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

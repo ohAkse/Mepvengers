@@ -12,7 +12,7 @@ class MTagCollectionView: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 50)
+        layout.itemSize = CGSize(width: 70, height: 50)
         super.init(frame: .zero, collectionViewLayout: layout)
     }
 
@@ -23,37 +23,20 @@ class MTagCollectionView: UICollectionView {
 
 class MTagCollectionViewCell: UICollectionViewCell {
     // 프로퍼티
-    var _ImageName : String = ""
-    var ImageName: String {
-       get {
-          return _ImageName
-       }
-       set(newVal) {
-           _ImageName = newVal
-       }
-    }
-    
-    var _labelText : String = ""
-    var LabelText: String {
-       get {
-          return _labelText
-       }
-       set(newVal) {
-           _labelText = newVal
-       }
-    }
-    var _url : URL? = URL(string: "")
-    var Url: URL?{
-       get {
-          return _url
-       }
-       set(newVal) {
-           _url = newVal
-       }
-    }
+
+
+//    var _url : URL? = URL(string: "")
+//    var Url: URL?{
+//       get {
+//          return _url
+//       }
+//       set(newVal) {
+//           _url = newVal
+//       }
+//    }
     
     var imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "search")?.resized(toWidth: 100, toHeight: 100))
+        let imageView = UIImageView(image: UIImage(named: "search"))
         imageView.clipsToBounds = true
         
         return imageView

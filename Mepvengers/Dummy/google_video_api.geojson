@@ -1,0 +1,187 @@
+//https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&type=video
+//동영상 실행하는건 http:youtube.com/embed/{videoID} -> ex  https://www.youtube.com/embed/ntnO4gqrhC8  channelID를 넣어 조회를 할경우 채널주인의 영상 채널이 나옴..
+//ex) https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&channelId=UCQkIH55mkTKgecG2HTYAk1Q  channelId가 UCQkIH55mkTKgecG2HTYAk1Q인것만 조회됨..
+// 주로 쓰이는건 q(검색 질의어), key(API key값), part(snippet이 Id보다 좀더 자세히나옴), channelId(채널이름), type(video) 등
+// 자세한건 https://developers.google.com/youtube/v3/docs/videos?hl=ko에서..
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "GmQELsO-_VORDXZU-WP9zUoEQRg",
+  "nextPageToken": "CAUQAA",
+  "regionCode": "KR",
+  "pageInfo": {
+    "totalResults": 402191,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "8_tKNPLmmLSM_3G5lptnbSXL_ZU",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "ntnO4gqrhC8"
+      },
+      "snippet": {
+        "publishedAt": "2023-07-03T07:26:06Z",
+        "channelId": "UCElKL78QbhFh8plHcGZb0Ag",
+        "title": "실비 김치",
+        "description": "가끔은 저도 제가 무슨 말을 하는지 모르겠지만 괜찮아요.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ntnO4gqrhC8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ntnO4gqrhC8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ntnO4gqrhC8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "다해",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-07-03T07:26:06Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "rgs_wz3Lxn8nF-VE5Ljv3S_qNAg",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "t-F4jqYnB4o"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-01T10:00:40Z",
+        "channelId": "UCQkIH55mkTKgecG2HTYAk1Q",
+        "title": "매운맛 끝판왕🔥 실비 김치 한상 차리다가 18년 우정 박살 남 [실비 김치 편🥵]",
+        "description": "궁둥이 불나게 매운 거 좋아하는 사람 다 모이라~ 맵부심 와장창 해뿟는 실비 김치 한상 가지고 왔으니까 오늘은 매운 거 잘 먹는 아들 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/t-F4jqYnB4o/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/t-F4jqYnB4o/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/t-F4jqYnB4o/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "ㄴ신봉선ㄱ",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-01T10:00:40Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "bsSqMNXbtxQjOWVn3rBvlP2cwNM",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "H4h-W68t5lw"
+      },
+      "snippet": {
+        "publishedAt": "2022-01-13T13:50:06Z",
+        "channelId": "UCJYQGF8-jdrsEpU0SR1Fv8A",
+        "title": "실비김치 처음 먹는 사람의 흔한 모습 #shorts",
+        "description": "실비김치 먹방 매운 김치 먹방.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/H4h-W68t5lw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/H4h-W68t5lw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/H4h-W68t5lw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "또순 DDosoon Eating Sound",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-01-13T13:50:06Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "q4nDNS_10NU7AABFoEQcPFkxGWs",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "nqezHrds7pQ"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-30T07:57:39Z",
+        "channelId": "UCkL84edpNrmASTmaTPuCMAw",
+        "title": "김치와 밥만 있어도 행복한데 수육까지 있으면 이곳은 천국이야.. 실비김치 수육 먹방 korean spicy kimchi [eating show] mukbang korean food",
+        "description": "실비김치 #실비파김치 #수육 #koreanspicykimchi #ASMR #realsounds #Mukbang #eatingshow 비지니스 문의 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/nqezHrds7pQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/nqezHrds7pQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/nqezHrds7pQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Wooang 우앙",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-30T07:57:39Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "sDzkJLiPhZrf4IhMfMs7RHJ317g",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "VmiXgTCfnMA"
+      },
+      "snippet": {
+        "publishedAt": "2023-07-06T11:30:18Z",
+        "channelId": "UCUxXrqHwz836pHcRZRVJLhw",
+        "title": "SUB) 실비김치 듬뿍넣은 실비김치볶음밥🔥 (ft.크림소스) 진짜 역대급 꿀조합 먹방 SPICY SILBI KIMCHI BOKKEMBAP REAL SOUND ASMR MUKBANG",
+        "description": "SUB ) #실비김치 #듬뿍 넣은 #실비김치볶음밥 ( #ft .#크림 소스) 진짜 #역대급 #꿀조합 #먹방 #SPICY #SILBI #KIMCHI ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/VmiXgTCfnMA/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/VmiXgTCfnMA/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/VmiXgTCfnMA/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "수향TV [suhyangTV]",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-07-06T11:30:18Z"
+      }
+    }
+  ]
+}

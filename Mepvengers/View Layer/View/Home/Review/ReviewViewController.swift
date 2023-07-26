@@ -8,20 +8,17 @@
 import UIKit
 
 extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dummyData.count
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
-        cell = reviewRecommendCollectionView!.dequeueReusableCell(withReuseIdentifier: "ReviewMainCollectionViewCell", for: indexPath)
+        cell = reviewRecommendCollectionView.dequeueReusableCell(withReuseIdentifier: "ReviewMainCollectionViewCell", for: indexPath)
         if let tagCell = cell as? MMainCollectionViewCell  {
             if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
                 let data = dummyData[indexPath.item]
                 tagCell.titleLabel.text = data
-                tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])?.resized(toWidth: 150, toHeight: 100)
+                tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
             }
         }
         return cell ?? UICollectionViewCell()
@@ -42,7 +39,6 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
             print(Logger.Write(LogLevel.Info)("ReviewViewController")(42)("더미 데이터를 API데이터 변환 필요"))
         }
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
@@ -96,32 +92,32 @@ class ReviewViewController: BaseViewController {
     }
     
     //기본 이미지뷰
-    var reviewFoodHeaderLabel : MTextLabel? // 내용
-    var reviewFoodImageView: UIImageView? //맨위 사진
-    var reviewContentHeaderLabel : MTextLabel? // 내용
-    var reviewContentLabel : MTextLabel? // 내용적는 라벨
-    var reviewMoreButton : MButton? // 내용적는 라벨
-    var reviewShareButton : MButton? //공유 버튼
-    var reviewLikeButton : MButton? //좋아요 버튼
-    var reviewRecommenHeaderLabel : MTextLabel?//추천 블로그
-    var reviewRecommendCollectionView : MMainCollectionView?//다른 추천 블로그 음식 썸네일
+    var reviewFoodHeaderLabel  =  MTextLabel(text :"대표 사진", isBold: true, fontSize: 20) // 내용
+    var reviewFoodImageView = UIImageView() //맨위 사진
+    var reviewContentHeaderLabel =  MTextLabel(text : "본문", isBold: true, fontSize: 20)
+    var reviewContentLabel = MTextLabel(text : "", isBold: false, fontSize: 16) // 내용적는 라벨
+    var reviewMoreButton = MButton(name : "", titleText: "더 보기", IsMoreButton: true)
+    var reviewShareButton =  MButton(name : "square.and.arrow.up") //공유 버튼
+    var reviewLikeButton = MButton(name : "heart") //좋아요 버튼
+    var reviewRecommenHeaderLabel = MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)
+    var reviewRecommendCollectionView = MMainCollectionView(isHorizontal: true, size: CGSize(width: 150, height: 130))//밑에 추천 음식썸네일
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(reviewFoodHeaderLabel!)
-        view.addSubview(reviewFoodImageView!)
-        view.addSubview(reviewContentHeaderLabel!)
-        view.addSubview(reviewContentLabel!)
-        view.addSubview(reviewMoreButton!)
-        view.addSubview(reviewShareButton!)
-        view.addSubview(reviewLikeButton!)
-        view.addSubview(reviewRecommenHeaderLabel!)
-        view.addSubview(reviewRecommendCollectionView!)
+        view.addSubview(reviewFoodHeaderLabel)
+        view.addSubview(reviewFoodImageView)
+        view.addSubview(reviewContentHeaderLabel)
+        view.addSubview(reviewContentLabel)
+        view.addSubview(reviewMoreButton)
+        view.addSubview(reviewShareButton)
+        view.addSubview(reviewLikeButton)
+        view.addSubview(reviewRecommenHeaderLabel)
+        view.addSubview(reviewRecommendCollectionView)
         
-        reviewRecommendCollectionView!.delegate = self
-        reviewRecommendCollectionView!.dataSource = self
-        reviewRecommendCollectionView!.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "ReviewMainCollectionViewCell")
+        reviewRecommendCollectionView.delegate = self
+        reviewRecommendCollectionView.dataSource = self
+        reviewRecommendCollectionView.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "ReviewMainCollectionViewCell")
         
         SetupLayout()
         NavigationLayout()
@@ -130,9 +126,9 @@ class ReviewViewController: BaseViewController {
     }
     
     func SetupButtonClickEvent(){
-        reviewMoreButton?.addTarget(self, action: #selector(reviewMoreButtonClick), for: .touchUpInside)
-        reviewShareButton?.addTarget(self, action: #selector(reviewShareButtonClick), for: .touchUpInside)
-        reviewLikeButton?.addTarget(self, action: #selector(reviewLikeButtonClick), for: .touchUpInside)
+        reviewMoreButton.addTarget(self, action: #selector(reviewMoreButtonClick), for: .touchUpInside)
+        reviewShareButton.addTarget(self, action: #selector(reviewShareButtonClick), for: .touchUpInside)
+        reviewLikeButton.addTarget(self, action: #selector(reviewLikeButtonClick), for: .touchUpInside)
         
     }
     
@@ -159,9 +155,6 @@ class ReviewViewController: BaseViewController {
     
     func SetupLayout(){
         //대표사진
-        guard let reviewFoodHeaderLabel = reviewFoodHeaderLabel else {
-            return
-        }
         reviewFoodHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewFoodHeaderLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
@@ -169,11 +162,7 @@ class ReviewViewController: BaseViewController {
             reviewFoodHeaderLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: 20),
             reviewFoodHeaderLabel.heightAnchor.constraint(equalToConstant: 40) //
         ])
-        
         //음식사진
-        guard let reviewFoodImageView = reviewFoodImageView else {
-            return
-        }
         reviewFoodImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewFoodImageView.topAnchor.constraint(equalTo: reviewFoodHeaderLabel.bottomAnchor,constant: 20),
@@ -182,9 +171,6 @@ class ReviewViewController: BaseViewController {
             reviewFoodImageView.heightAnchor.constraint(equalToConstant: 200) //
         ])
         //공유
-        guard let reviewShareButton = reviewShareButton else {
-            return
-        }
         reviewShareButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewShareButton.topAnchor.constraint(equalTo: reviewFoodImageView.bottomAnchor,constant: 20),
@@ -193,9 +179,6 @@ class ReviewViewController: BaseViewController {
             
         ])
         //좋아요
-        guard let reviewLikeButton = reviewLikeButton else {
-            return
-        }
         reviewLikeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewLikeButton.topAnchor.constraint(equalTo: reviewFoodImageView.bottomAnchor,constant: 20),
@@ -203,9 +186,6 @@ class ReviewViewController: BaseViewController {
         ])
         
         //본문
-        guard let reviewContentHeaderLabel = reviewContentHeaderLabel else {
-            return
-        }
         reviewContentHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewContentHeaderLabel.topAnchor.constraint(equalTo: reviewLikeButton.bottomAnchor,constant: 10),
@@ -214,37 +194,21 @@ class ReviewViewController: BaseViewController {
             reviewContentHeaderLabel.heightAnchor.constraint(equalToConstant: 30) //
             
         ])
-        
         //글내용
-        guard let reviewContentLabel = reviewContentLabel else {
-            return
-        }
         reviewContentLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewContentLabel.topAnchor.constraint(equalTo: reviewContentHeaderLabel.bottomAnchor,constant: 10),
             reviewContentLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             reviewContentLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            //reviewContentLabel.heightAnchor.constraint(equalToConstant: 30) //
-            
         ])
-        
-        
         //더보기
-        guard let reviewMoreButton = reviewMoreButton else {
-            return
-        }
         reviewMoreButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewMoreButton.topAnchor.constraint(equalTo: reviewContentLabel.bottomAnchor,constant: 5),
             reviewMoreButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             reviewMoreButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
         ])
-        
-        
         //다른 블로그 글 보기
-        guard let reviewRecommenHeaderLabel = reviewRecommenHeaderLabel else {
-            return
-        }
         reviewRecommenHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewRecommenHeaderLabel.topAnchor.constraint(equalTo: reviewMoreButton.bottomAnchor,constant: 20),
@@ -252,11 +216,7 @@ class ReviewViewController: BaseViewController {
             reviewRecommenHeaderLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
         ])
-        
         //음식 사진
-        guard let reviewRecommendCollectionView = reviewRecommendCollectionView else {
-            return
-        }
         reviewRecommendCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             reviewRecommendCollectionView.topAnchor.constraint(equalTo: reviewRecommenHeaderLabel.bottomAnchor,constant: 10),
