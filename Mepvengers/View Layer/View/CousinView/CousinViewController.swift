@@ -8,37 +8,66 @@
 import UIKit
 import YouTubeiOSPlayerHelper
 
+protocol CousinViewSpec: AnyObject {
+    func UpdateTagCollectionView(cousinTagList : [CousinViewTagModel])
+    func UpdateMainCollectionView(cousinMainCollectionList: [CousinViewMainCollectionModel])
+    func ShowErrorMessage(ErrorMessage : String)
+    func ReloadTagCollectionView(cellInfo : CousinViewTagModel)
+    func RouteReviewController(cellInfo : CousinViewMainCollectionModel)
+}
+
+extension CousinViewController : CousinViewSpec
+{
+    func ShowErrorMessage(ErrorMessage: String) {
+        self.showAlert(title: "에러", message: ErrorMessage)
+    }
+
+    func UpdateTagCollectionView(cousinTagList : [CousinViewTagModel]){
+        CousinViewTagList = cousinTagList
+    }
+    func UpdateMainCollectionView(cousinMainCollectionList: [CousinViewMainCollectionModel]){
+        print(Logger.Write(LogLevel.Info)("CousinViewController")(29)("테이블뷰 Reload하는 기능 추가해야함"))
+        CousinMainCollectionList = cousinMainCollectionList
+    }
+    func ReloadTagCollectionView(cellInfo : CousinViewTagModel){
+        print(cellInfo)
+    }
+    func RouteReviewController(cellInfo: CousinViewMainCollectionModel){
+        let baseController = VideoPlayerSceneBuilder().WithNavigationController()
+        let VideoController = baseController.rootViewController as? VideoPlayerViewController
+        VideoController!.VideoID = cellInfo.VideoUrl
+        navigationController?.pushViewController(VideoController!, animated: true)
+    }
+}
+
 extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView === CousinTagCollectionView
         {
-            return dummyData.count
+            return CousinViewTagList.count
         }else{
-            return dummyGoogleData.count
+            return CousinMainCollectionList.count
         }
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
         if collectionView === CousinTagCollectionView {
             cell = CousinTagCollectionView.dequeueReusableCell(withReuseIdentifier: "CousinTagCollectionViewCell", for: indexPath)
             if let tagCell = cell as? MTagCollectionViewCell  {
-                if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
-                    let data = dummyData[indexPath.item]
-                    tagCell.titleLabel.text = data
-                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
+                if indexPath.item < CousinViewTagList.count {
+                    let data = CousinViewTagList[indexPath.item]
+                    tagCell.titleLabel.text = data.title
+                    tagCell.imageView.image = UIImage(named: data.ImageName)
                 }
             }
         }
         else {
             cell = CousinMainCollectionView.dequeueReusableCell(withReuseIdentifier: "CousinMainCollectionViewCell", for: indexPath)
             if let mainCell = cell as? MMainCollectionViewCell {
-                if indexPath.item < dummyGoogleData.count && indexPath.item < dummyGoogleThumbNailName.count {
-                    let nameText = dummyGoogleData[indexPath.item]
-                    mainCell.titleLabel.text = nameText
-                    let imageUrl = URL(string: dummyGoogleThumbNailName[indexPath.item])
+                if indexPath.item < CousinMainCollectionList.count {
+                    let data = CousinMainCollectionList[indexPath.item]
+                    mainCell.titleLabel.text = data.title
+                    let imageUrl = URL(string: data.imageUrl)
                     let session = URLSession.shared
                     let task = session.dataTask(with: imageUrl!) { (data, response, error) in
                         if error == nil {
@@ -56,6 +85,19 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         return cell ?? UICollectionViewCell()
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == CousinTagCollectionView{
+            if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
+                CousinViewPresenter.OnTagSelectedItem(cellInfo: CousinViewTagList[indexPath.item])
+            }
+        }
+        else{
+            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
+                CousinViewPresenter.OnCellSelectedItem(cellInfo: CousinMainCollectionList[indexPath.item])
+            }
+        }
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var cellSize: CGSize = CGSize(width: 50, height: 50) // 기본 셀 크기
@@ -79,27 +121,6 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         return cellSize
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
-        if collectionView == CousinTagCollectionView{
-            print(Logger.Write(LogLevel.Info)("CousinViewController")(72)("더미 데이터를 API데이터 변환 필요"))
-            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                //Reload하는 부분 구현 필요
-            }
-        }
-        else{
-            print(Logger.Write(LogLevel.Info)("CousinViewController")(72)("더미 데이터를 API데이터 변환 필요"))
-            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                let baseController = VideoPlayerSceneBuilder().WithNavigationController()
-                let VideoController = baseController.rootViewController as? VideoPlayerViewController
-                VideoController!.VideoID = "t-F4jqYnB4o"
-                navigationController?.pushViewController(VideoController!, animated: true)
-                
-            }
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
@@ -113,7 +134,9 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 
 class CousinViewController: BaseViewController {
-    //  var CousinViewPresenter : CousinViewPresenterSpec?
+    var CousinViewPresenter : CousinViewPresenterSpec!
+    var CousinViewTagList : [CousinViewTagModel] = []
+    var CousinMainCollectionList : [CousinViewMainCollectionModel] = []
     var CousinTagCollectionView = MTagCollectionView() // 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
     var CousinMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 350, height: 200))
     
@@ -132,8 +155,7 @@ class CousinViewController: BaseViewController {
         
         NavigationLayout()
         SetupLayout()
-        
-        
+        CousinViewPresenter.loadData()
     }
     
     
@@ -151,7 +173,6 @@ class CousinViewController: BaseViewController {
     }
     
     func SetupLayout(){
-        
         //태그 콜렉션
         CousinTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -160,7 +181,6 @@ class CousinViewController: BaseViewController {
             CousinTagCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             CousinTagCollectionView.heightAnchor.constraint(equalToConstant: 70) // 콜렉션 뷰의 높이 설정
         ])
-        
         //태그 콜렉션
         CousinMainCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

@@ -225,7 +225,6 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
     
 }
 
-
 //#if DEBUG // UI 레이아웃 잡기..
 //extension HomeViewController: UIViewControllerRepresentable {
 //    typealias UIViewControllerType = HomeViewController

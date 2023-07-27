@@ -10,7 +10,9 @@ import UIKit
 struct CousinSceneBuilder : ViewBuilderSpec{
     func build()->  CousinViewController {
         let cousinViewController = CousinViewController()
-        //Present 및 fetch클래스 등록
+        let cousinViewPresenter = CousinViewPresenter()
+        cousinViewPresenter.CousinViewSpec = cousinViewController
+        cousinViewController.CousinViewPresenter = cousinViewPresenter
         return cousinViewController
     }
     

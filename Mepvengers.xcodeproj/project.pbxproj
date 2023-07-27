@@ -43,6 +43,9 @@
 		5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */; };
 		5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */; };
 		5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */; };
+		5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */; };
+		5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */; };
+		5FCFB5D42A72BC0A00273DE0 /* NaverBlogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5D32A72BC0A00273DE0 /* NaverBlogModel.swift */; };
 		5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651B2A64D5B50016C79D /* BaseViewController.swift */; };
 		5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */; };
 		5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */; };
@@ -101,6 +104,9 @@
 		5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewPresenter.swift; sourceTree = "<group>"; };
 		5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPresenter.swift; sourceTree = "<group>"; };
 		5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVideoModel.swift; sourceTree = "<group>"; };
+		5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoModel.swift; sourceTree = "<group>"; };
+		5FCFB5D32A72BC0A00273DE0 /* NaverBlogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverBlogModel.swift; sourceTree = "<group>"; };
 		5FE1651B2A64D5B50016C79D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilderSpec.swift; sourceTree = "<group>"; };
@@ -211,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				5FC05C0D2A66C7A600B12A03 /* Enum */,
-				5FC05C062A66C51500B12A03 /* DataModel */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 		5FA04F752A63E432006E6FA6 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
+				5FCFB5C62A72A61A00273DE0 /* Model */,
 				5FC05C072A66C54300B12A03 /* UseCase */,
 				5FC05C082A66C54D00B12A03 /* Presenter */,
 			);
@@ -312,13 +318,6 @@
 			path = CousinView;
 			sourceTree = "<group>";
 		};
-		5FC05C062A66C51500B12A03 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModel;
-			sourceTree = "<group>";
-		};
 		5FC05C072A66C54300B12A03 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +343,16 @@
 			children = (
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		5FCFB5C62A72A61A00273DE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */,
+				5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */,
+				5FCFB5D32A72BC0A00273DE0 /* NaverBlogModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5FE1651F2A64D5CF0016C79D /* Home */ = {
@@ -579,6 +588,7 @@
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
 				5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
+				5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */,
 				5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */,
 				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
 				5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */,
@@ -587,6 +597,7 @@
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
 				5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */,
 				5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */,
+				5FCFB5D42A72BC0A00273DE0 /* NaverBlogModel.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
 				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
 				5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */,
@@ -600,6 +611,7 @@
 				5FAED9622A67A3CB006E89FC /* MMainCollectionView.swift in Sources */,
 				5FC05C0C2A66C69100B12A03 /* CousinViewPresenter.swift in Sources */,
 				5FE165302A64E4CB0016C79D /* HomeSceneBuilder.swift in Sources */,
+				5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */,
 				5FE165542A6550B80016C79D /* Logger.swift in Sources */,
 				5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */,
 				5FE165522A652CF40016C79D /* UIImage.swift in Sources */,

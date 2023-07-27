@@ -13,6 +13,10 @@ extension VideoPlayerViewController : YTPlayerViewDelegate{
         print("Video quality changed to: \(quality.rawValue)")
     }
 }
+struct VideoModel{
+    var VideoID : String
+}
+
 class VideoPlayerViewController: BaseViewController {
     
     var VideoPlayerView = YTPlayerView()

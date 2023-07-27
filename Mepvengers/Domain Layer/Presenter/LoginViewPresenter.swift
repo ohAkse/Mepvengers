@@ -9,7 +9,7 @@ import Foundation
 import SwiftSMTP
 import UIKit
 protocol LoginViewEventReceiverable: AnyObject {
-    func receivedEventOfSetupViews(with setupModel: CousinViewSetupModel)
+    //func receivedEventOfSetupViews(with setupModel: CousinViewSetupModel)
 }
 struct LoginViewSetupModel {
     var LoginEmailTextHeader: String

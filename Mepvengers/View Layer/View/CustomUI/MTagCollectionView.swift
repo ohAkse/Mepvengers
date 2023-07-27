@@ -23,17 +23,6 @@ class MTagCollectionView: UICollectionView {
 
 class MTagCollectionViewCell: UICollectionViewCell {
     // 프로퍼티
-
-
-//    var _url : URL? = URL(string: "")
-//    var Url: URL?{
-//       get {
-//          return _url
-//       }
-//       set(newVal) {
-//           _url = newVal
-//       }
-//    }
     
     var imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "search"))
