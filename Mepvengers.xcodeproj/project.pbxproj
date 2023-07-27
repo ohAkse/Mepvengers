@@ -40,6 +40,9 @@
 		5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */; };
 		5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */; };
 		5FC05C0C2A66C69100B12A03 /* CousinViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */; };
+		5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */; };
+		5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */; };
+		5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */; };
 		5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651B2A64D5B50016C79D /* BaseViewController.swift */; };
 		5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */; };
 		5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */; };
@@ -95,6 +98,9 @@
 		5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CousinSceneBuilder.swift; sourceTree = "<group>"; };
 		5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPresenter.swift; sourceTree = "<group>"; };
 		5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CousinViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewPresenter.swift; sourceTree = "<group>"; };
 		5FE1651B2A64D5B50016C79D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilderSpec.swift; sourceTree = "<group>"; };
@@ -205,8 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				5FC05C0D2A66C7A600B12A03 /* Enum */,
-				5FC05C082A66C54D00B12A03 /* Presenter */,
-				5FC05C072A66C54300B12A03 /* UseCase */,
 				5FC05C062A66C51500B12A03 /* DataModel */,
 			);
 			path = "Data Layer";
@@ -215,6 +219,8 @@
 		5FA04F752A63E432006E6FA6 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
+				5FC05C072A66C54300B12A03 /* UseCase */,
+				5FC05C082A66C54D00B12A03 /* Presenter */,
 			);
 			path = "Domain Layer";
 			sourceTree = "<group>";
@@ -326,6 +332,9 @@
 				5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */,
 				5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */,
 				5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */,
+				5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */,
+				5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */,
+				5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -576,8 +585,11 @@
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
 				5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */,
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
+				5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */,
+				5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
 				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
+				5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */,
 				5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */,
 				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,

@@ -28,7 +28,7 @@ protocol LoginViewPresenterSpec {
 
 class LoginViewPresenter : LoginViewPresenterSpec{
     
-    weak var LoginViewSpec : LoginViewProtocol?
+    weak var LoginViewSpec : LoginViewSpec?
     var smtp = SMTP(hostname: "smtp.naver.com", email: "segassdc1@naver.com", password: "dbrud0629!@")
     var CheckEmailAuthTimer : Timer?
     var CheckTime = 0

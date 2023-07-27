@@ -6,8 +6,81 @@
 //
 
 import UIKit
-import SwiftUI
-import SwiftSMTP
+
+enum QuestionType{
+    case QuestionCategoryContent
+    case QuestionDeviceContent
+    case QuestionSubjectContent
+    case QuestionContent
+}
+
+protocol QuestionViewSpec: AnyObject {
+    func CloseView(tag : Int)
+    func ConfirmButtonClickResult(bSuccess : Bool, missingTextFieldText : [String])
+    func CancleButtonClickResult()
+    //    func ShowErrorMessage(ErrorMessage : String) 나중에 View에서막든 Present에서 막든 예외처리 상황이 필요시 사용
+}
+
+extension QuestionViewController : QuestionViewSpec{
+    func ConfirmButtonClickResult(bSuccess : Bool, missingTextFieldText : [String]){
+        if(missingTextFieldText.isEmpty){
+            AuthDelegate?.didReceiveResult(.Success)
+            navigationController?.popViewController(animated: true)
+            
+        }else{
+            for i in 0..<missingTextFieldText.count{
+                let missingTextHeader = missingTextFieldText[i]
+                switch missingTextHeader{
+                case "문의유형" :
+                    QuestionCategoryHeader.textColor = .red
+                    makeAnimation(bError: true, TextHeaderLabel: QuestionCategoryHeader)
+                case  "기종 정보" :
+                    QuestionDeviceHeader.textColor = .red
+                    makeAnimation(bError: true, TextHeaderLabel: QuestionDeviceHeader)
+                case  "제목" :
+                    QuestionSubjecttHeader.textColor = .red
+                    makeAnimation(bError: true, TextHeaderLabel: QuestionSubjecttHeader)
+                case  "본문" :
+                    QuestionContentHeader.textColor = .red
+                    makeAnimation(bError: true, TextHeaderLabel: QuestionContentHeader)
+                default:
+                    break
+                }
+            }
+            Toast.showToast(message: "다음 항목을 입력해주세요 :", errorMessage: missingTextFieldText, font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
+        }
+    }
+    func CancleButtonClickResult(){
+        QuestionCategoryHeader.textColor = .black
+        QuestionCategoryContent.text = ""
+        QuestionContent.text = ""
+        QuestionContentHeader.textColor = .black
+        QuestionDeviceContent.text = ""
+        QuestionDeviceHeader.textColor = .black
+        QuestionSubjectContent.text = ""
+        QuestionSubjecttHeader.textColor = .black
+        QuestionContent.text = ""
+        QuestionContentHeader.textColor = .black
+    }
+    
+    func CloseView(tag : Int)  {
+        switch tag{
+        case 2:
+            QuestionDeviceContent.resignFirstResponder()
+        case 3:
+            QuestionSubjectContent.resignFirstResponder()
+        case 4:
+            QuestionContent.resignFirstResponder()
+        default:
+            break
+        }
+    }
+    //    func ShowErrorMessage(ErrorMessage : String){
+    //        self.showAlert(title: "에러", message: ErrorMessage)
+    //    }
+    
+}
+
 
 protocol EmailAuthDelegate : AnyObject{
     func didReceiveResult(_ result : EmailResult)
@@ -20,7 +93,7 @@ enum EmailResult{
 
 class QuestionViewController: BaseViewController, UITextFieldDelegate {
     
-    var QuestionCategoryHeaderLabel = MTextLabel(text: "문의 유형", isBold: true, fontSize: 20)//문의 유형 헤더
+    var QuestionCategoryHeader = MTextLabel(text: "문의 유형", isBold: true, fontSize: 20)//문의 유형 헤더
     var QuestionCategoryContent = MTextField(placeHolderText : "문의 유형을 선택해주세요.")
     var QuestionDeviceHeader =  MTextLabel(text: "기종 정보", isBold: true, fontSize: 20)// 기종정보 헤더
     var QuestionDeviceContent = MTextField(placeHolderText : " ex) 모델 : \(UIDevice.current.model),운영체제 이름 :\(UIDevice.current.systemName), 운영체제 버전\(UIDevice.current.systemVersion)") //기종정보
@@ -31,11 +104,13 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
     var QuestionConfirmButton = MButton(name : "", titleText: "제출", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))// 확인
     var QuestionCancleButton = MButton(name : "", titleText: "취소", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
     weak var AuthDelegate : EmailAuthDelegate?
+    var QuestionPresenterSpec : QuestionViewPresenterSpec!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(QuestionCategoryHeaderLabel)
+        view.addSubview(QuestionCategoryHeader)
         view.addSubview(QuestionCategoryContent)
         view.addSubview(QuestionDeviceHeader)
         view.addSubview(QuestionDeviceContent)
@@ -47,94 +122,51 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         view.addSubview(QuestionCancleButton)
         NavigationLayout()
         SetupLayout()
-        
-        QuestionCategoryContent.delegate = self
-        QuestionContent.delegate = self
-        QuestionContent.becomeFirstResponder()
+        SetUpTextFields()
         
         QuestionConfirmButton.addTarget(self, action: #selector(ConfirmButtonClicked), for: .touchUpInside)
         QuestionCancleButton.addTarget(self, action: #selector(CancelButtonClicked), for: .touchUpInside)
         
     }
-    @objc func ConfirmButtonClicked(){
-        var category = String()
-        var device = String()
-        var subject = String()
-        var content = String()
-        var missingTextFieldText : [String] = []
+    
+    func SetUpTextFields(){
+        QuestionCategoryContent.delegate = self
+        QuestionCategoryContent.tag = 1
         
-        if let categoryText = QuestionCategoryContent.text{
-            if categoryText != ""{
-                QuestionCategoryHeaderLabel.textColor = .black
-                category = categoryText
-            }else{
-                QuestionCategoryHeaderLabel.textColor = .red
-                missingTextFieldText.append("문의 유형")
-                makeAnimation(bError: true, TextHeaderLabel: QuestionCategoryHeaderLabel)
-            }
-
-            if let deviceText = QuestionDeviceContent.text{
-                if deviceText != "" {
-                    QuestionDeviceHeader.textColor = .black
-                    device = deviceText
-                }else{
-                    QuestionDeviceHeader.textColor = .red
-                    missingTextFieldText.append("기종 정보 ")
-                    makeAnimation(bError: true, TextHeaderLabel: QuestionDeviceHeader)
-                    
-                }
-            }
-
-            if let subjectText = QuestionSubjectContent.text{
-                if subjectText != ""{
-                    QuestionSubjecttHeader.textColor = .black
-                    subject = subjectText
-                }else{
-                    QuestionSubjecttHeader.textColor = .red
-                    missingTextFieldText.append("제목 ")
-                    makeAnimation(bError: true, TextHeaderLabel: QuestionSubjecttHeader)
-                }
-            }
-
-            if let contentText = QuestionContent.text{
-                if contentText != "" {
-                    QuestionContentHeader.textColor = .black
-                    content = contentText
-                }else{
-                    QuestionContentHeader.textColor = .red
-                    missingTextFieldText.append("본문 ")
-                    makeAnimation(bError: true, TextHeaderLabel: QuestionContentHeader)
-                }
-            }
-
-            if(missingTextFieldText.isEmpty){
-                let smtp = SMTP(hostname: "smtp.naver.com", email: "segassdc1@naver.com", password: "dbrud0629!@")
-                let MailFrom = Mail.User(name : "맵밴져스", email: "segassdc1@naver.com")
-                print(Logger.Write(LogLevel.Info)("QuestionViewController")(108)("로그인시 인증받은 이메일 기준으로 옮길것.."))
-                let MailTo = Mail.User(name : "", email: "segassdc1@naver.com")
-                let MailContent = Mail(from : MailFrom, to : [MailTo], subject: subject, text: "문의유형 : \(category)\n기종정보 : \(device)\n내용 : \(content)")
-                smtp.send(MailContent)
-                
-                AuthDelegate?.didReceiveResult(.Success)
-                navigationController?.popViewController(animated: true)
-                
-            }else{
-                Toast.showToast(message: "다음 항목을 입력해주세요 :", errorMessage: missingTextFieldText, font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
-            }
-            
+        QuestionDeviceContent.delegate = self
+        QuestionDeviceContent.tag = 2
+        
+        QuestionSubjectContent.delegate = self
+        QuestionSubjectContent.tag = 3
+        
+        QuestionContent.delegate = self
+        QuestionContent.tag = 4
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag
+        {
+        case 2:
+            QuestionPresenterSpec.TextFieldShouldReturn(with: textField.text!, QuestionType :.QuestionDeviceContent)
+            QuestionDeviceHeader.textColor = .black
+        case 3:
+            QuestionPresenterSpec.TextFieldShouldReturn(with: textField.text!, QuestionType :.QuestionSubjectContent)
+            QuestionSubjecttHeader.textColor = .black
+        case 4:
+            QuestionPresenterSpec.TextFieldShouldReturn(with: textField.text!, QuestionType :.QuestionContent)
+            QuestionContentHeader.textColor = .black
+        default :
+            break
         }
+        return true
+    }
+    
+    @objc func ConfirmButtonClicked(){
+        QuestionPresenterSpec.ConfirmButtonClicked()
     }
     
     @objc func CancelButtonClicked(){
-        QuestionCategoryContent.text = ""
-        QuestionDeviceContent.text = ""
-        QuestionSubjectContent.text = ""
-        QuestionContent.text = ""
-        
-        QuestionContentHeader.textColor = .black
-        QuestionDeviceHeader.textColor = .black
-        QuestionSubjecttHeader.textColor = .black
-        QuestionContentHeader.textColor = .black
+        QuestionPresenterSpec.CancelButtonClick()
     }
     
     func makeAnimation(bError : Bool, TextHeaderLabel : MTextLabel){
@@ -161,62 +193,81 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         backItem.title = "뒤로 가기"
         self.navigationItem.backBarButtonItem = backItem
     }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        switch textField.tag
+        {
+        case 2:
+            QuestionPresenterSpec.TextFieldShouldReturn(with: textField.text!, QuestionType :.QuestionDeviceContent)
+            QuestionDeviceHeader.textColor = .black
+        case 3:
+            QuestionPresenterSpec.TextFieldShouldReturn(with: textField.text!, QuestionType :.QuestionSubjectContent)
+            QuestionSubjecttHeader.textColor = .black
+        case 4:
+            QuestionPresenterSpec.TextFieldShouldReturn(with: textField.text!, QuestionType :.QuestionContent)
+            QuestionContentHeader.textColor = .black
+        default :
+            break
+        }
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField == QuestionCategoryContent
         {
-            
             let CategoryalertController = UIAlertController(title: "문의 유형", message: "문의하고자 하는 유형을 선택해주세요.", preferredStyle: .alert)
+
+            // 라디오 버튼 액션 추가
+            let QuestionItem = UIAlertAction(title: "질문", style: .default) { (_) in
+                self.QuestionCategoryContent.text = "질문"
+                self.QuestionCategoryHeader.textColor = .black
+                self.QuestionPresenterSpec.TextFieldShouldReturn(with: "질문", QuestionType: .QuestionCategoryContent)
+            }
+            let SuggestionItem = UIAlertAction(title: "건의사항", style: .default) { (_) in
+                self.QuestionCategoryContent.text = "건의사항"
+                self.QuestionCategoryHeader.textColor = .black
+                self.QuestionPresenterSpec.TextFieldShouldReturn(with: "건의사항", QuestionType: .QuestionCategoryContent)
+            }
+            let EtcItem = UIAlertAction(title: "기타", style: .default) { (_) in
+                self.QuestionCategoryContent.text = "기타"
+                self.QuestionCategoryHeader.textColor = .black
+                self.QuestionPresenterSpec.TextFieldShouldReturn(with: "기타", QuestionType: .QuestionCategoryContent)
+            }
+            // 라디오 버튼 액션에 선택 속성 추가
+            QuestionItem.setValue(false, forKey: "checked") // 초기 선택
+            SuggestionItem.setValue(false, forKey: "checked")
+            EtcItem.setValue(false, forKey: "checked")
             
-            //if let CategoryContent = self.QuestionCategoryContent{
-                
-                // 라디오 버튼 액션 추가
-                let QuestionItem = UIAlertAction(title: "질문", style: .default) { (_) in
-                    self.QuestionCategoryContent.text = "질문"
-                }
-                let SuggestionItem = UIAlertAction(title: "건의사항", style: .default) { (_) in
-                    self.QuestionCategoryContent.text = "건의사항"
-                }
-                let EtcItem = UIAlertAction(title: "기타", style: .default) { (_) in
-                    self.QuestionCategoryContent.text = "기타"
-                }
-                // 라디오 버튼 액션에 선택 속성 추가
-                QuestionItem.setValue(false, forKey: "checked") // 초기 선택
-                SuggestionItem.setValue(false, forKey: "checked")
-                EtcItem.setValue(false, forKey: "checked")
-                
-                // 라디오 버튼 액션을 다이얼로그에 추가
-                CategoryalertController.addAction(QuestionItem)
-                CategoryalertController.addAction(SuggestionItem)
-                CategoryalertController.addAction(EtcItem)
-                
-                // 취소 액션 추가
-                let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-                CategoryalertController.addAction(cancelAction)
-                
-                // 다이얼로그 표시
-                present(CategoryalertController, animated: true, completion: nil)
-          //  }
+            // 라디오 버튼 액션을 다이얼로그에 추가
+            CategoryalertController.addAction(QuestionItem)
+            CategoryalertController.addAction(SuggestionItem)
+            CategoryalertController.addAction(EtcItem)
+            
+            // 취소 액션 추가
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            CategoryalertController.addAction(cancelAction)
+            
+            // 다이얼로그 표시
+            present(CategoryalertController, animated: true, completion: nil)
+            //  }
         }
     }
     
     func SetupLayout(){
         //문의 유형
-        QuestionCategoryHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
+        QuestionCategoryHeader.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            QuestionCategoryHeaderLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            QuestionCategoryHeaderLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            QuestionCategoryHeaderLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
-            QuestionCategoryHeaderLabel.heightAnchor.constraint(equalToConstant: 40) //
+            QuestionCategoryHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
+            QuestionCategoryHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            QuestionCategoryHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
+            QuestionCategoryHeader.heightAnchor.constraint(equalToConstant: 40) //
         ])
         
         //문의 유형 본문
         QuestionCategoryContent.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            QuestionCategoryContent.topAnchor.constraint(equalTo: QuestionCategoryHeaderLabel.bottomAnchor,constant: 5),
-            QuestionCategoryContent.leadingAnchor.constraint(equalTo: QuestionCategoryHeaderLabel.leadingAnchor),
-            QuestionCategoryContent.trailingAnchor.constraint(equalTo: QuestionCategoryHeaderLabel.trailingAnchor),
+            QuestionCategoryContent.topAnchor.constraint(equalTo: QuestionCategoryHeader.bottomAnchor,constant: 5),
+            QuestionCategoryContent.leadingAnchor.constraint(equalTo: QuestionCategoryHeader.leadingAnchor),
+            QuestionCategoryContent.trailingAnchor.constraint(equalTo: QuestionCategoryHeader.trailingAnchor),
             QuestionCategoryContent.heightAnchor.constraint(equalToConstant: 40) //
         ])
         //기종 정보

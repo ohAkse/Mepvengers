@@ -92,6 +92,8 @@ class ReviewViewController: BaseViewController {
     }
     
     //기본 이미지뷰
+    
+
     var reviewFoodHeaderLabel  =  MTextLabel(text :"대표 사진", isBold: true, fontSize: 20) // 내용
     var reviewFoodImageView = UIImageView() //맨위 사진
     var reviewContentHeaderLabel =  MTextLabel(text : "본문", isBold: true, fontSize: 20)
@@ -101,6 +103,8 @@ class ReviewViewController: BaseViewController {
     var reviewLikeButton = MButton(name : "heart") //좋아요 버튼
     var reviewRecommenHeaderLabel = MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)
     var reviewRecommendCollectionView = MMainCollectionView(isHorizontal: true, size: CGSize(width: 150, height: 130))//밑에 추천 음식썸네일
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
