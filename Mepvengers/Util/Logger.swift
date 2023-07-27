@@ -19,23 +19,21 @@ class Logger{
         case .Debug:
             preFixEmoji = "\u{1F7E2}" //녹색
             totalLog = "[\(preFixEmoji) Debug] : "
-
+            
         case .Info:
             preFixEmoji = "\u{1F535}" //파란색
             totalLog =  "[\(preFixEmoji) Info] : "
-
+            
         case .Error:
             preFixEmoji = "\u{1F534}" //빨간색
             totalLog =  "[\(preFixEmoji) Error] : "
         case .Warning:
             preFixEmoji = "\u{1F7E1}" //노란색
             totalLog =  "[\(preFixEmoji) Warning] : "
-
+            
         case .Unknown:
             preFixEmoji = "\u{26AB}" //검은색
             totalLog =  "[\(preFixEmoji) Unknown] : "
-        default:
-            totalLog = ""
         }
         
         return { typeOfClass in

@@ -8,10 +8,13 @@ import Foundation
 import UIKit
 struct HomeSceneBuilder : ViewBuilderSpec{
     func build()->  HomeViewController {
-        let rootViewController = HomeViewController()
+        let homeViewController = HomeViewController()
+        let homeViewPresenter = HomeViewPresenter()
+        homeViewPresenter.HomeViewSpec = homeViewController
+        homeViewController.homeViewPresenter = homeViewPresenter
         //Present 및 fetch클래스 등록
 
-        return rootViewController
+        return homeViewController
     }
     
 }

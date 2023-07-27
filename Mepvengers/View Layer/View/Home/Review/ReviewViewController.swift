@@ -7,18 +7,53 @@
 
 import UIKit
 
+protocol ReviewViewSpec: AnyObject {
+    func UpdateMainCollectionView(reviewModelList : [ReviewModel])
+    func MoreButtonClickedReturn()
+    func LikeButtonClickedReturn()
+    func ShareButtonClickedReturn()
+    func OnReviewCellClickedReturn(cellInfo : ReviewModel)
+}
+extension ReviewViewController : ReviewViewSpec{
+    func UpdateMainCollectionView(reviewModelList : [ReviewModel]){
+        reviewCollectionData = reviewModelList
+    }
+    func MoreButtonClickedReturn() {
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(16)("웹뷰전환필요"))
+    }
+    
+    func LikeButtonClickedReturn() {
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(21)("로컬DB에 저장 및 좋아요 페이지에 기능 추가 필요"))
+    }
+    
+    func ShareButtonClickedReturn() {
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(26)("공유기능 추가 필요"))
+    }
+    
+    func BlogCollectionClickedReturn() {
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(30)("다른 블로그 화면 전환 필요"))
+    }
+    func OnReviewCellClickedReturn(cellInfo : ReviewModel){
+        let baseController = ReviewSceneBuilder().WithNavigationController()
+        let reviewController = baseController.rootViewController as? ReviewViewController
+        reviewController?.reviewData = ReviewModel(BlogName: "하드코딩블로그3", Cotent: cellInfo.Cotent, ImageURl: cellInfo.ImageURl, IsLike: false) //title 좀 바꿔야할듯..
+        navigationController?.pushViewController(reviewController!, animated: true)
+    }
+}
+
+
 extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyData.count
+        return reviewCollectionData.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
         cell = reviewRecommendCollectionView.dequeueReusableCell(withReuseIdentifier: "ReviewMainCollectionViewCell", for: indexPath)
         if let tagCell = cell as? MMainCollectionViewCell  {
-            if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
-                let data = dummyData[indexPath.item]
-                tagCell.titleLabel.text = data
-                tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
+            if indexPath.item < reviewCollectionData.count{
+                let data = reviewCollectionData[indexPath.item]
+                tagCell.titleLabel.text = data.Cotent
+                tagCell.imageView.image = UIImage(named: data.ImageURl)
             }
         }
         return cell ?? UICollectionViewCell()
@@ -36,7 +71,7 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-            print(Logger.Write(LogLevel.Info)("ReviewViewController")(42)("더미 데이터를 API데이터 변환 필요"))
+            reviewPresentSpec.OnReviewCellClicked(cellInfo: reviewCollectionData[indexPath.item])
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -51,49 +86,10 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 class ReviewViewController: BaseViewController {
     //프로퍼티
-    var _blogName : String = ""
-    var BlogName: String {
-        get {
-            return _blogName
-        }
-        set(newVal) {
-            _blogName = newVal
-        }
-    }
     
-    var _docUrl : String = ""
-    var DocUrl: String {
-        get {
-            return _docUrl
-        }
-        set(newVal) {
-            _docUrl = newVal
-        }
-    }
-    
-    var _imageUrl : String = ""
-    var ImageURl: String {
-        get {
-            return _imageUrl
-        }
-        set(newVal) {
-            _imageUrl = newVal
-        }
-    }
-    
-    var _isLike : Bool = false
-    var IsLike: Bool {
-        get {
-            return _isLike
-        }
-        set(newVal) {
-            _isLike = newVal
-        }
-    }
-    
-    //기본 이미지뷰
-    
-
+    var reviewPresentSpec : ReviewViewPresenterSpec!
+    var reviewCollectionData : [ReviewModel] = []
+    var reviewData = ReviewModel(BlogName: "", Cotent: "", ImageURl: "", IsLike: false)
     var reviewFoodHeaderLabel  =  MTextLabel(text :"대표 사진", isBold: true, fontSize: 20) // 내용
     var reviewFoodImageView = UIImageView() //맨위 사진
     var reviewContentHeaderLabel =  MTextLabel(text : "본문", isBold: true, fontSize: 20)
@@ -103,8 +99,6 @@ class ReviewViewController: BaseViewController {
     var reviewLikeButton = MButton(name : "heart") //좋아요 버튼
     var reviewRecommenHeaderLabel = MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)
     var reviewRecommendCollectionView = MMainCollectionView(isHorizontal: true, size: CGSize(width: 150, height: 130))//밑에 추천 음식썸네일
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,6 +121,10 @@ class ReviewViewController: BaseViewController {
         NavigationLayout()
         SetupButtonClickEvent()
         
+        reviewFoodImageView.image = UIImage(named: reviewData.ImageURl)
+        reviewContentLabel.text = reviewData.Cotent
+        
+        reviewPresentSpec.LoadData()
     }
     
     func SetupButtonClickEvent(){
@@ -137,20 +135,20 @@ class ReviewViewController: BaseViewController {
     }
     
     @objc func reviewMoreButtonClick(){
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(140)("웹뷰 링크로 전환하는 기능 필요"))
+        reviewPresentSpec.MoreButtonClicked()
     }
     
     @objc func reviewShareButtonClick(){
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(144)("공유 버튼 추가 필요"))
+        reviewPresentSpec.ShareButtonClicked()
     }
     
     @objc func reviewLikeButtonClick(){
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(148)("로컬DB에 저장 및 좋아요 페이지에 기능 추가 필요"))
+        reviewPresentSpec.LikeButtonClicked()
     }
     
     func NavigationLayout(){
         let titleLabel = UILabel()
-        titleLabel.text = BlogName
+        titleLabel.text = reviewData.BlogName
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.sizeToFit()

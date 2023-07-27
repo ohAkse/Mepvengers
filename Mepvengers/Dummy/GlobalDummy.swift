@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 //네이버, 카카오 API를 이용하기 위한 더미데이터(첫번째화면)
 let dummyData = ["면", "치킨", "김치","돈까스","냉면","마라탕","밥"]
 let dummyData1 = ["중독되는 매운맛 선화동 매운<b>실비</b><b>김치</b> 나홀로족 세트", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면","면", "치킨", "김치","돈까스","냉면"]
@@ -16,3 +17,5 @@ let dummyImageName1 = ["question","question","search","question","search","searc
 let dummyGoogleData = ["면", "치킨", "김치","돈까스","냉면"]
 let dummyGoogleThumbNailName = ["https://i.ytimg.com/vi/t-F4jqYnB4o/mqdefault.jpg","https://i.ytimg.com/vi/t-F4jqYnB4o/mqdefault.jpg","https://i.ytimg.com/vi/t-F4jqYnB4o/mqdefault.jpg","https://i.ytimg.com/vi/t-F4jqYnB4o/mqdefault.jpg","https://i.ytimg.com/vi/t-F4jqYnB4o/mqdefault.jpg"]
 let dummyGoogleViewoId = ["ntnO4gqrhC8", "H4h-W68t5lw", "H4h-W68t5lw", "H4h-W68t5lw", "H4h-W68t5lw"]
+let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
+let colorSet: [UIColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .systemPurple]

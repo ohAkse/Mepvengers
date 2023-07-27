@@ -10,7 +10,10 @@ import UIKit
 struct ReviewSceneBuilder : ViewBuilderSpec{
     func build()->  ReviewViewController {
         let reviewController = ReviewViewController()
-        //Present 및 fetch클래스 등록
+        //fetch클래스 등록
+        let reviewViewPresenter = ReviewViewPresenter()
+        reviewController.reviewPresentSpec = reviewViewPresenter
+        reviewViewPresenter.ReviewViewSpec = reviewController
         return reviewController
     }
     

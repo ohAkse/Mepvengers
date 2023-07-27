@@ -11,17 +11,39 @@ import Alamofire
 import Foundation
 import Kingfisher
 import RealmSwift
-let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-let colorSet: [UIColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .systemPurple]
+
+protocol HomeViewSpec: AnyObject {
+    func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] )
+    func UpdateMainCollectionView(homeMainCollectionModel : [HomeViewMainCollectionModel])
+    func ReloadTagCollectionView(cellinfo : HomeViewTagModel)
+    func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
+}
+extension HomeViewController : HomeViewSpec{
+    func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] ){
+        self.HometagList = homeTagList
+    }
+    func UpdateMainCollectionView(homeMainCollectionModel : [HomeViewMainCollectionModel]){
+        self.HomeMainCollectionList = homeMainCollectionModel
+    }
+    func ReloadTagCollectionView(cellinfo : HomeViewTagModel){
+        print("TagName -> \(cellinfo.title)")
+    }
+    func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
+    {
+        let baseController = ReviewSceneBuilder().WithNavigationController()
+        let reviewController = baseController.rootViewController as? ReviewViewController
+        reviewController?.reviewData = ReviewModel(BlogName: "하드코딩블로그", Cotent: cellinfo.title, ImageURl: cellinfo.ImageName, IsLike: false) //title 좀 바꿔야할듯..
+        navigationController?.pushViewController(reviewController!, animated: true)
+    }
+}
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView === homeTagCollectionView
         {
-            return dummyData.count
+            return HometagList.count
         }else{
-            return dummyData1.count
+            return HomeMainCollectionList.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -29,25 +51,38 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if collectionView === homeTagCollectionView {
             cell = homeTagCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeTagCollectionViewCell", for: indexPath)
             if let tagCell = cell as? MTagCollectionViewCell  {
-                if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
-                    let data = dummyData[indexPath.item]
-                    tagCell.titleLabel.text = data
-                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
+                if indexPath.item < HometagList.count{
+                    let data = HometagList[indexPath.item]
+                    tagCell.titleLabel.text = data.title
+                    tagCell.imageView.image = UIImage(named: data.ImageName)
                 }
             }
         } else {
             cell = homeMainCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeMainCollectionViewCell", for: indexPath)
             if let mainCell = cell as? MMainCollectionViewCell {
-                if indexPath.item < dummyData1.count && indexPath.item < dummyImageName1.count {
-                    let data = dummyData1[indexPath.item]
-                    mainCell.titleLabel.text = data
-                    mainCell.imageView.image = UIImage(named: dummyImageName1[indexPath.item])
+                if indexPath.item < HomeMainCollectionList.count{
+                    let data = HomeMainCollectionList[indexPath.item]
+                    mainCell.titleLabel.text = data.title
+                    mainCell.imageView.image = UIImage(named: data.ImageName)
                 }
             }
         }
         return cell ?? UICollectionViewCell()
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if collectionView === homeMainCollectionView{
+            print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
+            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
+                homeViewPresenter.onMainItemSelected(cellInfo: HomeMainCollectionList[indexPath.item])
+            }
+        }else{
+            if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
+                homeViewPresenter.onTagItemSelected(cellInfo:  HometagList[indexPath.item])
+            }
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var cellSize: CGSize = CGSize(width: 50, height: 50) // 기본 셀 크기
         if collectionView === homeTagCollectionView{
@@ -70,26 +105,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cellSize
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        if collectionView === homeMainCollectionView{
-            print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
-            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                let baseController = ReviewSceneBuilder().WithNavigationController()
-                let reviewController = baseController.rootViewController as? ReviewViewController
-                reviewController?.BlogName = "ABC"
-                reviewController?.reviewFoodImageView.image = UIImage(named: "search")
-                reviewController?.reviewContentLabel.text = "향이 익숙하지 않았는데 <b>실비</b> <b>김치</b>는 양념만 따로 냉동해서 라면 끓여 먹을 때마다 넣어 먹어주면 너무 좋습니다. 매운 <b>실비</b> <b>김치</b> 후기 매운 음식 좋아하시는 분들은 다 아실텐데 선화동  본점은...".replacingOccurrences(of: "</b>", with:"" ).replacingOccurrences(of: "<b>", with: "")
-                navigationController?.pushViewController(reviewController!, animated: true)
-            }
-        }else{
-            if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
-                print(cell.titleLabel.text!)
-            }
-            
-        }
-    }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
@@ -99,11 +115,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-
-
 class HomeViewController: BaseViewController, EmailAuthDelegate{
+    var HometagList : [HomeViewTagModel] = []
+    var HomeMainCollectionList : [HomeViewMainCollectionModel] = []
     
-    var homeViewPresenter =  HomeViewPresenter()
+    var homeViewPresenter :  HomeViewPresenter!
     var homeTableView : MTableView? //밑에 사진, 글 등
     var homeTableViewController = MTableViewController() //
     var homeTagCollectionView =  MTagCollectionView()// 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
@@ -129,6 +145,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         
         NavigationLayout()
         SetupLayout()
+        homeViewPresenter.loadData()
         
     }
     
