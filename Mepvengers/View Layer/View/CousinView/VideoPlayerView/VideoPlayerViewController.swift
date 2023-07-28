@@ -8,19 +8,26 @@
 import UIKit
 import YouTubeiOSPlayerHelper
 
+protocol VideoPlayerViewSpec: AnyObject {
+    func CheckStatus(status : Bool) // 임시
+}
+extension VideoPlayerViewController : VideoPlayerViewSpec{
+    
+    func CheckStatus(status : Bool){
+        print(status)
+    }
+
+}
 extension VideoPlayerViewController : YTPlayerViewDelegate{
     func playerView(_ playerView: YTPlayerView, didChangeTo quality: YTPlaybackQuality) {
         print("Video quality changed to: \(quality.rawValue)")
     }
 }
-struct VideoModel{
-    var VideoID : String
-}
 
 class VideoPlayerViewController: BaseViewController {
-    
+    var VideoPresenterSpec : VideoPlayerPresenterSpec!
+    var vieoPlayerModel = VideoPlayerModel(videoUrl: "")
     var VideoPlayerView = YTPlayerView()
-    var VideoID = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(VideoPlayerView)
@@ -31,12 +38,13 @@ class VideoPlayerViewController: BaseViewController {
             self.view.layoutIfNeeded()
             self.VideoPlayerView.isHidden = false
         }
+       // VideoPresenterSpec.CheckStatus()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SetupLayout()
-        // 동영상 로드
-        VideoPlayerView.load(withVideoId: VideoID)
+        VideoPlayerView.load(withVideoId: vieoPlayerModel.videoUrl)
+   
     }
     func NavigationLayout(){
         let titleLabel = UILabel()

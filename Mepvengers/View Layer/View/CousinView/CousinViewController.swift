@@ -13,7 +13,7 @@ protocol CousinViewSpec: AnyObject {
     func UpdateMainCollectionView(cousinMainCollectionList: [CousinViewMainCollectionModel])
     func ShowErrorMessage(ErrorMessage : String)
     func ReloadTagCollectionView(cellInfo : CousinViewTagModel)
-    func RouteReviewController(cellInfo : CousinViewMainCollectionModel)
+    func RouteVideoPlayerController(cellInfo : CousinViewMainCollectionModel)
 }
 
 extension CousinViewController : CousinViewSpec
@@ -32,10 +32,10 @@ extension CousinViewController : CousinViewSpec
     func ReloadTagCollectionView(cellInfo : CousinViewTagModel){
         print(cellInfo)
     }
-    func RouteReviewController(cellInfo: CousinViewMainCollectionModel){
+    func RouteVideoPlayerController(cellInfo: CousinViewMainCollectionModel){
         let baseController = VideoPlayerSceneBuilder().WithNavigationController()
         let VideoController = baseController.rootViewController as? VideoPlayerViewController
-        VideoController!.VideoID = cellInfo.VideoUrl
+        VideoController?.vieoPlayerModel = VideoPlayerModel(videoUrl: cellInfo.VideoUrl)
         navigationController?.pushViewController(VideoController!, animated: true)
     }
 }
@@ -169,6 +169,7 @@ class CousinViewController: BaseViewController {
         
         let backItem = UIBarButtonItem()
         backItem.title = "뒤로 가기"
+        backItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backItem
     }
     

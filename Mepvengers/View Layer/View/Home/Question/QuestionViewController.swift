@@ -106,10 +106,14 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
     weak var AuthDelegate : EmailAuthDelegate?
     var QuestionPresenterSpec : QuestionViewPresenterSpec!
     
+    var overlap:CGFloat = 0.0
+    var lastOffsetY:CGFloat = 0.0
+    var ScrollView = UIScrollView()
+    var ContentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.addSubview(ScrollView)
         view.addSubview(QuestionCategoryHeader)
         view.addSubview(QuestionCategoryContent)
         view.addSubview(QuestionDeviceHeader)
@@ -127,7 +131,47 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         QuestionConfirmButton.addTarget(self, action: #selector(ConfirmButtonClicked), for: .touchUpInside)
         QuestionCancleButton.addTarget(self, action: #selector(CancelButtonClicked), for: .touchUpInside)
         
+        let scrollFrame = CGRect(x: 0, y: 10, width: view.frame.width, height: view.frame.height - 10)
+        ScrollView.frame = scrollFrame
+        
+        let contentHeight = QuestionContent.frame.origin.y + 50
+        let contentWidth = view.frame.width // 뷰의 가로 길이를 contentWidth로 설정하거나 필요에 따라 다른 값을 사용
+
+        ScrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)
+        print(view.frame.height)
+        print(ScrollView.contentSize)
+        
+        QuestionCategoryContent.isUserInteractionEnabled = true
+        QuestionDeviceContent.isUserInteractionEnabled = true
+        QuestionSubjectContent.isUserInteractionEnabled = true
+        QuestionContent.isUserInteractionEnabled = true
+        
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(self.KeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.addObserver(self, selector: #selector(self.keyboardDidHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    @objc func KeyboardWillShow(_ notification : Notification){
+        //ScrollView.setContentOffset(CGPoint(x: 0, y: -100) , animated: true)
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        // 텍스트 필드가 키보드에 가려지지 않도록 스크롤뷰를 원하는 위치로 스크롤
+        let activeFieldFrame = view.convert(QuestionConfirmButton.frame, from: ContentView)
+        let overlap = activeFieldFrame.maxY - keyboardFrame.minY + 5
+        print(overlap)
+        if overlap > 0 {
+            var contentOffset = ScrollView.contentOffset
+            contentOffset.y += overlap - 100
+            ScrollView.setContentOffset(contentOffset , animated: true)
+        }
+   
+    }
+    @objc func keyboardDidHide(_ notification : Notification){
+        
+        ScrollView.frame = view.frame
+        //ScrollView.setContentOffset(CGPoint(x: 0, y: 100) , animated: true)
+    }
+    
     
     func SetUpTextFields(){
         QuestionCategoryContent.delegate = self
@@ -191,6 +235,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         
         let backItem = UIBarButtonItem()
         backItem.title = "뒤로 가기"
+        backItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backItem
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -211,11 +256,10 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         if textField == QuestionCategoryContent
         {
             let CategoryalertController = UIAlertController(title: "문의 유형", message: "문의하고자 하는 유형을 선택해주세요.", preferredStyle: .alert)
-
+            
             // 라디오 버튼 액션 추가
             let QuestionItem = UIAlertAction(title: "질문", style: .default) { (_) in
                 self.QuestionCategoryContent.text = "질문"
@@ -248,17 +292,25 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
             
             // 다이얼로그 표시
             present(CategoryalertController, animated: true, completion: nil)
-            //  }
         }
     }
     
     func SetupLayout(){
         //문의 유형
+        ScrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
+            ScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
+            ScrollView.heightAnchor.constraint(equalToConstant: 40) //
+        ])
+        
+        //문의 유형
         QuestionCategoryHeader.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            QuestionCategoryHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20),
-            QuestionCategoryHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            QuestionCategoryHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
+            QuestionCategoryHeader.topAnchor.constraint(equalTo: ScrollView.safeAreaLayoutGuide.topAnchor),
+            QuestionCategoryHeader.leadingAnchor.constraint(equalTo: ScrollView.leadingAnchor),
+            QuestionCategoryHeader.trailingAnchor.constraint(equalTo: ScrollView.trailingAnchor),
             QuestionCategoryHeader.heightAnchor.constraint(equalToConstant: 40) //
         ])
         
@@ -321,6 +373,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
             QuestionContent.topAnchor.constraint(equalTo: QuestionContentHeader.bottomAnchor,constant: 10),
             QuestionContent.leadingAnchor.constraint(equalTo: QuestionContentHeader.leadingAnchor),
             QuestionContent.trailingAnchor.constraint(equalTo: QuestionContentHeader.trailingAnchor),
+            QuestionContent.heightAnchor.constraint(equalToConstant: 150) //
             
         ])
         
@@ -328,22 +381,21 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
         QuestionConfirmButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             QuestionConfirmButton.topAnchor.constraint(equalTo: QuestionContent.bottomAnchor,constant: 20),
-            QuestionConfirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            QuestionConfirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            QuestionConfirmButton.leadingAnchor.constraint(equalTo: ScrollView.leadingAnchor, constant: 50),
             QuestionConfirmButton.heightAnchor.constraint(equalToConstant: 50),
             QuestionConfirmButton.widthAnchor.constraint(equalToConstant: 70) //
-            
+
         ])
-        //취소
+       //취소
         QuestionCancleButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             QuestionCancleButton.topAnchor.constraint(equalTo: QuestionContent.bottomAnchor,constant: 20),
-            QuestionCancleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant : -50),
+            QuestionCancleButton.trailingAnchor.constraint(equalTo: QuestionContent.trailingAnchor, constant: -50),
             QuestionCancleButton.bottomAnchor.constraint(equalTo: QuestionConfirmButton.safeAreaLayoutGuide.bottomAnchor),
             QuestionCancleButton.heightAnchor.constraint(equalToConstant: 50),
             QuestionCancleButton.widthAnchor.constraint(equalToConstant: 70)
         ])
-        
+
     }
     
 }

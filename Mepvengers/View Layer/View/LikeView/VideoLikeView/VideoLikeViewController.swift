@@ -7,28 +7,48 @@
 
 import UIKit
 
-extension VideoLikeViewController : UITableViewDataSource{
+protocol VideoLikeViewSpec{
+    func UpdateCollectionView(cellList : [VideoLikeViewModel])
+    func RouteVideoPlayerController(routeCellInfo : VideoLikeViewModel)
+}
+extension VideoLikeViewController : VideoLikeViewSpec{
+    func UpdateCollectionView(cellList : [VideoLikeViewModel]){
+        videoLikeList = cellList
+    }
+    func RouteVideoPlayerController(routeCellInfo : VideoLikeViewModel){
+        print(Logger.Write(LogLevel.Info)("VideoLikeViewController")(19)("웹뷰로 전환 예정.."))
+    }
+}
+
+extension VideoLikeViewController : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyImageName1.count // 하드코딩
+        return videoLikeList.count // 하드코딩
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell?
         if tableView == VideoTableView {
-            print(Logger.Write(LogLevel.Info)("VideoTableViewCell")(18)("더미 데이터를 API데이터 변환 필요"))
+            print(Logger.Write(LogLevel.Info)("VideoLikeViewController")(31)("더미 데이터를 API데이터 변환 필요"))
             if let cell = tableView.dequeueReusableCell(withIdentifier: "VideoTableViewCell") as? MTableCell {
-                cell.contentLabel.text = "WWW"
-                //cell.saveTime = "CCC"
-                cell.photoImageView.image = UIImage(named: dummyImageName1[indexPath.item])?.resized(toWidth: 150, toHeight: 150)
+                let data = videoLikeList[indexPath.item]
+                cell.contentLabel.text = data.contentHeader
+                cell.saveTime.text = data.saveTime
+                cell.photoImageView.image = UIImage(named: data.imageUrl)?.resized(toWidth: 150, toHeight: 150)
                 return cell
             }
         }
         return cell ?? UITableViewCell()
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let cell = tableView.cellForRow(at: indexPath) as! MTableCell
+        VideoLikePresenter.OnSelectedItem(cellinfo: VideoLikeViewModel(contentHeader: "하드코딩", saveTime: cell.saveTime.text!, imageUrl: "question"))
+    }
 }
 
 
 class VideoLikeViewController: BaseViewController {
+    var VideoLikePresenter : VideoLikePresenterSpec!
+    var videoLikeList : [VideoLikeViewModel] = []
     var VideoheaderTextLabel = MTextLabel(text : "비디오 좋아요 목록", isBold: true, fontSize: 16) // 좋아요
     var VideoTableView = MTableView()
     var VideoTableViewCell = MTableCell()
@@ -39,9 +59,12 @@ class VideoLikeViewController: BaseViewController {
         view.addSubview(VideoTableView)
         view.backgroundColor = .white
         VideoTableView.dataSource = self
+        VideoTableView.delegate = self
         VideoTableView.register(MTableCell.self, forCellReuseIdentifier: "VideoTableViewCell")
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
+     
         SetupLayout()
+        VideoLikePresenter.loadData()
     }
 
     func SetupLayout(){

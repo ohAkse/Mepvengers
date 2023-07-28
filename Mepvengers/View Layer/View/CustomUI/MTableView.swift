@@ -22,17 +22,13 @@ class MTableView: UITableView{
 
 class MTableViewController: UIViewController{
     
-    // ...
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         UITableViewCell()
     }
-    
-    // ...
 }
 
 
@@ -66,15 +62,7 @@ class MTableCell: UITableViewCell {
     
     //저장 될 시간
     lazy var saveTime: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        let now = Date()
-        let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
-        formatter.dateFormat = "yyyy-MM-dd"
-        let currentTime = formatter.string(from: now)
-        label.text = "저장시간:" + currentTime
-        label.textAlignment = .left
-        return label
+        return UILabel()
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

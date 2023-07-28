@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+protocol VideoPlayerPresenterSpec {
+    func CheckStatus()
+}
+struct VideoPlayerModel {
+    var videoUrl: String
+}
+
+class VideoViewPresenter: VideoPlayerPresenterSpec {
+    var VideoPlayerViewSpec : VideoPlayerViewSpec!
+    func CheckStatus(){
+        VideoPlayerViewSpec.CheckStatus(status: true)
+    }
+}

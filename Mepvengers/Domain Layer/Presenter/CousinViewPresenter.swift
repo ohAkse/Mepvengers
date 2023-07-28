@@ -35,7 +35,7 @@ protocol CousinViewPresenterSpec {
 class CousinViewPresenter : CousinViewPresenterSpec{
     func OnCellSelectedItem(cellInfo : CousinViewMainCollectionModel)
     {
-        CousinViewSpec.RouteReviewController(cellInfo: cellInfo)
+        CousinViewSpec.RouteVideoPlayerController(cellInfo: cellInfo)
     }
     func OnTagSelectedItem(cellInfo : CousinViewTagModel){
         CousinViewSpec.ReloadTagCollectionView(cellInfo: cellInfo)

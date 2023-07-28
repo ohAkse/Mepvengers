@@ -118,7 +118,6 @@ class ReviewViewController: BaseViewController {
         reviewRecommendCollectionView.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "ReviewMainCollectionViewCell")
         
         SetupLayout()
-        NavigationLayout()
         SetupButtonClickEvent()
         
         reviewFoodImageView.image = UIImage(named: reviewData.ImageURl)
@@ -133,7 +132,7 @@ class ReviewViewController: BaseViewController {
         reviewLikeButton.addTarget(self, action: #selector(reviewLikeButtonClick), for: .touchUpInside)
         
     }
-    
+
     @objc func reviewMoreButtonClick(){
         reviewPresentSpec.MoreButtonClicked()
     }
@@ -146,14 +145,7 @@ class ReviewViewController: BaseViewController {
         reviewPresentSpec.LikeButtonClicked()
     }
     
-    func NavigationLayout(){
-        let titleLabel = UILabel()
-        titleLabel.text = reviewData.BlogName
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.sizeToFit()
-        self.navigationItem.titleView = titleLabel
-    }
+
     
     func SetupLayout(){
         //대표사진

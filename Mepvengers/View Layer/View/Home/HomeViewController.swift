@@ -212,6 +212,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         
         let backItem = UIBarButtonItem()
         backItem.title = "뒤로 가기"
+        backItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backItem
     }
 

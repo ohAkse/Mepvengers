@@ -43,7 +43,7 @@ extension LikeViewController: PageboyViewControllerDataSource, TMBarDataSource {
 
 class LikeViewController: TabmanViewController{
     var LikeTBbar : TMBar.ButtonBar?
-    var TabViewControllers : [UIViewController] = [BlogSceneBuilder().WithNavigationController(), VideoLikeViewSpec().WithNavigationController()]
+    var TabViewControllers : [UIViewController] = [BlogSceneBuilder().WithNavigationController(), VideoLikeSceneBuilder().WithNavigationController()]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
