@@ -24,11 +24,11 @@ protocol HomeViewPresenterSpec{
 }
 
 
-class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUseCase: FetchDataUseCaseSpec, AnyFetchUseCase.DataModel == NaverBlogAPI {
+class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUseCase: FetchDataUseCaseSpec, AnyFetchUseCase.DataModel == KakaoAPI {
     
     var HomeViewSpec : HomeViewSpec
     var FetchDataUseCaseSpec: AnyFetchUseCase
-    var NaverBlogAPI : NaverBlogAPI?
+    var KakaoAPI : KakaoAPI?
     
     init(HomeViewSpec: HomeViewSpec, FetchUseCase : AnyFetchUseCase ) {
         self.HomeViewSpec = HomeViewSpec
@@ -36,20 +36,29 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     }
     
     func loadData() {
+        //  var ApiManager = APIManager()
+        //  do{
+        //      try ApiManager.fetchKaKao(keyword: "실비김치")
+        //  }catch{
+        //      print("eror")
+        //  }
+        
         do{
             FetchDataUseCaseSpec.fetchDataModel { (result) in
                 switch result {
-                case .success(let NaverBlogAPI):
-                    self.NaverBlogAPI = NaverBlogAPI
-                    //HomeViewSpec.RouteReviewController(cellinfo: MainInfo)
-                    //print(NaverBlogAPI)
+                case .success(let kakaoAPI):
+                    let filteredDocuments = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
+                    
+                    self.KakaoAPI = kakaoAPI
+                    self.KakaoAPI?.documents = filteredDocuments
+                    //print(self.KakaoAPI)
+                    self.HomeViewSpec.UpdateMainCollectionView(homeMainCollectionModel: self.KakaoAPI!)
+                    //print(self.KakaoAPI)
                 case .failure:
-                    self.NaverBlogAPI = nil
-                    print("failure")
+                    //  self.NaverBlogAPI = KakaoAPI()
+                    print("safasfas")
                 }
             }
-        }catch{
-            print("eror")
         }
     }
     

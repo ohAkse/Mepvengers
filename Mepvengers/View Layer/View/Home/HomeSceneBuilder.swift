@@ -9,14 +9,11 @@ import UIKit
 struct HomeSceneBuilder : ViewBuilderSpec{
     func build()->  HomeViewController {
         let homeViewController = HomeViewController()
-        let remoteRepository = RemoteNaverBlogRepository(fetcher: NaverBlogFetcher())
-        let fetchNaverUseCase = FetchNaverBlogUseCase(repository: remoteRepository)
-        var homeViewPresenter = HomeViewPresenter<FetchNaverBlogUseCase>(HomeViewSpec: homeViewController, FetchUseCase: fetchNaverUseCase)
+        let remoteRepository = RemoteNaverBlogRepository(fetcher: KakaoFetcher())
+        let fetchNaverUseCase = FetchKakaoBlogUseCase(repository: remoteRepository)
+        var homeViewPresenter = HomeViewPresenter<FetchKakaoBlogUseCase>(HomeViewSpec: homeViewController, FetchUseCase: fetchNaverUseCase)
         homeViewPresenter.HomeViewSpec = homeViewController
         homeViewController.homeViewPresenter = homeViewPresenter
-        
-        
-        
         
         //Present 및 fetch클래스 등록
 

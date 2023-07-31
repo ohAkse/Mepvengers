@@ -13,33 +13,28 @@ class APIManager {
     static let clientId = "aJxp7fjSFRE3H8h9_VHG"
     static let clientSecret = "AFmp0_ZLaT"
 
-    var completion: ((NaverBlogAPI, NetworkError) -> Void)?
+    var completion: ((KakaoAPI, NetworkError) -> Void)?
     init() {
 
     }
-    func fetchNaver(keyword: String) throws {
-        let apiURL = "https://openapi.naver.com/v1/search/blog?query=\(keyword)"
-
-        guard let encodedURL = apiURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            print("URL encoding failed")
-            return
-        }
-        guard let url = URL(string: encodedURL) else {
-            print("Invalid URL")
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue(APIManager.clientId, forHTTPHeaderField: "X-Naver-Client-Id")
-        request.addValue(APIManager.clientSecret, forHTTPHeaderField: "X-Naver-Client-Secret")
+    func fetchKaKao(keyword : String) {
+        let apiKey = "6662f3bca0dc428495de3aed317c9869"
+        let apiUrl = "https://dapi.kakao.com/v2/search/blog"
         
-        AF.request(request).responseDecodable(of: NaverBlogAPI.self) { [weak self] response in
-            switch response.result {
-            case .success(let naverAPI):
-                self?.completion?(naverAPI, NetworkError.empty)
-            case .failure(let error):
-                self?.completion?(NaverBlogAPI(), NetworkError.serviceError)
+        let headers: HTTPHeaders = [
+            "Authorization": "KakaoAK " + apiKey
+        ]
+        AF.request(apiUrl, method: .get, parameters: ["query": keyword], headers: headers)
+            .responseDecodable(of: KakaoAPI.self) { response in
+                switch response.result {
+                case .success(let kakaoAPIResponse):
+                    self.completion?(kakaoAPIResponse, NetworkError.empty)
+                     //print(kakaoAPIResponse)
+                case .failure(let error):
+                    self.completion?(KakaoAPI(), NetworkError.serviceError)
+                     //print("Decoding error: \(error)")
+                }
+                
             }
-        }
     }
 }

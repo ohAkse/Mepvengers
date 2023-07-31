@@ -1,26 +1,49 @@
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let welcome = try Welcome(json)
-
-import Foundation
-
-// MARK: - Welcome
-struct KakaoModel {
-    let documents: [Document]
+struct KakaoAPI: Codable {
+    var documents: [Document]
     let meta: Meta
+    init(){
+        self.documents = []
+        self.meta = Meta(isEnd: false, pageableCount: 0, totalCount: 0)
+    }
+    
+    init(documents: [Document], meta: Meta) {
+        self.documents = documents
+        self.meta = meta
+    }
 }
 
-// MARK: - Document
-struct Document {
-    let blogname, contents, datetime: String
+struct Document: Codable {
+    let blogname: String
+    let contents: String
+    let datetime: String
     let thumbnail: String
     let title: String
     let url: String
+
+    init(blogname: String, contents: String, datetime: String, thumbnail: String, title: String, url: String) {
+        self.blogname = blogname
+        self.contents = contents
+        self.datetime = datetime
+        self.thumbnail = thumbnail
+        self.title = title
+        self.url = url
+    }
 }
 
-// MARK: - Meta
-struct Meta {
+struct Meta: Codable {
     let isEnd: Bool
-    let pageableCount, totalCount: Int
+    let pageableCount: Int
+    let totalCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case isEnd = "is_end"
+        case pageableCount = "pageable_count"
+        case totalCount = "total_count"
+    }
+
+    init(isEnd: Bool, pageableCount: Int, totalCount: Int) {
+        self.isEnd = isEnd
+        self.pageableCount = pageableCount
+        self.totalCount = totalCount
+    }
 }

@@ -20,8 +20,6 @@
 		5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5DE2A77599C003B7C21 /* APIManager.swift */; };
 		5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F75C5E12A777DA3003B7C21 /* SwiftyJSON */; };
 		5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */; };
-		5F75C5F82A77A073003B7C21 /* FetchNaverBlogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F72A77A073003B7C21 /* FetchNaverBlogUseCase.swift */; };
-		5F75C5FC2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5FB2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift */; };
 		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
 		5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */; };
 		5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */; };
@@ -66,6 +64,8 @@
 		5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */; };
 		5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */; };
 		5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */; };
+		5FF6BC8F2A78274200170342 /* FetchKakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */; };
+		5FF6BC912A78276000170342 /* RemoteKakaoFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6BC902A78276000170342 /* RemoteKakaoFetcher.swift */; };
 		613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D5040AF080804EBA38775F /* Pods_Mepvengers.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,8 +82,6 @@
 		5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeSceneBuilder.swift; sourceTree = "<group>"; };
 		5F75C5DE2A77599C003B7C21 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataUseCaseSpec.swift; sourceTree = "<group>"; };
-		5F75C5F72A77A073003B7C21 /* FetchNaverBlogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchNaverBlogUseCase.swift; sourceTree = "<group>"; };
-		5F75C5FB2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNaverBlogFetcher.swift; sourceTree = "<group>"; };
 		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
 		5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewController.swift; sourceTree = "<group>"; };
 		5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mepvengers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +134,8 @@
 		5FED380B2A6AC4F100CADAA3 /* google_video_api.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = google_video_api.geojson; sourceTree = "<group>"; };
 		5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSceneBuilder.swift; sourceTree = "<group>"; };
+		5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchKakaoUseCase.swift; sourceTree = "<group>"; };
+		5FF6BC902A78276000170342 /* RemoteKakaoFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKakaoFetcher.swift; sourceTree = "<group>"; };
 		68A7AAEDA7EADAEC5FC6CFDA /* Pods-Mepvengers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.debug.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.debug.xcconfig"; sourceTree = "<group>"; };
 		9A42A90DA341D908A0BA45F7 /* Pods-Mepvengers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.release.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,7 +176,7 @@
 		5F75C5EA2A778E52003B7C21 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				5F75C5FB2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift */,
+				5FF6BC902A78276000170342 /* RemoteKakaoFetcher.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */,
-				5F75C5F72A77A073003B7C21 /* FetchNaverBlogUseCase.swift */,
+				5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -617,7 +617,6 @@
 				5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */,
 				5FAED9752A6834AB006E89FC /* QuestionViewController.swift in Sources */,
 				5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */,
-				5F75C5F82A77A073003B7C21 /* FetchNaverBlogUseCase.swift in Sources */,
 				5F497B812A73913A0006A1FB /* VideoLikeViewPresenter.swift in Sources */,
 				5FAED9582A67A2CB006E89FC /* MTableView.swift in Sources */,
 				5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */,
@@ -625,6 +624,7 @@
 				5FAED9602A67A3A2006E89FC /* MTextLabel.swift in Sources */,
 				5FAED9642A67A40B006E89FC /* MNavigationItem.swift in Sources */,
 				5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */,
+				5FF6BC912A78276000170342 /* RemoteKakaoFetcher.swift in Sources */,
 				5FAED95E2A67A377006E89FC /* MTextField.swift in Sources */,
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
 				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
@@ -644,6 +644,7 @@
 				5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */,
 				5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */,
 				5FCFB5D42A72BC0A00273DE0 /* NaverBlogModel.swift in Sources */,
+				5FF6BC8F2A78274200170342 /* FetchKakaoUseCase.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
 				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
 				5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */,
@@ -651,7 +652,6 @@
 				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
-				5F75C5FC2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift in Sources */,
 				5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */,
 				5FAED95A2A67A30E006E89FC /* MTabbarView.swift in Sources */,
 				5FE165292A64D9360016C79D /* Theme.swift in Sources */,

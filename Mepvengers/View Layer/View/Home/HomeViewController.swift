@@ -10,11 +10,11 @@ import SwiftUI
 import Alamofire
 import Foundation
 import Kingfisher
-import RealmSwift
+
 
 protocol HomeViewSpec: AnyObject {
     func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] )
-    func UpdateMainCollectionView(homeMainCollectionModel : [HomeViewMainCollectionModel])
+    func UpdateMainCollectionView(homeMainCollectionModel : KakaoAPI)
     func ReloadTagCollectionView(cellinfo : HomeViewTagModel)
     func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
 }
@@ -22,9 +22,22 @@ extension HomeViewController : HomeViewSpec{
     func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] ){
         self.HometagList = homeTagList
     }
-    func UpdateMainCollectionView(homeMainCollectionModel : [HomeViewMainCollectionModel]){
-        self.HomeMainCollectionList = homeMainCollectionModel
+    func UpdateMainCollectionView(homeMainCollectionModel: KakaoAPI) {
+        var updatedDocuments = self.KakaoAPIModel.documents
+        updatedDocuments.append(contentsOf: homeMainCollectionModel.documents)
+        // 변경 사항을 배치로 처리
+        homeMainCollectionView.performBatchUpdates({
+            self.KakaoAPIModel.documents = updatedDocuments
+            
+            // 추가된 데이터의 인덱스 경로 배열 생성
+            let indexPathsToAdd = (self.KakaoAPIModel.documents.count - homeMainCollectionModel.documents.count)..<self.KakaoAPIModel.documents.count
+            let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
+            
+            // CollectionView에 추가된 셀을 삽입
+            homeMainCollectionView.insertItems(at: indexPaths)
+        }, completion: nil)
     }
+
     func ReloadTagCollectionView(cellinfo : HomeViewTagModel){
         print("TagName -> \(cellinfo.title)")
     }
@@ -43,9 +56,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         {
             return HometagList.count
         }else{
-            return HomeMainCollectionList.count
+            return KakaoAPIModel.documents.count
+            //return KakaoAPIModel.documents.count
+            
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        if offsetY > contentHeight - frameHeight {
+            homeViewPresenter.loadData()
+            
+        }
+    }
+    func loadMoreData(){
+        
+    }
+
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
         if collectionView === homeTagCollectionView {
@@ -60,10 +90,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             cell = homeMainCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeMainCollectionViewCell", for: indexPath)
             if let mainCell = cell as? MMainCollectionViewCell {
-                if indexPath.item < HomeMainCollectionList.count{
-                    let data = HomeMainCollectionList[indexPath.item]
-                    mainCell.titleLabel.text = data.title
-                    mainCell.imageView.image = UIImage(named: data.ImageName)
+                if !KakaoAPIModel.documents.isEmpty && indexPath.item < KakaoAPIModel.documents.count{
+                    let data = KakaoAPIModel.documents[indexPath.item]
+               
+
+                    mainCell.titleLabel.text = data.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+                    if let imageUrl = URL(string: data.thumbnail) {
+                        let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                            if let error = error {
+                                return
+                            }
+                            
+                            if let data = data, let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    // 이미지를 다운로드한 후에는 메인 스레드에서 UI 업데이트를 수행해야 합니다.
+                                    mainCell.imageView.image = image
+                                }
+                            }
+                        }
+                        task.resume()
+                    }
                 }
             }
         }
@@ -75,7 +121,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if collectionView === homeMainCollectionView{
             print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
             if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                homeViewPresenter.onMainItemSelected(cellInfo: HomeMainCollectionList[indexPath.item])
+                //homeViewPresenter.onMainItemSelected(cellInfo: HomeMainCollectionList[indexPath.item])
             }
         }else{
             if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
@@ -117,12 +163,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 class HomeViewController: BaseViewController, EmailAuthDelegate{
     var HometagList : [HomeViewTagModel] = []
-    var HomeMainCollectionList : [HomeViewMainCollectionModel] = []
-    
-    var homeViewPresenter :  HomeViewPresenter<FetchNaverBlogUseCase>!
-
-    
-    
+    var KakaoAPIModel  = KakaoAPI()
+    var homeViewPresenter :  HomeViewPresenter<FetchKakaoBlogUseCase>!
     var homeTableView : MTableView? //밑에 사진, 글 등
     var homeTableViewController = MTableViewController() //
     var homeTagCollectionView =  MTagCollectionView()// 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
@@ -160,6 +202,8 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
             print("")
         }
     }
+    
+    
     
     func SetupLayout(){
 
