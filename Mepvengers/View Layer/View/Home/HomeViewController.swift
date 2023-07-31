@@ -119,7 +119,10 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
     var HometagList : [HomeViewTagModel] = []
     var HomeMainCollectionList : [HomeViewMainCollectionModel] = []
     
-    var homeViewPresenter :  HomeViewPresenter!
+    var homeViewPresenter :  HomeViewPresenter<FetchNaverBlogUseCase>!
+
+    
+    
     var homeTableView : MTableView? //밑에 사진, 글 등
     var homeTableViewController = MTableViewController() //
     var homeTagCollectionView =  MTagCollectionView()// 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신

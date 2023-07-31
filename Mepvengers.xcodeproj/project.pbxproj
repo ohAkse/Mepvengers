@@ -12,10 +12,16 @@
 		5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */; };
 		5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */; };
 		5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2912702A6FF22B000A8FCE /* UIAlertController.swift */; };
+		5F2E5DFB2A741226005BDB2F /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E5DFA2A741226005BDB2F /* Array.swift */; };
 		5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */; };
 		5F497B7F2A734BD80006A1FB /* BlogLikeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B7E2A734BD80006A1FB /* BlogLikeViewPresenter.swift */; };
 		5F497B812A73913A0006A1FB /* VideoLikeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B802A73913A0006A1FB /* VideoLikeViewPresenter.swift */; };
 		5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */; };
+		5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5DE2A77599C003B7C21 /* APIManager.swift */; };
+		5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F75C5E12A777DA3003B7C21 /* SwiftyJSON */; };
+		5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */; };
+		5F75C5F82A77A073003B7C21 /* FetchNaverBlogUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F72A77A073003B7C21 /* FetchNaverBlogUseCase.swift */; };
+		5F75C5FC2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5FB2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift */; };
 		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
 		5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */; };
 		5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */; };
@@ -69,10 +75,15 @@
 		5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneBuilder.swift; sourceTree = "<group>"; };
 		5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogLikeViewController.swift; sourceTree = "<group>"; };
 		5F2912702A6FF22B000A8FCE /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		5F2E5DFA2A741226005BDB2F /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewPresenter.swift; sourceTree = "<group>"; };
 		5F497B7E2A734BD80006A1FB /* BlogLikeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogLikeViewPresenter.swift; sourceTree = "<group>"; };
 		5F497B802A73913A0006A1FB /* VideoLikeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewPresenter.swift; sourceTree = "<group>"; };
 		5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeSceneBuilder.swift; sourceTree = "<group>"; };
+		5F75C5DE2A77599C003B7C21 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataUseCaseSpec.swift; sourceTree = "<group>"; };
+		5F75C5F72A77A073003B7C21 /* FetchNaverBlogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchNaverBlogUseCase.swift; sourceTree = "<group>"; };
+		5F75C5FB2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteNaverBlogFetcher.swift; sourceTree = "<group>"; };
 		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
 		5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewController.swift; sourceTree = "<group>"; };
 		5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mepvengers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +148,7 @@
 				5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */,
 				5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */,
 				613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */,
+				5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */,
 				5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +163,22 @@
 				5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */,
 			);
 			path = LoginView;
+			sourceTree = "<group>";
+		};
+		5F75C5DD2A77598E003B7C21 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				5F75C5DE2A77599C003B7C21 /* APIManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		5F75C5EA2A778E52003B7C21 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				5F75C5FB2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		5F8B1CEE2A6E75730023BA85 /* BlogLikeView */ = {
@@ -220,6 +248,7 @@
 		5FA04F742A63E426006E6FA6 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				5F75C5EA2A778E52003B7C21 /* Repository */,
 				5FC05C0D2A66C7A600B12A03 /* Enum */,
 			);
 			path = "Data Layer";
@@ -228,6 +257,7 @@
 		5FA04F752A63E432006E6FA6 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
+				5F75C5DD2A77598E003B7C21 /* Manager */,
 				5FCFB5C62A72A61A00273DE0 /* Model */,
 				5FC05C072A66C54300B12A03 /* UseCase */,
 				5FC05C082A66C54D00B12A03 /* Presenter */,
@@ -248,6 +278,7 @@
 		5FA04F772A63E5D1006E6FA6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5F2E5DFA2A741226005BDB2F /* Array.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -325,6 +356,8 @@
 		5FC05C072A66C54300B12A03 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */,
+				5F75C5F72A77A073003B7C21 /* FetchNaverBlogUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -475,6 +508,7 @@
 				5F1F9C272A69336500E3FB00 /* SwiftSMTP */,
 				5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */,
 				5F8B1CE42A6E38E70023BA85 /* Tabman */,
+				5F75C5E12A777DA3003B7C21 /* SwiftyJSON */,
 			);
 			productName = Mepvengers;
 			productReference = 5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */;
@@ -508,6 +542,7 @@
 				5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 				5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 				5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */,
+				5F75C5E02A777DA3003B7C21 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 5FA04F5C2A63E0CA006E6FA6 /* Products */;
 			projectDirPath = "";
@@ -582,6 +617,7 @@
 				5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */,
 				5FAED9752A6834AB006E89FC /* QuestionViewController.swift in Sources */,
 				5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */,
+				5F75C5F82A77A073003B7C21 /* FetchNaverBlogUseCase.swift in Sources */,
 				5F497B812A73913A0006A1FB /* VideoLikeViewPresenter.swift in Sources */,
 				5FAED9582A67A2CB006E89FC /* MTableView.swift in Sources */,
 				5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */,
@@ -593,12 +629,14 @@
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
 				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
+				5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */,
 				5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
 				5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */,
 				5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */,
 				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
 				5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */,
+				5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */,
 				5F497B7F2A734BD80006A1FB /* BlogLikeViewPresenter.swift in Sources */,
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
 				5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */,
@@ -613,6 +651,7 @@
 				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
+				5F75C5FC2A77A30E003B7C21 /* RemoteNaverBlogFetcher.swift in Sources */,
 				5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */,
 				5FAED95A2A67A30E006E89FC /* MTabbarView.swift in Sources */,
 				5FE165292A64D9360016C79D /* Theme.swift in Sources */,
@@ -621,6 +660,7 @@
 				5FE165302A64E4CB0016C79D /* HomeSceneBuilder.swift in Sources */,
 				5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */,
 				5FE165542A6550B80016C79D /* Logger.swift in Sources */,
+				5F2E5DFB2A741226005BDB2F /* Array.swift in Sources */,
 				5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */,
 				5FE165522A652CF40016C79D /* UIImage.swift in Sources */,
 				5FAED96A2A67A59D006E89FC /* LikeSceneBuilder.swift in Sources */,
@@ -844,6 +884,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5F75C5E02A777DA3003B7C21 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman.git";
@@ -867,6 +915,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
 			productName = SwiftSMTP;
+		};
+		5F75C5E12A777DA3003B7C21 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F75C5E02A777DA3003B7C21 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 		5F8B1CE42A6E38E70023BA85 /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;

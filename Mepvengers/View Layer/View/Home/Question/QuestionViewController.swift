@@ -167,9 +167,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
    
     }
     @objc func keyboardDidHide(_ notification : Notification){
-        
         ScrollView.frame = view.frame
-        //ScrollView.setContentOffset(CGPoint(x: 0, y: 100) , animated: true)
     }
     
     
