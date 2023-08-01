@@ -15,12 +15,14 @@ import Kingfisher
 protocol HomeViewSpec: AnyObject {
     func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] )
     func UpdateMainCollectionView(homeMainCollectionModel : KakaoAPI)
-    func ReloadTagCollectionView(cellinfo : HomeViewTagModel)
+    func ReloadCollectionView(kakaoAPI : KakaoAPI)
     func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
+    func ShowErrorAlertDialog(message : String)
 }
 extension HomeViewController : HomeViewSpec{
     func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] ){
         self.HometagList = homeTagList
+        //homeTagCollectionView.reloadData()
     }
     func UpdateMainCollectionView(homeMainCollectionModel: KakaoAPI) {
         var updatedDocuments = self.KakaoAPIModel.documents
@@ -37,9 +39,11 @@ extension HomeViewController : HomeViewSpec{
             homeMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
     }
-
-    func ReloadTagCollectionView(cellinfo : HomeViewTagModel){
-        print("TagName -> \(cellinfo.title)")
+    func ReloadCollectionView(kakaoAPI : KakaoAPI){
+        
+        KakaoAPIModel.documents = kakaoAPI.documents
+        homeMainCollectionView.reloadData()
+        
     }
     func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
     {
@@ -47,6 +51,11 @@ extension HomeViewController : HomeViewSpec{
         let reviewController = baseController.rootViewController as? ReviewViewController
         reviewController?.reviewData = ReviewModel(BlogName: "하드코딩블로그", Cotent: cellinfo.title, ImageURl: cellinfo.ImageName, IsLike: false) //title 좀 바꿔야할듯..
         navigationController?.pushViewController(reviewController!, animated: true)
+    }
+    func ShowErrorAlertDialog(message : String){
+        DispatchQueue.main.async{
+            self.showAlert(title: "에러", message: message)
+        }
     }
 }
 
@@ -66,6 +75,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let frameHeight = scrollView.frame.height
         if offsetY > contentHeight - frameHeight {
             homeViewPresenter.loadData()
+            if selectedCategory == ""
+            {
+                homeViewPresenter.loadData()
+            }else{
+                homeViewPresenter.onSearchMainItem(keyword: selectedCategory)
+            }
         }
     }
     
@@ -76,8 +91,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if let tagCell = cell as? MTagCollectionViewCell  {
                 if indexPath.item < HometagList.count{
                     let data = HometagList[indexPath.item]
-                    tagCell.titleLabel.text = data.title
-                    tagCell.imageView.image = UIImage(named: data.ImageName)
+                    tagCell.titleLabel.text = data.category
                 }
             }
         } else {
@@ -165,16 +179,34 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        return g_sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return g_sectionInsets.left
     }
+}
+
+extension HomeViewController : UITextFieldDelegate{
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        homeViewPresenter.onSearchMainItem(keyword: textField.text!)
+        homeSearchTextField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+
+        if let touch = touches.first, touch.view != homeSearchTextField {
+            homeSearchTextField.resignFirstResponder()
+        }
+    }
+    
 }
 
 class HomeViewController: BaseViewController, EmailAuthDelegate{
     var HometagList : [HomeViewTagModel] = []
+    var selectedCategory = ""
     var KakaoAPIModel  = KakaoAPI()
     var homeViewPresenter :  HomeViewPresenter<FetchKakaoBlogUseCase>!
     var homeTableView : MTableView? //밑에 사진, 글 등
@@ -200,9 +232,12 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         homeMainCollectionView.dataSource = self
         homeMainCollectionView.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "HomeMainCollectionViewCell")
         
+        homeSearchTextField.delegate = self
+        
         NavigationLayout()
         SetupLayout()
         homeViewPresenter.loadData()
+        homeViewPresenter.loadTagData()
         
     }
     
@@ -211,11 +246,11 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         case EmailResult.Success:
             Toast.showToast(message: "제출이 완료되었습니다.", errorMessage: [], font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
         default:
-            print("")
+            print("error")
         }
     }
     
-    
+
     
     func SetupLayout(){
 

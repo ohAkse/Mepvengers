@@ -10,8 +10,8 @@ struct HomeSceneBuilder : ViewBuilderSpec{
     func build()->  HomeViewController {
         let homeViewController = HomeViewController()
         let remoteRepository = RemoteNaverBlogRepository(fetcher: KakaoFetcher())
-        let fetchNaverUseCase = FetchKakaoBlogUseCase(repository: remoteRepository)
-        var homeViewPresenter = HomeViewPresenter<FetchKakaoBlogUseCase>(HomeViewSpec: homeViewController, FetchUseCase: fetchNaverUseCase)
+        let fetchKakaoUseCase = FetchKakaoBlogUseCase(repository: remoteRepository)
+        var homeViewPresenter = HomeViewPresenter<FetchKakaoBlogUseCase>(HomeViewSpec: homeViewController, FetchUseCase: fetchKakaoUseCase)
         homeViewPresenter.HomeViewSpec = homeViewController
         homeViewController.homeViewPresenter = homeViewPresenter
         

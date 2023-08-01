@@ -19,6 +19,7 @@
 		5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */; };
 		5F6302282A78F2D5009673E0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6302272A78F2D5009673E0 /* WebViewController.swift */; };
 		5F63022A2A78FFBF009673E0 /* WebViewSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6302292A78FFBF009673E0 /* WebViewSceneBuilder.swift */; };
+		5F63022C2A7946D8009673E0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F63022B2A7946D8009673E0 /* UIColor.swift */; };
 		5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5DE2A77599C003B7C21 /* APIManager.swift */; };
 		5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F75C5E12A777DA3003B7C21 /* SwiftyJSON */; };
 		5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */; };
@@ -84,6 +85,7 @@
 		5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeSceneBuilder.swift; sourceTree = "<group>"; };
 		5F6302272A78F2D5009673E0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		5F6302292A78FFBF009673E0 /* WebViewSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewSceneBuilder.swift; sourceTree = "<group>"; };
+		5F63022B2A7946D8009673E0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5F75C5DE2A77599C003B7C21 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataUseCaseSpec.swift; sourceTree = "<group>"; };
 		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 			children = (
 				5FE165512A652CF40016C79D /* UIImage.swift */,
 				5F2912702A6FF22B000A8FCE /* UIAlertController.swift */,
+				5F63022B2A7946D8009673E0 /* UIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				5F497B7F2A734BD80006A1FB /* BlogLikeViewPresenter.swift in Sources */,
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
 				5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */,
+				5F63022C2A7946D8009673E0 /* UIColor.swift in Sources */,
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
 				5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */,
 				5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */,

@@ -17,26 +17,24 @@ class APIManager {
     init() {
 
     }
-    func fetchKaKao(keyword : String) {
+    static func fetchKaKao(keyword: String, completion: @escaping (KakaoAPI?, NetworkError) -> Void) {
         let apiKey = "6662f3bca0dc428495de3aed317c9869"
         let apiUrl = "https://dapi.kakao.com/v2/search/blog"
         
         let headers: HTTPHeaders = [
             "Authorization": "KakaoAK " + apiKey
         ]
+        
         AF.request(apiUrl, method: .get, parameters: ["query": keyword], headers: headers)
             .responseDecodable(of: KakaoAPI.self) { response in
                 switch response.result {
                 case .success(let kakaoAPIResponse):
-                    //self.completion?(kakaoAPIResponse, NetworkError.empty)
-                    print("A")
-                    //print(kakaoAPIResponse)
+                    completion(kakaoAPIResponse, .empty)
                 case .failure(let error):
-                    print("A")
-                    //self.completion?(KakaoAPI(), NetworkError.serviceError)
-                     //print("Decoding error: \(error)")
+                    completion(nil, .serviceError)
+                    print("Decoding error: \(error)")
                 }
-                
             }
     }
+
 }

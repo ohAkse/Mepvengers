@@ -57,7 +57,7 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 if indexPath.item < CousinViewTagList.count {
                     let data = CousinViewTagList[indexPath.item]
                     tagCell.titleLabel.text = data.title
-                    tagCell.imageView.image = UIImage(named: data.ImageName)
+                    //tagCell.imageView.image = UIImage(named: data.ImageName)
                 }
             }
         }
@@ -122,11 +122,11 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return cellSize
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        return g_sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return g_sectionInsets.left
     }
 }
 
