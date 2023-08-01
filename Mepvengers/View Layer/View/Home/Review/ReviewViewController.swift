@@ -8,18 +8,22 @@
 import UIKit
 
 protocol ReviewViewSpec: AnyObject {
-    func UpdateMainCollectionView(reviewModelList : [ReviewModel])
+    func UpdateMainCollectionView(KakaoAPI : KakaoAPI)
     func MoreButtonClickedReturn()
     func LikeButtonClickedReturn()
     func ShareButtonClickedReturn()
-    func OnReviewCellClickedReturn(cellInfo : ReviewModel)
+    func OnReviewCellClickedReturn(cellInfo : Document)
 }
 extension ReviewViewController : ReviewViewSpec{
-    func UpdateMainCollectionView(reviewModelList : [ReviewModel]){
-        reviewCollectionData = reviewModelList
+    func UpdateMainCollectionView(KakaoAPI : KakaoAPI){
+        reviewKakaoAPI = KakaoAPI
+        reviewRecommendCollectionView.reloadData()
     }
     func MoreButtonClickedReturn() {
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(16)("웹뷰전환필요"))
+        let baseController = WebviewSceneBuilder().WithNavigationController()
+        let WebviewController = baseController.rootViewController as? WebViewController
+        WebviewController?.webViewUrl = reviewBlogUrl
+        navigationController?.pushViewController(WebviewController!, animated: true)
     }
     
     func LikeButtonClickedReturn() {
@@ -27,33 +31,77 @@ extension ReviewViewController : ReviewViewSpec{
     }
     
     func ShareButtonClickedReturn() {
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(26)("공유기능 추가 필요"))
+            let link = reviewBlogUrl // 공유하고자 하는 링크 주소
+             let activityViewController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
+             
+             activityViewController.excludedActivityTypes = [
+                 .addToReadingList,
+                 .assignToContact,
+                 .print,
+                 .postToTencentWeibo
+             ]
+             if let popoverController = activityViewController.popoverPresentationController {
+                 popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+             }
+             present(activityViewController, animated: true, completion: nil)
     }
     
     func BlogCollectionClickedReturn() {
         print(Logger.Write(LogLevel.Info)("ReviewViewController")(30)("다른 블로그 화면 전환 필요"))
     }
-    func OnReviewCellClickedReturn(cellInfo : ReviewModel){
+    func OnReviewCellClickedReturn(cellInfo : Document){
+        let data = cellInfo
         let baseController = ReviewSceneBuilder().WithNavigationController()
-        let reviewController = baseController.rootViewController as? ReviewViewController
-        reviewController?.reviewData = ReviewModel(BlogName: "하드코딩블로그3", Cotent: cellInfo.Cotent, ImageURl: cellInfo.ImageURl, IsLike: false) //title 좀 바꿔야할듯..
-        navigationController?.pushViewController(reviewController!, animated: true)
+         let reviewController = baseController.rootViewController as? ReviewViewController
+        reviewController?.reviewBlogName = data.blogname
+        reviewController?.reviewBlogUrl = data.url.replacingOccurrences(of: "http", with: "https")
+        reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        if let imageUrl = URL(string: data.thumbnail) {
+            let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                if let error = error {
+                    print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
+                    return
+                }
+
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        reviewController?.reviewFoodImageView.image = image
+                        self.navigationController!.isNavigationBarHidden = false
+                        self.navigationController!.pushViewController(reviewController!, animated: true)
+                    }
+                }
+            }
+            task.resume()
+        }
     }
 }
 
 
 extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return reviewCollectionData.count
+        return reviewKakaoAPI.documents.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
         cell = reviewRecommendCollectionView.dequeueReusableCell(withReuseIdentifier: "ReviewMainCollectionViewCell", for: indexPath)
-        if let tagCell = cell as? MMainCollectionViewCell  {
-            if indexPath.item < reviewCollectionData.count{
-                let data = reviewCollectionData[indexPath.item]
-                tagCell.titleLabel.text = data.Cotent
-                tagCell.imageView.image = UIImage(named: data.ImageURl)
+        if let cell = cell as? MMainCollectionViewCell  {
+            if !reviewKakaoAPI.documents.isEmpty && indexPath .item < reviewKakaoAPI.documents.count{
+                let data = reviewKakaoAPI.documents[indexPath.item]
+                cell.titleLabel.text = data.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+                if let imageUrl = URL(string: data.thumbnail) {
+                    let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if let error = error {
+                            return
+                        }
+                        if let data = data, let image = UIImage(data: data) {
+                            DispatchQueue.main.async {
+                                cell.imageView.image = image
+                            }
+                        }
+                    }
+                    task.resume()
+                }
             }
         }
         return cell ?? UICollectionViewCell()
@@ -71,7 +119,7 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-            reviewPresentSpec.OnReviewCellClicked(cellInfo: reviewCollectionData[indexPath.item])
+            reviewPresentSpec.OnReviewCellClicked(cellInfo: reviewKakaoAPI.documents[indexPath.item])
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -88,7 +136,6 @@ class ReviewViewController: BaseViewController {
     //프로퍼티
     
     var reviewPresentSpec : ReviewViewPresenterSpec!
-    var reviewCollectionData : [ReviewModel] = []
     var reviewData = ReviewModel(BlogName: "", Cotent: "", ImageURl: "", IsLike: false)
     var reviewFoodHeaderLabel  =  MTextLabel(text :"대표 사진", isBold: true, fontSize: 20) // 내용
     var reviewFoodImageView = UIImageView() //맨위 사진
@@ -99,6 +146,9 @@ class ReviewViewController: BaseViewController {
     var reviewLikeButton = MButton(name : "heart") //좋아요 버튼
     var reviewRecommenHeaderLabel = MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)
     var reviewRecommendCollectionView = MMainCollectionView(isHorizontal: true, size: CGSize(width: 150, height: 130))//밑에 추천 음식썸네일
+    var reviewBlogUrl = ""
+    var reviewBlogName = ""
+    var reviewKakaoAPI = KakaoAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,17 +170,15 @@ class ReviewViewController: BaseViewController {
         SetupLayout()
         SetupButtonClickEvent()
         
-        reviewFoodImageView.image = UIImage(named: reviewData.ImageURl)
-        reviewContentLabel.text = reviewData.Cotent
-        
+        NavigationLayout()
         reviewPresentSpec.LoadData()
+        
     }
     
     func SetupButtonClickEvent(){
         reviewMoreButton.addTarget(self, action: #selector(reviewMoreButtonClick), for: .touchUpInside)
         reviewShareButton.addTarget(self, action: #selector(reviewShareButtonClick), for: .touchUpInside)
         reviewLikeButton.addTarget(self, action: #selector(reviewLikeButtonClick), for: .touchUpInside)
-        
     }
 
     @objc func reviewMoreButtonClick(){
@@ -145,7 +193,20 @@ class ReviewViewController: BaseViewController {
         reviewPresentSpec.LikeButtonClicked()
     }
     
-
+    func NavigationLayout(){
+          let titleLabel = UILabel()
+          titleLabel.text = reviewBlogName
+          titleLabel.textAlignment = .center
+          titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+          titleLabel.sizeToFit()
+          self.navigationItem.titleView = titleLabel
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "뒤로 가기"
+        backItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backItem
+      }
+    
     
     func SetupLayout(){
         //대표사진

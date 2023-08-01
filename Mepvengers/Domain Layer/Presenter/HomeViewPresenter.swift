@@ -48,18 +48,17 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
                 switch result {
                 case .success(let kakaoAPI):
                     let filteredDocuments = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
-                    
                     self.KakaoAPI = kakaoAPI
                     self.KakaoAPI?.documents = filteredDocuments
-                    //print(self.KakaoAPI)
                     self.HomeViewSpec.UpdateMainCollectionView(homeMainCollectionModel: self.KakaoAPI!)
-                    //print(self.KakaoAPI)
                 case .failure:
                     //  self.NaverBlogAPI = KakaoAPI()
                     print("safasfas")
                 }
             }
         }
+        
+
     }
     
     func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel) {

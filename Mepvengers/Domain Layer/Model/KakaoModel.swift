@@ -28,6 +28,14 @@ struct Document: Codable {
         self.title = title
         self.url = url
     }
+    init() {
+        self.blogname = ""
+        self.contents = ""
+        self.datetime = ""
+        self.thumbnail = ""
+        self.title = ""
+        self.url = ""
+    }
 }
 
 struct Meta: Codable {
@@ -45,5 +53,10 @@ struct Meta: Codable {
         self.isEnd = isEnd
         self.pageableCount = pageableCount
         self.totalCount = totalCount
+    }
+    init() {
+        self.isEnd = false
+        self.pageableCount = 0
+        self.totalCount = 0
     }
 }

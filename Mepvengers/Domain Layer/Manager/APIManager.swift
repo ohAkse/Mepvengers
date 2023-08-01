@@ -28,10 +28,12 @@ class APIManager {
             .responseDecodable(of: KakaoAPI.self) { response in
                 switch response.result {
                 case .success(let kakaoAPIResponse):
-                    self.completion?(kakaoAPIResponse, NetworkError.empty)
-                     //print(kakaoAPIResponse)
+                    //self.completion?(kakaoAPIResponse, NetworkError.empty)
+                    print("A")
+                    //print(kakaoAPIResponse)
                 case .failure(let error):
-                    self.completion?(KakaoAPI(), NetworkError.serviceError)
+                    print("A")
+                    //self.completion?(KakaoAPI(), NetworkError.serviceError)
                      //print("Decoding error: \(error)")
                 }
                 

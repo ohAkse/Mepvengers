@@ -57,8 +57,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return HometagList.count
         }else{
             return KakaoAPIModel.documents.count
-            //return KakaoAPIModel.documents.count
-            
         }
     }
     
@@ -68,13 +66,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let frameHeight = scrollView.frame.height
         if offsetY > contentHeight - frameHeight {
             homeViewPresenter.loadData()
-            
         }
     }
-    func loadMoreData(){
-        
-    }
-
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
@@ -92,15 +85,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if let mainCell = cell as? MMainCollectionViewCell {
                 if !KakaoAPIModel.documents.isEmpty && indexPath.item < KakaoAPIModel.documents.count{
                     let data = KakaoAPIModel.documents[indexPath.item]
-               
-
                     mainCell.titleLabel.text = data.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
                     if let imageUrl = URL(string: data.thumbnail) {
                         let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                             if let error = error {
+                                print(Logger.Write(LogLevel.Error)("HomeViewController")(92)("error -> \(error.localizedDescription)"))
                                 return
                             }
-                            
                             if let data = data, let image = UIImage(data: data) {
                                 DispatchQueue.main.async {
                                     // 이미지를 다운로드한 후에는 메인 스레드에서 UI 업데이트를 수행해야 합니다.
@@ -121,7 +112,28 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if collectionView === homeMainCollectionView{
             print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
             if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                //homeViewPresenter.onMainItemSelected(cellInfo: HomeMainCollectionList[indexPath.item])
+                let data = KakaoAPIModel.documents[indexPath.item]
+                let baseController = ReviewSceneBuilder().WithNavigationController()
+                 let reviewController = baseController.rootViewController as? ReviewViewController
+                reviewController?.reviewBlogName = data.blogname
+                reviewController?.reviewBlogUrl = data.url.replacingOccurrences(of: "http", with: "https")
+                reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+                if let imageUrl = URL(string: data.thumbnail) {
+                    let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if let error = error {
+                            print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
+                            return
+                        }
+
+                        if let data = data, let image = UIImage(data: data) {
+                            DispatchQueue.main.async {
+                                reviewController?.reviewFoodImageView.image = image
+                                self.navigationController?.pushViewController(reviewController!, animated: true)
+                            }
+                        }
+                    }
+                    task.resume()
+                }
             }
         }else{
             if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {

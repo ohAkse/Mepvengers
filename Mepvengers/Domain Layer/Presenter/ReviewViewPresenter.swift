@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol ReviewEventReceiverable: AnyObject {
     func receivedEventOfSetupViews(with setupModel: CousinViewSetupModel)
@@ -16,7 +17,7 @@ protocol ReviewViewPresenterSpec {
     func MoreButtonClicked()
     func LikeButtonClicked()
     func ShareButtonClicked()
-    func OnReviewCellClicked(cellInfo : ReviewModel)
+    func OnReviewCellClicked(cellInfo : Document)
     func LoadData()
 }
 struct ReviewModel {
@@ -26,8 +27,43 @@ struct ReviewModel {
     var IsLike: Bool
 }
 
-class ReviewViewPresenter: ReviewViewPresenterSpec {
+class ReviewViewPresenter : ReviewViewPresenterSpec{
+    func LoadData() {
+        //  var ApiManager = APIManager()
+        //  do{
+        //      try ApiManager.fetchKaKao(keyword: "실비김치")
+        //  }catch{
+        //      print("eror")
+        //  }
+     
+        let apiKey = "6662f3bca0dc428495de3aed317c9869"
+        let apiUrl = "https://dapi.kakao.com/v2/search/blog"
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "KakaoAK " + apiKey
+        ]
+        
+        AF.request(apiUrl, method: .get, parameters: ["query": "매운음식"], headers: headers)
+            .responseDecodable(of: KakaoAPI.self) { (response: DataResponse<KakaoAPI, AFError>) in
+                switch response.result {
+                case .success(let kakaoAPIResponse):
+                    self.kakaoAPI = kakaoAPIResponse
+                    self.ReviewViewSpec.UpdateMainCollectionView(KakaoAPI: self.kakaoAPI)
+                    print("")
+                case .failure(let error):
+                    print("Error: \(error)")
+                    //completionHandler(.failure(error))
+                }
+            }
+    }
+    
     var ReviewViewSpec : ReviewViewSpec!
+    var kakaoAPI = KakaoAPI()
+    
+  
+    func OnReviewCellClicked(cellInfo: Document) {
+        ReviewViewSpec.OnReviewCellClickedReturn(cellInfo : cellInfo)
+    }
     func MoreButtonClicked(){
         ReviewViewSpec.MoreButtonClickedReturn()
     }
@@ -36,25 +72,6 @@ class ReviewViewPresenter: ReviewViewPresenterSpec {
     }
     func ShareButtonClicked(){
         ReviewViewSpec.ShareButtonClickedReturn()
-    }
-
-    func LoadData() {
-        var ReviewModelList : [ReviewModel] = []
-        //여기서 나중에 서비스에서 받은 모델 기준으로 커스터마이징 할것
-        for i in 0..<7
-        {
-            if i%2 == 0
-            {
-                ReviewModelList.append(ReviewModel(BlogName: "에헤라", Cotent: "랜덤텍스트\(i)", ImageURl: "search", IsLike: false))
-            }else{
-                ReviewModelList.append(ReviewModel(BlogName: "디야", Cotent: "랜덤텍스트\(i)", ImageURl: "question", IsLike: false))
-            }
-        }
-        ReviewModelList[0].Cotent = "향이 익숙하지 않았는데 <b>실비</b> <b>김치</b>는 양념만 따로 냉동해서 라면 끓여 먹을 때마다 넣어 먹어주면 너무 좋습니다. 매운 <b>실비</b> <b>김치</b> 후기 매운 음식 좋아하시는 분들은 다 아실텐데 선화동  본점은...".replacingOccurrences(of: "</b>", with:"" ).replacingOccurrences(of: "<b>", with: "")
-        ReviewViewSpec.UpdateMainCollectionView(reviewModelList: ReviewModelList)
-    }
-    func OnReviewCellClicked(cellInfo: ReviewModel) {
-        ReviewViewSpec.OnReviewCellClickedReturn(cellInfo : cellInfo)
     }
     
 }

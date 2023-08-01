@@ -9,7 +9,7 @@ import UIKit
 
 class MButton: UIButton {
 
-    init(name: String, titleText : String = "", IsMoreButton : Bool = false , bgColor : UIColor =  UIColor(red: 255, green: 255, blue: 238)) {
+    init(name: String, titleText : String = "", IsMoreButton : Bool = false , bgColor : UIColor =  UIColor(red: 255, green: 255, blue: 255)) {
         super.init(frame: .zero)
         frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         if titleText != ""{
