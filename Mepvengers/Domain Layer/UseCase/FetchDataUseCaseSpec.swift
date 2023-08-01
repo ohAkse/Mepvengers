@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Alamofire
 protocol FetchDataUseCaseSpec {
     associatedtype DataModel
-    typealias FetchDataModelUseCaseCompletionHandler = (_ books: Result<DataModel, NetworkError>) -> ()
-    func fetchDataModel(_ completionHandler: @escaping FetchDataModelUseCaseCompletionHandler)
+    typealias FetchDataModelUseCaseCompletionHandler = (_ books: Result<DataModel, AFError>) -> ()
+    func fetchDataModel(_ keyword : String, completionHandler: @escaping FetchDataModelUseCaseCompletionHandler)
 }

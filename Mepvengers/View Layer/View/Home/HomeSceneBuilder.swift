@@ -9,7 +9,7 @@ import UIKit
 struct HomeSceneBuilder : ViewBuilderSpec{
     func build()->  HomeViewController {
         let homeViewController = HomeViewController()
-        let remoteRepository = RemoteNaverBlogRepository(fetcher: KakaoFetcher())
+        let remoteRepository = RemoteKakaoBlogRepository(fetcher: KakaoFetcher())
         let fetchKakaoUseCase = FetchKakaoBlogUseCase(repository: remoteRepository)
         var homeViewPresenter = HomeViewPresenter<FetchKakaoBlogUseCase>(HomeViewSpec: homeViewController, FetchUseCase: fetchKakaoUseCase)
         homeViewPresenter.HomeViewSpec = homeViewController

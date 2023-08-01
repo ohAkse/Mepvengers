@@ -31,7 +31,7 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     var HomeViewSpec : HomeViewSpec
     var FetchDataUseCaseSpec: AnyFetchUseCase
     var kakaoAPI = KakaoAPI()
-    
+    var keyword = ""
     init(HomeViewSpec: HomeViewSpec, FetchUseCase : AnyFetchUseCase ) {
         self.HomeViewSpec = HomeViewSpec
         self.FetchDataUseCaseSpec = FetchUseCase
@@ -39,8 +39,10 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     
     func loadData() {
         do{
-        
-            FetchDataUseCaseSpec.fetchDataModel { (result) in
+            if keyword == ""{
+                keyword = "매운김치"
+            }
+            FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
                 switch result {
                 case .success(let kakaoAPI):
                     let filteredDocuments = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
@@ -56,8 +58,6 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
 
     }
     func onSearchMainItem(keyword : String){
-    
-        
         APIManager.fetchKaKao(keyword: keyword) { (kakaoAPIResponse, networkError) in
             if networkError == .empty {
                 // 요청이 성공적으로 완료되었을 때 처리
@@ -65,12 +65,13 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
                     let kakaoDocument = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
                     let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPI.meta)
                     self.kakaoAPI = filteredKakaoAPI
-                    self.HomeViewSpec.UpdateMainCollectionView(homeMainCollectionModel: self.kakaoAPI)
+                    self.HomeViewSpec.ReloadCollectionView(kakaoAPI: kakaoAPI)
                 }
             } else {
                 self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
             }
         }
+        self.keyword = keyword
     }
     func loadTagData(){
         var homeViewTagModelList : [ HomeViewTagModel] = []
@@ -80,6 +81,7 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
             
         }
         HomeViewSpec.UpdateTagCollectionView(homeTagList:  homeViewTagModelList)
+        
     }
     
     func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel) {
@@ -96,6 +98,7 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
                 self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
             }
         }
+        self.keyword = TagInfo.category
     }
     func onMainItemSelected(cellInfo MainInfo: HomeViewMainCollectionModel) {
         HomeViewSpec.RouteReviewController(cellinfo: MainInfo)

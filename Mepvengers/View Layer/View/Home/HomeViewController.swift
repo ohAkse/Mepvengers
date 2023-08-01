@@ -22,11 +22,10 @@ protocol HomeViewSpec: AnyObject {
 extension HomeViewController : HomeViewSpec{
     func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] ){
         self.HometagList = homeTagList
-        //homeTagCollectionView.reloadData()
     }
     func UpdateMainCollectionView(homeMainCollectionModel: KakaoAPI) {
         var updatedDocuments = self.KakaoAPIModel.documents
-        updatedDocuments.append(contentsOf: homeMainCollectionModel.documents)
+        updatedDocuments.insert(contentsOf: homeMainCollectionModel.documents, at: 0)
         // 변경 사항을 배치로 처리
         homeMainCollectionView.performBatchUpdates({
             self.KakaoAPIModel.documents = updatedDocuments
@@ -75,12 +74,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let frameHeight = scrollView.frame.height
         if offsetY > contentHeight - frameHeight {
             homeViewPresenter.loadData()
-            if selectedCategory == ""
-            {
-                homeViewPresenter.loadData()
-            }else{
-                homeViewPresenter.onSearchMainItem(keyword: selectedCategory)
-            }
         }
     }
     
@@ -92,6 +85,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if indexPath.item < HometagList.count{
                     let data = HometagList[indexPath.item]
                     tagCell.titleLabel.text = data.category
+             
                 }
             }
         } else {
@@ -190,8 +184,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension HomeViewController : UITextFieldDelegate{
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        homeViewPresenter.onSearchMainItem(keyword: textField.text!)
         homeSearchTextField.resignFirstResponder()
+        homeViewPresenter.onSearchMainItem(keyword: textField.text!)
         return true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -206,7 +200,6 @@ extension HomeViewController : UITextFieldDelegate{
 
 class HomeViewController: BaseViewController, EmailAuthDelegate{
     var HometagList : [HomeViewTagModel] = []
-    var selectedCategory = ""
     var KakaoAPIModel  = KakaoAPI()
     var homeViewPresenter :  HomeViewPresenter<FetchKakaoBlogUseCase>!
     var homeTableView : MTableView? //밑에 사진, 글 등
