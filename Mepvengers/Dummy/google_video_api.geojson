@@ -1,4 +1,7 @@
-
+//유튜브 GET https://www.googleapis.com/youtube/v3/search
+//google AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg
+//?part=id.snippet&type=video&Key=AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI &q=실비김&maxResults=10&order=date
+// https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&channelId=UCQkIH55mkTKgecG2HTYAk1Q
 
 {
   "kind": "youtube#searchListResponse",

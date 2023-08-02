@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-struct FetchKakaoBlogUseCase: FetchDataUseCaseSpec {
+struct FetchKakaoUseCase: FetchDataUseCaseSpec {
     func fetchDataModel(_ keyword : String, completionHandler: @escaping FetchDataModelUseCaseCompletionHandler) {
         repository.fetchKakaoBlog(keyword, completionHandler : completionHandler)
     }
@@ -18,7 +18,8 @@ struct FetchKakaoBlogUseCase: FetchDataUseCaseSpec {
         self.repository = repository
     }
 }
-struct KakaoFetcher: NetworkFetchable {
+struct KakaoFetcher: NetworkKakaoFetchable {
+    typealias DataModel = KakaoAPI
     func fetchKakaoBlog(_ keyword: String, completionHandler: @escaping (Result<KakaoAPI, AFError>) -> ()) {
         let apiKey = "6662f3bca0dc428495de3aed317c9869"
         let apiUrl = "https://dapi.kakao.com/v2/search/blog"
@@ -26,16 +27,12 @@ struct KakaoFetcher: NetworkFetchable {
         let headers: HTTPHeaders = [
             "Authorization": "KakaoAK " + apiKey
         ]
-
         AF.request(apiUrl, method: .get, parameters: ["query": keyword], headers: headers)
             .responseDecodable(of: KakaoAPI.self) { response in
                 switch response.result {
                 case .success(let kakaoAPIResponse):
                     completionHandler(.success(kakaoAPIResponse))
-                    
-                    print("")
                 case .failure(let error):
-                    print("")
                     completionHandler(.failure(error))// AFNetworkError
 
                 }
@@ -43,7 +40,5 @@ struct KakaoFetcher: NetworkFetchable {
             }
         
     }
-    
-    typealias DataModel = KakaoAPI
     
 }

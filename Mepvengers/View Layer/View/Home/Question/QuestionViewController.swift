@@ -18,10 +18,14 @@ protocol QuestionViewSpec: AnyObject {
     func CloseView(tag : Int)
     func ConfirmButtonClickResult(bSuccess : Bool, missingTextFieldText : [String])
     func CancleButtonClickResult()
-    //    func ShowErrorMessage(ErrorMessage : String) 나중에 View에서막든 Present에서 막든 예외처리 상황이 필요시 사용
+    func ShowErrorMessage(ErrorMessage : String)
 }
 
 extension QuestionViewController : QuestionViewSpec{
+    func ShowErrorMessage(ErrorMessage: String) {
+        self.showAlert(title: "에러", message: ErrorMessage)
+    }
+    
     func ConfirmButtonClickResult(bSuccess : Bool, missingTextFieldText : [String]){
         if(missingTextFieldText.isEmpty){
             AuthDelegate?.didReceiveResult(.Success)

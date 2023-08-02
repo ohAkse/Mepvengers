@@ -12,24 +12,13 @@ protocol KakaoBlogRepositorySpec {
     typealias FetchKakaoBlogCompletionHandler = (Result<KakaoAPI, AFError>) -> ()
     func fetchKakaoBlog(_ keyword : String, completionHandler: @escaping FetchKakaoBlogCompletionHandler)
 }
-enum NetworkError: Error {
-    case empty
-    case url
-    case encode
-    case connection
-    case decode
-    case emptyContent
-    case serviceError
-}
-
-protocol NetworkFetchable {
+protocol NetworkKakaoFetchable {
     associatedtype DataModel: Codable
     func fetchKakaoBlog(_ keyword : String, completionHandler: @escaping (Result<KakaoAPI, AFError>) -> ())
 }
 
+struct RemoteKakaoBlogRepository<AnyNetworkFetchable>: KakaoBlogRepositorySpec where AnyNetworkFetchable: NetworkKakaoFetchable, AnyNetworkFetchable.DataModel == KakaoAPI {
 
-struct RemoteKakaoBlogRepository<AnyNetworkFetchable>: KakaoBlogRepositorySpec where AnyNetworkFetchable: NetworkFetchable, AnyNetworkFetchable.DataModel == KakaoAPI {
-    
     // MARK: private
     private let fetcher: AnyNetworkFetchable
     
@@ -38,6 +27,9 @@ struct RemoteKakaoBlogRepository<AnyNetworkFetchable>: KakaoBlogRepositorySpec w
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    init(fetcher: AnyNetworkFetchable) {
+        self.fetcher = fetcher
+    }
     func fetchKakaoBlog(_ keyword: String, completionHandler: @escaping FetchKakaoBlogCompletionHandler) {
         fetcher.fetchKakaoBlog(keyword){ response in
             switch response {
@@ -47,8 +39,5 @@ struct RemoteKakaoBlogRepository<AnyNetworkFetchable>: KakaoBlogRepositorySpec w
                 completionHandler(.failure(error))
             }
         }
-    }
-    init(fetcher: AnyNetworkFetchable) {
-        self.fetcher = fetcher
     }
 }

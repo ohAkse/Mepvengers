@@ -28,14 +28,10 @@ struct ReviewModel {
 }
 
 class ReviewViewPresenter : ReviewViewPresenterSpec{
+    var ReviewViewSpec : ReviewViewSpec!
+    var kakaoAPI = KakaoAPI()
+    
     func LoadData() {
-        //  var ApiManager = APIManager()
-        //  do{
-        //      try ApiManager.fetchKaKao(keyword: "실비김치")
-        //  }catch{
-        //      print("eror")
-        //  }
-     
         let apiKey = "6662f3bca0dc428495de3aed317c9869"
         let apiUrl = "https://dapi.kakao.com/v2/search/blog"
         
@@ -56,11 +52,6 @@ class ReviewViewPresenter : ReviewViewPresenterSpec{
                 }
             }
     }
-    
-    var ReviewViewSpec : ReviewViewSpec!
-    var kakaoAPI = KakaoAPI()
-    
-  
     func OnReviewCellClicked(cellInfo: Document) {
         ReviewViewSpec.OnReviewCellClickedReturn(cellInfo : cellInfo)
     }

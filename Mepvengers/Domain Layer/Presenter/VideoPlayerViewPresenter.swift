@@ -9,13 +9,19 @@ import Foundation
 
 protocol VideoPlayerPresenterSpec {
     func CheckStatus()
+    func OnLikeButtonClicked(cellInfo :YouTubeVideo)
+
 }
 struct VideoPlayerModel {
     var videoUrl: String
 }
 
 class VideoViewPresenter: VideoPlayerPresenterSpec {
+    func OnLikeButtonClicked(cellInfo :YouTubeVideo){
+        VideoPlayerViewSpec.LikeButtonClickedReturn(cellinfo: cellInfo)
+    }
     var VideoPlayerViewSpec : VideoPlayerViewSpec!
+    
     func CheckStatus(){
         VideoPlayerViewSpec.CheckStatus(status: true)
     }

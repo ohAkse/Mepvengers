@@ -28,20 +28,16 @@ protocol HomeViewPresenterSpec{
 
 class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUseCase: FetchDataUseCaseSpec, AnyFetchUseCase.DataModel == KakaoAPI {
     
-    var HomeViewSpec : HomeViewSpec
+    var HomeViewSpec : HomeViewSpec!
     var FetchDataUseCaseSpec: AnyFetchUseCase
     var kakaoAPI = KakaoAPI()
-    var keyword = ""
+    var keyword = "매운김치"
     init(HomeViewSpec: HomeViewSpec, FetchUseCase : AnyFetchUseCase ) {
         self.HomeViewSpec = HomeViewSpec
         self.FetchDataUseCaseSpec = FetchUseCase
     }
     
     func loadData() {
-        do{
-            if keyword == ""{
-                keyword = "매운김치"
-            }
             FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
                 switch result {
                 case .success(let kakaoAPI):
@@ -53,25 +49,6 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
                     self.HomeViewSpec.ShowErrorAlertDialog(message: "로드에 실패했습니다.")
                 }
             }
-        }
-        
-
-    }
-    func onSearchMainItem(keyword : String){
-        APIManager.fetchKaKao(keyword: keyword) { (kakaoAPIResponse, networkError) in
-            if networkError == .empty {
-                // 요청이 성공적으로 완료되었을 때 처리
-                if let kakaoAPI = kakaoAPIResponse{
-                    let kakaoDocument = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
-                    let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPI.meta)
-                    self.kakaoAPI = filteredKakaoAPI
-                    self.HomeViewSpec.ReloadCollectionView(kakaoAPI: kakaoAPI)
-                }
-            } else {
-                self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
-            }
-        }
-        self.keyword = keyword
     }
     func loadTagData(){
         var homeViewTagModelList : [ HomeViewTagModel] = []
@@ -81,19 +58,33 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
             
         }
         HomeViewSpec.UpdateTagCollectionView(homeTagList:  homeViewTagModelList)
-        
+    }
+    
+    func onSearchMainItem(keyword : String){
+        APIManager.fetchKaKao(keyword: keyword) { (kakaoAPIResponse, networkError) in
+            if networkError == .empty {
+                    let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
+                    let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPIResponse.meta)
+                    self.kakaoAPI = filteredKakaoAPI
+                    self.HomeViewSpec.ReloadCollectionView(kakaoAPI: kakaoAPIResponse)
+
+            } else {
+                self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
+            }
+        }
+        self.keyword = keyword
     }
     
     func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel) {
         APIManager.fetchKaKao(keyword: "매운" + TagInfo.category) { (kakaoAPIResponse, networkError) in
             if networkError == .empty {
                 // 요청이 성공적으로 완료되었을 때 처리
-                if let kakaoAPI = kakaoAPIResponse{
-                    let kakaoDocument = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
-                    let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPI.meta)
+             
+                    let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
+                    let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPIResponse.meta)
                     self.kakaoAPI = filteredKakaoAPI
                     self.HomeViewSpec.ReloadCollectionView(kakaoAPI : self.kakaoAPI)
-                }
+                
             } else {
                 self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
             }
@@ -102,6 +93,5 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     }
     func onMainItemSelected(cellInfo MainInfo: HomeViewMainCollectionModel) {
         HomeViewSpec.RouteReviewController(cellinfo: MainInfo)
-        return
     }
 }

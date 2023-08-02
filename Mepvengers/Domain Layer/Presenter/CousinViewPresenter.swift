@@ -17,8 +17,7 @@ struct CousinViewSetupModel {
     let productImageName: String
 }
 struct CousinViewTagModel {
-    var title: String
-    var ImageName: String
+    var category: String
 }
 
 struct CousinViewMainCollectionModel {
@@ -28,41 +27,54 @@ struct CousinViewMainCollectionModel {
 }
 
 protocol CousinViewPresenterSpec {
+    
     func loadData()
-    func OnCellSelectedItem(cellInfo : CousinViewMainCollectionModel)
+    func loadTagData()
+    func OnMainCellSelectedItem(cellInfo : YouTubeVideo)
     func OnTagSelectedItem(cellInfo : CousinViewTagModel)
 }
-class CousinViewPresenter : CousinViewPresenterSpec{
-    func OnCellSelectedItem(cellInfo : CousinViewMainCollectionModel)
-    {
+
+class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyFetchUseCase: FetchDataUseCaseSpec, AnyFetchUseCase.DataModel == GoogleVideoAPI {
+    
+    var FetchDataUseCaseSpec: AnyFetchUseCase
+    var CousinViewSpec : CousinViewSpec!
+    var googleAPI = GoogleVideoAPI()
+    var keyword = "실비김치"
+    init(CousinViewSpec: CousinViewSpec, FetchUseCase : AnyFetchUseCase ) {
+        self.CousinViewSpec = CousinViewSpec
+        self.FetchDataUseCaseSpec = FetchUseCase
+        
+    }
+    func loadData() {
+        FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
+            switch result {
+            case .success(let googleAPIResponse):
+                var googleResponse = googleAPIResponse
+                let filteredItem = googleResponse.items.filter { $0.id.videoId != nil }
+                googleResponse.items = filteredItem
+                self.googleAPI = googleResponse
+                self.CousinViewSpec.UpdateMainCollectionView(googleVideoAPI: googleResponse)
+            case .failure:
+                print(result)
+                self.CousinViewSpec.ShowErrorMessage(ErrorMessage : "로드하는데 문제가 발생했습니다.")
+            }
+        }
+    }
+    
+    func OnMainCellSelectedItem(cellInfo: YouTubeVideo) {
         CousinViewSpec.RouteVideoPlayerController(cellInfo: cellInfo)
     }
     func OnTagSelectedItem(cellInfo : CousinViewTagModel){
         CousinViewSpec.ReloadTagCollectionView(cellInfo: cellInfo)
     }
-    
-    var CousinViewSpec : CousinViewSpec!
-    
-    func loadData(){
-        var cousinTagModelList : [CousinViewTagModel] = []
-        var cousinViewMainCollectionModelList : [CousinViewMainCollectionModel] = []
-        //여기서 나중에 서비스에서 받은 모델 기준으로 커스터마이징 할것
-        for i in 0..<7
+    func loadTagData(){
+        var cousinViewTagModel : [ CousinViewTagModel] = []
+        for i in 0..<g_SpicyTagCollectionData.count
         {
-            if i%2 == 0
-            {
-                cousinTagModelList.append(CousinViewTagModel(title: "면\(i)", ImageName: "search"))
-            }else{
-                cousinTagModelList.append(CousinViewTagModel(title: "피자\(i)", ImageName: "question"))
-            }
+            cousinViewTagModel.append(CousinViewTagModel(category: g_SpicyTagCollectionData[i]))
+            
         }
-        cousinViewMainCollectionModelList.append(CousinViewMainCollectionModel(title: "A", imageUrl: "https://i.ytimg.com/vi/t-F4jqYnB4o/default.jpg",VideoUrl: "t-F4jqYnB4o"))
-        cousinViewMainCollectionModelList.append(CousinViewMainCollectionModel(title: "B", imageUrl: "https://i.ytimg.com/vi/H4h-W68t5lw/default.jpg",VideoUrl: "H4h-W68t5lw"))
-        cousinViewMainCollectionModelList.append(CousinViewMainCollectionModel(title: "C", imageUrl: "https://i.ytimg.com/vi/nqezHrds7pQ/default.jpg",VideoUrl: "nqezHrds7pQ"))
-        cousinViewMainCollectionModelList.append(CousinViewMainCollectionModel(title: "D", imageUrl: "https://i.ytimg.com/vi/VmiXgTCfnMA/default.jpg",VideoUrl: "ntnO4gqrhC8"))
-        cousinViewMainCollectionModelList.append(CousinViewMainCollectionModel(title: "E", imageUrl: "https://i.ytimg.com/vi/ntnO4gqrhC8/default.jpg",VideoUrl: "nqezHrds7pQ"))
-        cousinViewMainCollectionModelList.append(CousinViewMainCollectionModel(title: "F", imageUrl: "https://i.ytimg.com/vi/VmiXgTCfnMA/hqdefault.jpg",VideoUrl: "H4h-W68t5lw"))
-        CousinViewSpec.UpdateTagCollectionView(cousinTagList: cousinTagModelList)
-        CousinViewSpec.UpdateMainCollectionView(cousinMainCollectionList: cousinViewMainCollectionModelList)
+        CousinViewSpec.UpdateTagCollectionView(cousinTagList: cousinViewTagModel)
+        
     }
 }

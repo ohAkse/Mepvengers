@@ -1,6 +1,4 @@
-//유튜브 GET https://www.googleapis.com/youtube/v3/search
-//google AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg
-//?part=id.snippet&type=video&Key=AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI &q=실비김&maxResults=10&order=date
+
 {
   "documents": [
     {

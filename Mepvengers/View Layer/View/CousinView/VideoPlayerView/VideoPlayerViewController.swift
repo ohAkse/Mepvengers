@@ -9,9 +9,13 @@ import UIKit
 import YouTubeiOSPlayerHelper
 
 protocol VideoPlayerViewSpec: AnyObject {
-    func CheckStatus(status : Bool) // 임시
+    func CheckStatus(status : Bool)
+    func LikeButtonClickedReturn(cellinfo : YouTubeVideo)
 }
 extension VideoPlayerViewController : VideoPlayerViewSpec{
+    func LikeButtonClickedReturn(cellinfo : YouTubeVideo){
+        print(Logger.Write(LogLevel.Info)("VideoPlayerViewController")(16)("로컬저장하는방법.."))
+    }
     
     func CheckStatus(status : Bool){
         print(status)
@@ -25,34 +29,61 @@ extension VideoPlayerViewController : YTPlayerViewDelegate{
 }
 
 class VideoPlayerViewController: BaseViewController {
+    var VideoChannelTitle = MTextLabel(text: "", isBold: true, fontSize: 16)
+    var VideoChannelDescriptionHeader = MTextLabel(text: "영상 소개", isBold: true, fontSize: 20)
+    var VideoChannelDescription = MTextLabel(text: "", isBold: false, fontSize: 16)
+    var VideoLikeButton = MButton(name : "heart") //좋아요 버튼
+    
+    var VideoGoogleChannelInfo = YouTubeVideo()
     var VideoPresenterSpec : VideoPlayerPresenterSpec!
-    var vieoPlayerModel = VideoPlayerModel(videoUrl: "")
     var VideoPlayerView = YTPlayerView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(VideoPlayerView)
+        view.addSubview(VideoLikeButton)
+        view.addSubview(VideoChannelDescriptionHeader)
+        view.addSubview(VideoChannelDescription)
         VideoPlayerView.delegate = self
         VideoPlayerView.isHidden = true
+        
         // 오토레이아웃이 잡힐 때까지 기다리기
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.view.layoutIfNeeded()
             self.VideoPlayerView.isHidden = false
         }
-       // VideoPresenterSpec.CheckStatus()
+        VideoChannelDescription.text = VideoGoogleChannelInfo.snippet.videoDescription
+        
+        NavigationLayout()
+        SetupLayout()
+        SetupButtonClickEvent()
     }
+    
+    func SetupButtonClickEvent(){
+        VideoLikeButton.addTarget(self, action: #selector(VideoLikeButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func VideoLikeButtonClicked(){
+        VideoPresenterSpec.OnLikeButtonClicked(cellInfo: VideoGoogleChannelInfo)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         SetupLayout()
-        VideoPlayerView.load(withVideoId: vieoPlayerModel.videoUrl)
-   
+        VideoPlayerView.load(withVideoId: VideoGoogleChannelInfo.id.videoId!)
+        
     }
     func NavigationLayout(){
         let titleLabel = UILabel()
-        titleLabel.text = "영상 시청"
+        titleLabel.text = VideoGoogleChannelInfo.snippet.channelTitle
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.sizeToFit()
         self.navigationItem.titleView = titleLabel
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "뒤로 가기"
+        backItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backItem
     }
     
     func SetupLayout(){
@@ -63,6 +94,28 @@ class VideoPlayerViewController: BaseViewController {
             VideoPlayerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             VideoPlayerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             VideoPlayerView.heightAnchor.constraint(equalToConstant: 300) // 콜렉션 뷰의 높이 설정
+        ])
+        //좋아요
+        VideoLikeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            VideoLikeButton.topAnchor.constraint(equalTo: VideoPlayerView.bottomAnchor,constant: 20),
+            VideoLikeButton.trailingAnchor.constraint(equalTo: VideoPlayerView.trailingAnchor, constant: -10),
+            VideoLikeButton.widthAnchor.constraint(equalToConstant: 50),
+            VideoLikeButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        VideoChannelDescriptionHeader.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            VideoChannelDescriptionHeader.topAnchor.constraint(equalTo: VideoLikeButton.bottomAnchor,constant: 5),
+            VideoChannelDescriptionHeader.leadingAnchor.constraint(equalTo: VideoPlayerView.leadingAnchor, constant: 5),
+            VideoChannelDescriptionHeader.widthAnchor.constraint(equalToConstant: 100),
+            VideoChannelDescriptionHeader.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        VideoChannelDescription.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            VideoChannelDescription.topAnchor.constraint(equalTo: VideoPlayerView.bottomAnchor,constant: 5),
+            VideoChannelDescription.leadingAnchor.constraint(equalTo: VideoChannelDescriptionHeader.leadingAnchor),
+            VideoChannelDescription.trailingAnchor.constraint(equalTo: VideoPlayerView.trailingAnchor),
+            VideoChannelDescription.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
 

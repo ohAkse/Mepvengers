@@ -23,6 +23,9 @@
 		5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5DE2A77599C003B7C21 /* APIManager.swift */; };
 		5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F75C5E12A777DA3003B7C21 /* SwiftyJSON */; };
 		5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */; };
+		5F79ED202A79F98A00487310 /* RemoteGoogleFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED1F2A79F98A00487310 /* RemoteGoogleFetcher.swift */; };
+		5F79ED222A79FB8200487310 /* FetchGoogleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */; };
+		5F79ED242A7A0CEE00487310 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED232A7A0CEE00487310 /* NetworkError.swift */; };
 		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
 		5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */; };
 		5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */; };
@@ -54,7 +57,6 @@
 		5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */; };
 		5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */; };
 		5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */; };
-		5FCFB5D42A72BC0A00273DE0 /* NaverBlogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5D32A72BC0A00273DE0 /* NaverBlogModel.swift */; };
 		5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651B2A64D5B50016C79D /* BaseViewController.swift */; };
 		5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */; };
 		5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */; };
@@ -88,6 +90,9 @@
 		5F63022B2A7946D8009673E0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5F75C5DE2A77599C003B7C21 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataUseCaseSpec.swift; sourceTree = "<group>"; };
+		5F79ED1F2A79F98A00487310 /* RemoteGoogleFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGoogleFetcher.swift; sourceTree = "<group>"; };
+		5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGoogleUseCase.swift; sourceTree = "<group>"; };
+		5F79ED232A7A0CEE00487310 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
 		5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewController.swift; sourceTree = "<group>"; };
 		5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mepvengers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +130,6 @@
 		5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewPresenter.swift; sourceTree = "<group>"; };
 		5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVideoModel.swift; sourceTree = "<group>"; };
 		5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoModel.swift; sourceTree = "<group>"; };
-		5FCFB5D32A72BC0A00273DE0 /* NaverBlogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverBlogModel.swift; sourceTree = "<group>"; };
 		5FE1651B2A64D5B50016C79D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilderSpec.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				5FF6BC902A78276000170342 /* RemoteKakaoFetcher.swift */,
+				5F79ED1F2A79F98A00487310 /* RemoteGoogleFetcher.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 			children = (
 				5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */,
 				5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */,
+				5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -388,6 +394,7 @@
 		5FC05C0D2A66C7A600B12A03 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				5F79ED232A7A0CEE00487310 /* NetworkError.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -397,7 +404,6 @@
 			children = (
 				5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */,
 				5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */,
-				5FCFB5D32A72BC0A00273DE0 /* NaverBlogModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -631,6 +637,7 @@
 				5FAED9582A67A2CB006E89FC /* MTableView.swift in Sources */,
 				5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */,
 				5FC05BFE2A66565900B12A03 /* ReviewViewController.swift in Sources */,
+				5F79ED242A7A0CEE00487310 /* NetworkError.swift in Sources */,
 				5FAED9602A67A3A2006E89FC /* MTextLabel.swift in Sources */,
 				5FAED9642A67A40B006E89FC /* MNavigationItem.swift in Sources */,
 				5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */,
@@ -638,6 +645,7 @@
 				5FAED95E2A67A377006E89FC /* MTextField.swift in Sources */,
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
 				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
+				5F79ED222A79FB8200487310 /* FetchGoogleUseCase.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
 				5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */,
 				5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */,
@@ -654,7 +662,6 @@
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
 				5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */,
 				5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */,
-				5FCFB5D42A72BC0A00273DE0 /* NaverBlogModel.swift in Sources */,
 				5FF6BC8F2A78274200170342 /* FetchKakaoUseCase.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
 				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
@@ -663,6 +670,7 @@
 				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
+				5F79ED202A79F98A00487310 /* RemoteGoogleFetcher.swift in Sources */,
 				5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */,
 				5FAED95A2A67A30E006E89FC /* MTabbarView.swift in Sources */,
 				5FE165292A64D9360016C79D /* Theme.swift in Sources */,

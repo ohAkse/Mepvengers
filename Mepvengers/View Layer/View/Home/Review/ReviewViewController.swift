@@ -92,6 +92,7 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 if let imageUrl = URL(string: data.thumbnail) {
                     let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                         if let error = error {
+                            
                             return
                         }
                         if let data = data, let image = UIImage(data: data) {

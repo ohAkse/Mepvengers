@@ -29,11 +29,9 @@ extension HomeViewController : HomeViewSpec{
         // 변경 사항을 배치로 처리
         homeMainCollectionView.performBatchUpdates({
             self.KakaoAPIModel.documents = updatedDocuments
-            
             // 추가된 데이터의 인덱스 경로 배열 생성
             let indexPathsToAdd = (self.KakaoAPIModel.documents.count - homeMainCollectionModel.documents.count)..<self.KakaoAPIModel.documents.count
             let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
-            
             // CollectionView에 추가된 셀을 삽입
             homeMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
@@ -85,7 +83,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if indexPath.item < HometagList.count{
                     let data = HometagList[indexPath.item]
                     tagCell.titleLabel.text = data.category
-             
                 }
             }
         } else {
@@ -132,7 +129,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                             print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
                             return
                         }
-
                         if let data = data, let image = UIImage(data: data) {
                             DispatchQueue.main.async {
                                 reviewController?.reviewFoodImageView.image = image
@@ -201,7 +197,7 @@ extension HomeViewController : UITextFieldDelegate{
 class HomeViewController: BaseViewController, EmailAuthDelegate{
     var HometagList : [HomeViewTagModel] = []
     var KakaoAPIModel  = KakaoAPI()
-    var homeViewPresenter :  HomeViewPresenter<FetchKakaoBlogUseCase>!
+    var homeViewPresenter :  HomeViewPresenterSpec!
     var homeTableView : MTableView? //밑에 사진, 글 등
     var homeTableViewController = MTableViewController() //
     var homeTagCollectionView =  MTagCollectionView()// 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
@@ -242,11 +238,8 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
             print("error")
         }
     }
-    
 
-    
     func SetupLayout(){
-
         homeTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             homeTagCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
