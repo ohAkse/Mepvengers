@@ -8,6 +8,7 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
+import RealmSwift
 class APIManager {
     static let _APIManager = APIManager()
     static let clientId = "aJxp7fjSFRE3H8h9_VHG"
@@ -53,3 +54,4 @@ class APIManager {
         }
     }
 }
+

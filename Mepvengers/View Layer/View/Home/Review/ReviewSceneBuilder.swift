@@ -10,8 +10,8 @@ import UIKit
 struct ReviewSceneBuilder : ViewBuilderSpec{
     func build()->  ReviewViewController {
         let reviewController = ReviewViewController()
-        //fetch클래스 등록
         let reviewViewPresenter = ReviewViewPresenter()
+        reviewViewPresenter.localKakaoRepositorySpec = LocalKakaoRepository(fetcher: KakaoLocalFetcher())
         reviewController.reviewPresentSpec = reviewViewPresenter
         reviewViewPresenter.ReviewViewSpec = reviewController
         return reviewController

@@ -54,9 +54,8 @@ class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyF
                 googleResponse.items = filteredItem
                 self.googleAPI = googleResponse
                 self.CousinViewSpec.UpdateMainCollectionView(googleVideoAPI: googleResponse)
-            case .failure:
-                print(result)
-                self.CousinViewSpec.ShowErrorMessage(ErrorMessage : "로드하는데 문제가 발생했습니다.")
+            case .failure(let error):
+                self.CousinViewSpec.ShowErrorMessage(ErrorMessage : error.localizedDescription)
             }
         }
     }
@@ -65,14 +64,25 @@ class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyF
         CousinViewSpec.RouteVideoPlayerController(cellInfo: cellInfo)
     }
     func OnTagSelectedItem(cellInfo : CousinViewTagModel){
-        CousinViewSpec.ReloadTagCollectionView(cellInfo: cellInfo)
+        //test 필요..
+        self.keyword = cellInfo.category
+        APIManager.fetchGoogle(keyword: "매운" + cellInfo.category) { (googleResponse, networkError) in
+            if networkError == .empty {
+                var googleResponse = googleResponse
+                let filteredItem = googleResponse.items.filter { $0.id.videoId != nil }
+                googleResponse.items = filteredItem
+                self.googleAPI = googleResponse
+                self.CousinViewSpec.UpdateMainCollectionView(googleVideoAPI: googleResponse)
+            } else {
+                self.CousinViewSpec.ShowErrorMessage(ErrorMessage : networkError.localizedDescription)
+            }
+        }
     }
     func loadTagData(){
         var cousinViewTagModel : [ CousinViewTagModel] = []
         for i in 0..<g_SpicyTagCollectionData.count
         {
             cousinViewTagModel.append(CousinViewTagModel(category: g_SpicyTagCollectionData[i]))
-            
         }
         CousinViewSpec.UpdateTagCollectionView(cousinTagList: cousinViewTagModel)
         

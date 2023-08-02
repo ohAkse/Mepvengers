@@ -23,7 +23,6 @@ struct KakaoFetcher: NetworkKakaoFetchable {
     func fetchKakaoBlog(_ keyword: String, completionHandler: @escaping (Result<KakaoAPI, AFError>) -> ()) {
         let apiKey = "6662f3bca0dc428495de3aed317c9869"
         let apiUrl = "https://dapi.kakao.com/v2/search/blog"
-        
         let headers: HTTPHeaders = [
             "Authorization": "KakaoAK " + apiKey
         ]
@@ -36,9 +35,12 @@ struct KakaoFetcher: NetworkKakaoFetchable {
                     completionHandler(.failure(error))// AFNetworkError
 
                 }
-                
             }
-        
     }
+    
+}
+
+struct KakaoLocalFetcher {
+
     
 }

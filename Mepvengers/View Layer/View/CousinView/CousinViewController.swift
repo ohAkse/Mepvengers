@@ -21,27 +21,28 @@ extension CousinViewController : CousinViewSpec
     func ShowErrorMessage(ErrorMessage: String) {
         self.showAlert(title: "에러", message: ErrorMessage)
     }
-
+    
     func UpdateTagCollectionView(cousinTagList : [CousinViewTagModel]){
         CousinViewTagList = cousinTagList
     }
     func UpdateMainCollectionView(googleVideoAPI: GoogleVideoAPI){
         print(Logger.Write(LogLevel.Info)("CousinViewController")(29)("테이블뷰 Reload하는 기능 추가해야함"))
-
+        
         var updatedItem = self.CousinGoogleAPI.items
         updatedItem.insert(contentsOf: googleVideoAPI.items, at: 0)
         CousinMainCollectionView.performBatchUpdates({
             self.CousinGoogleAPI.items = updatedItem
-        
             let indexPathsToAdd = (self.CousinGoogleAPI.items.count - googleVideoAPI.items.count)..<self.CousinGoogleAPI.items.count
             let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
-
+            
             CousinMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
         
     }
     func ReloadTagCollectionView(cellInfo : CousinViewTagModel){
-        print(cellInfo)
+        //        KakaoAPIModel.documents = kakaoAPI.documents
+        //        homeMainCollectionView.reloadData()
+        //print(cellInfo)
     }
     func RouteVideoPlayerController(cellInfo: YouTubeVideo){
         let baseController = VideoPlayerSceneBuilder().WithNavigationController()
@@ -174,7 +175,6 @@ class CousinViewController: BaseViewController {
         CousinViewPresenter.loadTagData()
     }
     
-    
     func NavigationLayout(){
         let titleLabel = UILabel()
         titleLabel.text = "추천 영상"
@@ -187,6 +187,15 @@ class CousinViewController: BaseViewController {
         backItem.title = "뒤로 가기"
         backItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backItem
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        if offsetY > contentHeight - frameHeight {
+            CousinViewPresenter.loadData()
+        }
     }
     
     func SetupLayout(){

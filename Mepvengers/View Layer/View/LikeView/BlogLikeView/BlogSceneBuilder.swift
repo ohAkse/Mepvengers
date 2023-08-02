@@ -10,6 +10,7 @@ struct BlogSceneBuilder : ViewBuilderSpec{
     func build()->  BlogLikeViewController {
         let blogViewController = BlogLikeViewController()
         let blogPresenterSpec = BlogViewPresenter()
+        blogPresenterSpec.localKakaoRepositorySpec = LocalKakaoRepository(fetcher: KakaoLocalFetcher())
         blogViewController.BlogLikePresenterSpec = blogPresenterSpec
         blogPresenterSpec.BlogLikeViewSpec = blogViewController
         //Present 및 fetch클래스 등록

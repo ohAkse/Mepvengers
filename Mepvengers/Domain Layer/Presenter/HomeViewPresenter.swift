@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 protocol HomeViewEventReceiverable: AnyObject {
     func receivedEventOfSetupViews(with setupModel: CousinViewSetupModel)
 }
@@ -22,7 +23,7 @@ protocol HomeViewPresenterSpec{
     func loadTagData()
     func onSearchMainItem(keyword : String)
     func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel)
-    func onMainItemSelected(cellInfo MainInfo: HomeViewMainCollectionModel)
+    func onMainItemSelected(cellInfo MainInfo: Document)
 }
 
 
@@ -38,17 +39,49 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     }
     
     func loadData() {
-            FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
-                switch result {
-                case .success(let kakaoAPI):
-                    let filteredDocuments = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
-                    self.kakaoAPI = kakaoAPI
-                    self.kakaoAPI.documents = filteredDocuments
-                    self.HomeViewSpec.UpdateMainCollectionView(homeMainCollectionModel: self.kakaoAPI)
-                case .failure:
-                    self.HomeViewSpec.ShowErrorAlertDialog(message: "로드에 실패했습니다.")
-                }
+        FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
+            switch result {
+            case .success(let kakaoAPI):
+                let filteredDocuments = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
+                self.kakaoAPI = kakaoAPI
+                self.kakaoAPI.documents = filteredDocuments
+                self.HomeViewSpec.UpdateMainCollectionView(homeMainCollectionModel: self.kakaoAPI)
+            case .failure(let error):
+                self.HomeViewSpec.ShowErrorAlertDialog(message: error.localizedDescription)
             }
+        }
+    }
+    
+    
+    func onSearchMainItem(keyword : String){
+        FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
+            switch result {
+            case .success(let kakaoAPIResponse):
+                let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
+                let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPIResponse.meta)
+                self.kakaoAPI = filteredKakaoAPI
+                self.HomeViewSpec.ReloadCollectionView(kakaoAPI: kakaoAPIResponse)
+            case .failure(let error):
+                self.HomeViewSpec.ShowErrorAlertDialog(message: error.localizedDescription)
+            }
+        }
+        self.keyword = keyword
+    }
+    
+    func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel) {
+        FetchDataUseCaseSpec.fetchDataModel("매운" + TagInfo.category){ (result) in
+            switch result {
+            case .success(let kakaoAPIResponse):
+                let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
+                let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPIResponse.meta)
+                self.kakaoAPI = filteredKakaoAPI
+                self.HomeViewSpec.ReloadCollectionView(kakaoAPI : self.kakaoAPI)
+                
+            case .failure(let error):
+                self.HomeViewSpec.ShowErrorAlertDialog(message: error.localizedDescription )
+            }
+        }
+        self.keyword = TagInfo.category
     }
     func loadTagData(){
         var homeViewTagModelList : [ HomeViewTagModel] = []
@@ -60,38 +93,7 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
         HomeViewSpec.UpdateTagCollectionView(homeTagList:  homeViewTagModelList)
     }
     
-    func onSearchMainItem(keyword : String){
-        APIManager.fetchKaKao(keyword: keyword) { (kakaoAPIResponse, networkError) in
-            if networkError == .empty {
-                    let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
-                    let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPIResponse.meta)
-                    self.kakaoAPI = filteredKakaoAPI
-                    self.HomeViewSpec.ReloadCollectionView(kakaoAPI: kakaoAPIResponse)
-
-            } else {
-                self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
-            }
-        }
-        self.keyword = keyword
-    }
-    
-    func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel) {
-        APIManager.fetchKaKao(keyword: "매운" + TagInfo.category) { (kakaoAPIResponse, networkError) in
-            if networkError == .empty {
-                // 요청이 성공적으로 완료되었을 때 처리
-             
-                    let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
-                    let filteredKakaoAPI = KakaoAPI(documents: kakaoDocument, meta: kakaoAPIResponse.meta)
-                    self.kakaoAPI = filteredKakaoAPI
-                    self.HomeViewSpec.ReloadCollectionView(kakaoAPI : self.kakaoAPI)
-                
-            } else {
-                self.HomeViewSpec.ShowErrorAlertDialog(message: "로드하는데 문제가 발생했습니다..")
-            }
-        }
-        self.keyword = TagInfo.category
-    }
-    func onMainItemSelected(cellInfo MainInfo: HomeViewMainCollectionModel) {
-        HomeViewSpec.RouteReviewController(cellinfo: MainInfo)
+    func onMainItemSelected(cellInfo : Document) {
+        HomeViewSpec.RouteReviewController(cellinfo: cellInfo)
     }
 }

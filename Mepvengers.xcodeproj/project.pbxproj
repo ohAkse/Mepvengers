@@ -26,6 +26,14 @@
 		5F79ED202A79F98A00487310 /* RemoteGoogleFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED1F2A79F98A00487310 /* RemoteGoogleFetcher.swift */; };
 		5F79ED222A79FB8200487310 /* FetchGoogleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */; };
 		5F79ED242A7A0CEE00487310 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED232A7A0CEE00487310 /* NetworkError.swift */; };
+		5F79ED262A7A9FAA00487310 /* RemoteKakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED252A7A9FAA00487310 /* RemoteKakaoRepository.swift */; };
+		5F79ED282A7A9FD300487310 /* RemoteGoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED272A7A9FD300487310 /* RemoteGoogleRepository.swift */; };
+		5F79ED2A2A7AA0DC00487310 /* LocalKakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED292A7AA0DC00487310 /* LocalKakaoRepository.swift */; };
+		5F79ED2C2A7AA0E700487310 /* LocalGoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED2B2A7AA0E700487310 /* LocalGoogleRepository.swift */; };
+		5F79ED2E2A7AAF3100487310 /* KakaoLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED2D2A7AAF3100487310 /* KakaoLikeModel.swift */; };
+		5F79ED302A7AAF4200487310 /* GoogleVideoLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED2F2A7AAF4200487310 /* GoogleVideoLikeModel.swift */; };
+		5F79ED322A7AB41200487310 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED312A7AB41200487310 /* DateTime.swift */; };
+		5F79ED342A7AC3D800487310 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED332A7AC3D800487310 /* MigrationManager.swift */; };
 		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
 		5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */; };
 		5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */; };
@@ -93,6 +101,14 @@
 		5F79ED1F2A79F98A00487310 /* RemoteGoogleFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGoogleFetcher.swift; sourceTree = "<group>"; };
 		5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGoogleUseCase.swift; sourceTree = "<group>"; };
 		5F79ED232A7A0CEE00487310 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		5F79ED252A7A9FAA00487310 /* RemoteKakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKakaoRepository.swift; sourceTree = "<group>"; };
+		5F79ED272A7A9FD300487310 /* RemoteGoogleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGoogleRepository.swift; sourceTree = "<group>"; };
+		5F79ED292A7AA0DC00487310 /* LocalKakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalKakaoRepository.swift; sourceTree = "<group>"; };
+		5F79ED2B2A7AA0E700487310 /* LocalGoogleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGoogleRepository.swift; sourceTree = "<group>"; };
+		5F79ED2D2A7AAF3100487310 /* KakaoLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLikeModel.swift; sourceTree = "<group>"; };
+		5F79ED2F2A7AAF4200487310 /* GoogleVideoLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVideoLikeModel.swift; sourceTree = "<group>"; };
+		5F79ED312A7AB41200487310 /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		5F79ED332A7AC3D800487310 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
 		5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewController.swift; sourceTree = "<group>"; };
 		5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mepvengers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				5F75C5DE2A77599C003B7C21 /* APIManager.swift */,
+				5F79ED332A7AC3D800487310 /* MigrationManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -188,6 +205,10 @@
 			children = (
 				5FF6BC902A78276000170342 /* RemoteKakaoFetcher.swift */,
 				5F79ED1F2A79F98A00487310 /* RemoteGoogleFetcher.swift */,
+				5F79ED252A7A9FAA00487310 /* RemoteKakaoRepository.swift */,
+				5F79ED272A7A9FD300487310 /* RemoteGoogleRepository.swift */,
+				5F79ED292A7AA0DC00487310 /* LocalKakaoRepository.swift */,
+				5F79ED2B2A7AA0E700487310 /* LocalGoogleRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -290,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				5F2E5DFA2A741226005BDB2F /* Array.swift */,
+				5F79ED312A7AB41200487310 /* DateTime.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -404,6 +426,8 @@
 			children = (
 				5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */,
 				5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */,
+				5F79ED2D2A7AAF3100487310 /* KakaoLikeModel.swift */,
+				5F79ED2F2A7AAF4200487310 /* GoogleVideoLikeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -646,11 +670,13 @@
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
 				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
 				5F79ED222A79FB8200487310 /* FetchGoogleUseCase.swift in Sources */,
+				5F79ED2A2A7AA0DC00487310 /* LocalKakaoRepository.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
 				5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */,
 				5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
 				5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */,
+				5F79ED282A7A9FD300487310 /* RemoteGoogleRepository.swift in Sources */,
 				5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */,
 				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
 				5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */,
@@ -669,7 +695,9 @@
 				5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */,
 				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
+				5F79ED2E2A7AAF3100487310 /* KakaoLikeModel.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
+				5F79ED342A7AC3D800487310 /* MigrationManager.swift in Sources */,
 				5F79ED202A79F98A00487310 /* RemoteGoogleFetcher.swift in Sources */,
 				5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */,
 				5FAED95A2A67A30E006E89FC /* MTabbarView.swift in Sources */,
@@ -677,14 +705,18 @@
 				5FAED9622A67A3CB006E89FC /* MMainCollectionView.swift in Sources */,
 				5FC05C0C2A66C69100B12A03 /* CousinViewPresenter.swift in Sources */,
 				5FE165302A64E4CB0016C79D /* HomeSceneBuilder.swift in Sources */,
+				5F79ED262A7A9FAA00487310 /* RemoteKakaoRepository.swift in Sources */,
 				5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */,
 				5FE165542A6550B80016C79D /* Logger.swift in Sources */,
 				5F2E5DFB2A741226005BDB2F /* Array.swift in Sources */,
 				5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */,
 				5FE165522A652CF40016C79D /* UIImage.swift in Sources */,
+				5F79ED2C2A7AA0E700487310 /* LocalGoogleRepository.swift in Sources */,
 				5FAED96A2A67A59D006E89FC /* LikeSceneBuilder.swift in Sources */,
 				5FAED9682A67A56C006E89FC /* LikeViewController.swift in Sources */,
+				5F79ED322A7AB41200487310 /* DateTime.swift in Sources */,
 				5F63022A2A78FFBF009673E0 /* WebViewSceneBuilder.swift in Sources */,
+				5F79ED302A7AAF4200487310 /* GoogleVideoLikeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

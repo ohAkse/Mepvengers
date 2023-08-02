@@ -78,11 +78,7 @@ extension QuestionViewController : QuestionViewSpec{
         default:
             break
         }
-    }
-    //    func ShowErrorMessage(ErrorMessage : String){
-    //        self.showAlert(title: "에러", message: ErrorMessage)
-    //    }
-    
+    }    
 }
 
 

@@ -15,7 +15,7 @@ protocol ReviewEventReceiverable: AnyObject {
 protocol ReviewViewPresenterSpec {
     //var eventReceiver: LoginViewEventReceiverable? { get set }
     func MoreButtonClicked()
-    func LikeButtonClicked()
+    func LikeButtonClicked(cellInfo : KakaoLikeModel)
     func ShareButtonClicked()
     func OnReviewCellClicked(cellInfo : Document)
     func LoadData()
@@ -29,6 +29,7 @@ struct ReviewModel {
 
 class ReviewViewPresenter : ReviewViewPresenterSpec{
     var ReviewViewSpec : ReviewViewSpec!
+    var localKakaoRepositorySpec : LocalKakaoRepositorySpec!
     var kakaoAPI = KakaoAPI()
     
     func LoadData() {
@@ -38,7 +39,6 @@ class ReviewViewPresenter : ReviewViewPresenterSpec{
         let headers: HTTPHeaders = [
             "Authorization": "KakaoAK " + apiKey
         ]
-        
         AF.request(apiUrl, method: .get, parameters: ["query": "매운음식"], headers: headers)
             .responseDecodable(of: KakaoAPI.self) { (response: DataResponse<KakaoAPI, AFError>) in
                 switch response.result {
@@ -56,10 +56,15 @@ class ReviewViewPresenter : ReviewViewPresenterSpec{
         ReviewViewSpec.OnReviewCellClickedReturn(cellInfo : cellInfo)
     }
     func MoreButtonClicked(){
+        
         ReviewViewSpec.MoreButtonClickedReturn()
     }
-    func LikeButtonClicked(){
-        ReviewViewSpec.LikeButtonClickedReturn()
+    func LikeButtonClicked(cellInfo : KakaoLikeModel){
+        cellInfo.isLike = cellInfo.isLike == false ? true : false
+        if cellInfo.isLike == true{
+            localKakaoRepositorySpec.SaveKakaoBlog(kakao: cellInfo)
+        }
+        ReviewViewSpec.LikeButtonClickedReturn(cellInfo: cellInfo)
     }
     func ShareButtonClicked(){
         ReviewViewSpec.ShareButtonClickedReturn()

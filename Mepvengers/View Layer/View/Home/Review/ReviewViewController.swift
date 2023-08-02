@@ -10,7 +10,7 @@ import UIKit
 protocol ReviewViewSpec: AnyObject {
     func UpdateMainCollectionView(KakaoAPI : KakaoAPI)
     func MoreButtonClickedReturn()
-    func LikeButtonClickedReturn()
+    func LikeButtonClickedReturn(cellInfo : KakaoLikeModel)
     func ShareButtonClickedReturn()
     func OnReviewCellClickedReturn(cellInfo : Document)
 }
@@ -25,13 +25,15 @@ extension ReviewViewController : ReviewViewSpec{
         WebviewController?.webViewUrl = reviewBlogUrl
         navigationController?.pushViewController(WebviewController!, animated: true)
     }
-    
-    func LikeButtonClickedReturn() {
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(21)("로컬DB에 저장 및 좋아요 페이지에 기능 추가 필요"))
+
+    func LikeButtonClickedReturn(cellInfo : KakaoLikeModel) {
+        
+        cellInfo.isLike == false ? reviewLikeButton.setImage(name: "heart") : reviewLikeButton.setImage(name: "heart.fill")
+        ReviewIsLike = cellInfo.isLike
+        print(Logger.Write(LogLevel.Info)("ReviewViewController")(32)("좋아요 버튼 색깔바꾸는기능 필요"))
     }
-    
     func ShareButtonClickedReturn() {
-            let link = reviewBlogUrl // 공유하고자 하는 링크 주소
+            let link = reviewBlogUrl 
              let activityViewController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
              
              activityViewController.excludedActivityTypes = [
@@ -46,10 +48,7 @@ extension ReviewViewController : ReviewViewSpec{
              }
              present(activityViewController, animated: true, completion: nil)
     }
-    
-    func BlogCollectionClickedReturn() {
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(30)("다른 블로그 화면 전환 필요"))
-    }
+
     func OnReviewCellClickedReturn(cellInfo : Document){
         let data = cellInfo
         let baseController = ReviewSceneBuilder().WithNavigationController()
@@ -77,7 +76,6 @@ extension ReviewViewController : ReviewViewSpec{
     }
 }
 
-
 extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return reviewKakaoAPI.documents.count
@@ -92,7 +90,7 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
                 if let imageUrl = URL(string: data.thumbnail) {
                     let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                         if let error = error {
-                            
+                            print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
                             return
                         }
                         if let data = data, let image = UIImage(data: data) {
@@ -135,9 +133,7 @@ extension ReviewViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 class ReviewViewController: BaseViewController {
     //프로퍼티
-    
     var reviewPresentSpec : ReviewViewPresenterSpec!
-    var reviewData = ReviewModel(BlogName: "", Cotent: "", ImageURl: "", IsLike: false)
     var reviewFoodHeaderLabel  =  MTextLabel(text :"대표 사진", isBold: true, fontSize: 20) // 내용
     var reviewFoodImageView = UIImageView() //맨위 사진
     var reviewContentHeaderLabel =  MTextLabel(text : "본문", isBold: true, fontSize: 20)
@@ -145,11 +141,13 @@ class ReviewViewController: BaseViewController {
     var reviewMoreButton = MButton(name : "", titleText: "더 보기", IsMoreButton: true)
     var reviewShareButton =  MButton(name : "square.and.arrow.up") //공유 버튼
     var reviewLikeButton = MButton(name : "heart") //좋아요 버튼
+    var ReviewIsLike = false
     var reviewRecommenHeaderLabel = MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)
     var reviewRecommendCollectionView = MMainCollectionView(isHorizontal: true, size: CGSize(width: 150, height: 130))//밑에 추천 음식썸네일
     var reviewBlogUrl = ""
     var reviewBlogName = ""
     var reviewKakaoAPI = KakaoAPI()
+    var reviewDocument = Document()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -191,7 +189,8 @@ class ReviewViewController: BaseViewController {
     }
     
     @objc func reviewLikeButtonClick(){
-        reviewPresentSpec.LikeButtonClicked()
+        let Document = KakaoLikeModel(blogname: reviewDocument.blogname,url: reviewDocument.url, isLike: ReviewIsLike, SaveTime: Date().GetCurrentTime(), ThumbNail: reviewDocument.thumbnail)
+        reviewPresentSpec.LikeButtonClicked(cellInfo: Document)
     }
     
     func NavigationLayout(){

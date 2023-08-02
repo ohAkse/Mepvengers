@@ -17,6 +17,7 @@ class MTableView: UITableView{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
+
 }
 
 
@@ -37,6 +38,7 @@ class MTopicCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         // Initialize your cell here
     }
     
@@ -49,7 +51,7 @@ class MTableCell: UITableViewCell {
     //이미지뷰
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-      //  imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     

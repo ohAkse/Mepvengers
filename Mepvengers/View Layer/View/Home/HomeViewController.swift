@@ -16,7 +16,7 @@ protocol HomeViewSpec: AnyObject {
     func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] )
     func UpdateMainCollectionView(homeMainCollectionModel : KakaoAPI)
     func ReloadCollectionView(kakaoAPI : KakaoAPI)
-    func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
+    func RouteReviewController(cellinfo : Document)
     func ShowErrorAlertDialog(message : String)
 }
 extension HomeViewController : HomeViewSpec{
@@ -29,25 +29,43 @@ extension HomeViewController : HomeViewSpec{
         // 변경 사항을 배치로 처리
         homeMainCollectionView.performBatchUpdates({
             self.KakaoAPIModel.documents = updatedDocuments
-            // 추가된 데이터의 인덱스 경로 배열 생성
             let indexPathsToAdd = (self.KakaoAPIModel.documents.count - homeMainCollectionModel.documents.count)..<self.KakaoAPIModel.documents.count
             let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
-            // CollectionView에 추가된 셀을 삽입
             homeMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
     }
     func ReloadCollectionView(kakaoAPI : KakaoAPI){
-        
         KakaoAPIModel.documents = kakaoAPI.documents
         homeMainCollectionView.reloadData()
         
     }
-    func RouteReviewController(cellinfo : HomeViewMainCollectionModel)
+    func RouteReviewController(cellinfo : Document)
     {
+        let data = cellinfo
         let baseController = ReviewSceneBuilder().WithNavigationController()
         let reviewController = baseController.rootViewController as? ReviewViewController
-        reviewController?.reviewData = ReviewModel(BlogName: "하드코딩블로그", Cotent: cellinfo.title, ImageURl: cellinfo.ImageName, IsLike: false) //title 좀 바꿔야할듯..
-        navigationController?.pushViewController(reviewController!, animated: true)
+        
+        //todo 정리..
+        reviewController?.reviewDocument = data
+        reviewController?.reviewBlogName = data.blogname
+        reviewController?.reviewBlogUrl = data.url.replacingOccurrences(of: "http", with: "https")
+        reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        if let imageUrl = URL(string: data.thumbnail) {
+            let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                if let error = error {
+                    print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        reviewController?.reviewFoodImageView.image = image
+                        self.navigationController?.pushViewController(reviewController!, animated: true)
+                    }
+                }
+            }
+            task.resume()
+        }
+        
     }
     func ShowErrorAlertDialog(message : String){
         DispatchQueue.main.async{
@@ -99,7 +117,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                             }
                             if let data = data, let image = UIImage(data: data) {
                                 DispatchQueue.main.async {
-                                    // 이미지를 다운로드한 후에는 메인 스레드에서 UI 업데이트를 수행해야 합니다.
                                     mainCell.imageView.image = image
                                 }
                             }
@@ -111,33 +128,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         return cell ?? UICollectionViewCell()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         if collectionView === homeMainCollectionView{
             print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
             if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                let data = KakaoAPIModel.documents[indexPath.item]
-                let baseController = ReviewSceneBuilder().WithNavigationController()
-                 let reviewController = baseController.rootViewController as? ReviewViewController
-                reviewController?.reviewBlogName = data.blogname
-                reviewController?.reviewBlogUrl = data.url.replacingOccurrences(of: "http", with: "https")
-                reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-                if let imageUrl = URL(string: data.thumbnail) {
-                    let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                        if let error = error {
-                            print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
-                            return
-                        }
-                        if let data = data, let image = UIImage(data: data) {
-                            DispatchQueue.main.async {
-                                reviewController?.reviewFoodImageView.image = image
-                                self.navigationController?.pushViewController(reviewController!, animated: true)
-                            }
-                        }
-                    }
-                    task.resume()
-                }
+                homeViewPresenter.onMainItemSelected(cellInfo: KakaoAPIModel.documents[indexPath.item])
             }
         }else{
             if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
@@ -178,7 +175,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension HomeViewController : UITextFieldDelegate{
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         homeSearchTextField.resignFirstResponder()
         homeViewPresenter.onSearchMainItem(keyword: textField.text!)
@@ -186,12 +183,11 @@ extension HomeViewController : UITextFieldDelegate{
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-
+        
         if let touch = touches.first, touch.view != homeSearchTextField {
             homeSearchTextField.resignFirstResponder()
         }
     }
-    
 }
 
 class HomeViewController: BaseViewController, EmailAuthDelegate{
@@ -238,7 +234,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
             print("error")
         }
     }
-
+    
     func SetupLayout(){
         homeTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -254,7 +250,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
             homeSearchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             homeSearchTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -20),
             homeSearchTextField.heightAnchor.constraint(equalToConstant: 30) //
-        ]) 
+        ])
         
         homeRecommendLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -295,7 +291,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         backItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backItem
     }
-
+    
     
     @objc func Question(){
         let baseController = QuestionSceneBuilder().WithNavigationController()
