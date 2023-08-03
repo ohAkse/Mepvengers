@@ -8,15 +8,23 @@
 import UIKit
 
 protocol VideoLikeViewSpec{
-    func UpdateCollectionView(cellList : [VideoLikeViewModel])
-    func RouteVideoPlayerController(routeCellInfo : VideoLikeViewModel)
+    func UpdateCollectionView(cellList : [GoogleVideoLikeModel])
+    func RouteVideoPlayerController(routeCellInfo : GoogleVideoLikeModel)
 }
 extension VideoLikeViewController : VideoLikeViewSpec{
-    func UpdateCollectionView(cellList : [VideoLikeViewModel]){
+    func UpdateCollectionView(cellList : [GoogleVideoLikeModel]){
         videoLikeList = cellList
+        VideoTableView.reloadData()
+        
     }
-    func RouteVideoPlayerController(routeCellInfo : VideoLikeViewModel){
-        print(Logger.Write(LogLevel.Info)("VideoLikeViewController")(19)("웹뷰로 전환 예정.."))
+    func RouteVideoPlayerController(routeCellInfo : GoogleVideoLikeModel){
+        let baseController = WebviewSceneBuilder().WithNavigationController()
+        let WebviewController = baseController.rootViewController as? WebViewController
+        WebviewController?.VideoID = routeCellInfo.VideoUrl
+        print(routeCellInfo.VideoUrl)
+        TabmanDelegate?.willHideAll(true)
+        navigationController?.pushViewController(WebviewController!, animated: true)
+ 
     }
 }
 
@@ -28,30 +36,46 @@ extension VideoLikeViewController : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell?
         if tableView == VideoTableView {
-            print(Logger.Write(LogLevel.Info)("VideoLikeViewController")(31)("더미 데이터를 API데이터 변환 필요"))
             if let cell = tableView.dequeueReusableCell(withIdentifier: "VideoTableViewCell") as? MTableCell {
                 let data = videoLikeList[indexPath.item]
-                cell.contentLabel.text = data.contentHeader
+                cell.contentLabel.text = data.ChannelName
                 cell.saveTime.text = data.saveTime
-                cell.photoImageView.image = UIImage(named: data.imageUrl)?.resized(toWidth: 150, toHeight: 150)
+
+                cell.photoImageView.image = UIImage(named: "search")?.resized(toWidth: 50, toHeight: 150)//기본 이미지로 설정..나중에 이미지 찾자.
+                if let imageUrl = URL(string: data.ThumbnailUrl) {
+                    let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if let error = error {
+                            print(Logger.Write(LogLevel.Error)("VideoLikeViewController")(128)("error -> \(error.localizedDescription)"))
+                            return
+                        }
+                        if let data = data, let image = UIImage(data: data) {
+                            DispatchQueue.main.async {
+                                cell.photoImageView.image = image
+
+                            }
+                        }
+                    }
+                    task.resume()
+                }
                 return cell
             }
         }
         return cell ?? UITableViewCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let cell = tableView.cellForRow(at: indexPath) as! MTableCell
-        VideoLikePresenter.OnSelectedItem(cellinfo: VideoLikeViewModel(contentHeader: "하드코딩", saveTime: cell.saveTime.text!, imageUrl: "question"))
+        var item = videoLikeList[indexPath.item]
+        VideoLikePresenter.OnSelectedItem(cellinfo: item)
     }
 }
 
 
 class VideoLikeViewController: BaseViewController {
     var VideoLikePresenter : VideoLikePresenterSpec!
-    var videoLikeList : [VideoLikeViewModel] = []
+    var videoLikeList : [GoogleVideoLikeModel] = []
     var VideoheaderTextLabel = MTextLabel(text : "비디오 좋아요 목록", isBold: true, fontSize: 16) // 좋아요
     var VideoTableView = MTableView()
     var VideoTableViewCell = MTableCell()
+    weak var TabmanDelegate : TabmanTabBarDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -64,6 +88,9 @@ class VideoLikeViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = true
      
         SetupLayout()
+        VideoLikePresenter.loadData()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         VideoLikePresenter.loadData()
     }
 

@@ -9,18 +9,19 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-
-
 protocol LocalKakaoRepositorySpec  {
-    
-
     func SaveKakaoBlog(kakao: KakaoLikeModel)
     func ReadKakaoBlogData() -> [KakaoLikeModel]
     func updateKakaoLikeModel(blogname: String, isLike: Bool)
     func DeleteKakaoBlogAll()
-    func DeleteKakaoLikeBlog()
+    func DeleteKakaoLikeBlog(kakao: KakaoLikeModel)
     
 }
+struct KakaoLocalFetcher {
+
+    
+}
+
 struct LocalKakaoRepository: LocalKakaoRepositorySpec {
     let repository : KakaoLocalFetcher
     init(fetcher: KakaoLocalFetcher) {
@@ -39,15 +40,23 @@ struct LocalKakaoRepository: LocalKakaoRepositorySpec {
     
     func SaveKakaoBlog(kakao: KakaoLikeModel) {
         do {
-            let data = try JSONEncoder().encode(kakao)
-            let jsonData = try  JSON(data : data)
             let relam = try Realm()
+            var KakaoLikeModelList = ReadKakaoBlogData()
+            KakaoLikeModelList.append(kakao) // 새로운 데이터 추가
+            let filteredModels = KakaoLikeModelList.reduce(into: [KakaoLikeModel]()) { (result, model) in
+                if !result.contains(where: { $0.blogname == model.blogname }) {
+                    result.append(model)
+                }
+            }
+            let data = filteredModels.sorted { one, two in
+                return one.saveTime > two.saveTime
+            }
             try relam.write{
-                relam.add(kakao)
+                relam.add(data)
                 print("데이터 추가됨!!")
             }
         } catch {
-            print("Error deleting KakaoLikeModel objects: \(error)")
+            print("Error saving Kakao blog data: \(error)")
         }
     }
     
@@ -58,13 +67,14 @@ struct LocalKakaoRepository: LocalKakaoRepositorySpec {
         return Array(kakaoLikeModels)
     }
     
-    func DeleteKakaoLikeBlog(){
+    func DeleteKakaoLikeBlog(kakao: KakaoLikeModel){
         do {
             let realm = try Realm()
-            let allKakaoBlogs = realm.objects(KakaoLikeModel.self)
+            let allKakaoBlogs = realm.objects(KakaoLikeModel.self).filter("url == %@", "\(kakao.url)")
             
             try realm.write {
                 realm.delete(allKakaoBlogs)
+                print("kakao 모델 제거됨")
             }
         } catch {
             print("Error deleting KakaoLikeModel objects: \(error)")

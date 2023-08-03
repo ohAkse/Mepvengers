@@ -10,9 +10,9 @@ struct VideoLikeSceneBuilder : ViewBuilderSpec{
     func build()->  VideoLikeViewController {
         let VideoLikeViewController = VideoLikeViewController()
         let VideoLikePresenter = VideoLikeViewPresenter()
+        VideoLikePresenter.LocalGoogleRepositorySpec = LocalGoogleRepository(fetcher: GoogleLocalFetcher())
         VideoLikeViewController.VideoLikePresenter = VideoLikePresenter
         VideoLikePresenter.VideoLikeViewSpec = VideoLikeViewController
-        //fetch클래스 등록
         return VideoLikeViewController
     }
     

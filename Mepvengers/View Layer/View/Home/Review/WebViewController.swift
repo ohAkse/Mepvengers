@@ -2,7 +2,8 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
-
+    var webViewYoutubeEmbedding = "https://www.youtube.com/embed/"
+    var VideoID = ""
     var webViewUrl = ""
      var backButton = MButton(name: "Back", titleText: "< 뒤로가기")
      private lazy var webViewKit: WKWebView = {
@@ -25,11 +26,22 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
          view.addSubview(backButtonContainerView)
          webViewKit.navigationDelegate = self
          webViewKit.uiDelegate = self
-     
+     if VideoID == ""
+         {
          if let url = URL(string: webViewUrl) {
              let request = URLRequest(url: url)
              webViewKit.load(request)
          }
+     }else{
+         if let url = URL(string: webViewYoutubeEmbedding + VideoID ) {
+             print(url)
+             let request = URLRequest(url: url)
+             webViewKit.load(request)
+         }
+         
+     }
+         
+
          
          navigationController?.hidesBarsOnSwipe = false
          navigationController?.isNavigationBarHidden = true

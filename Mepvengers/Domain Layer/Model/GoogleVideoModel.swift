@@ -35,7 +35,7 @@ struct GoogleVideoAPI: Codable {
 struct YouTubeVideo: Codable {
     let kind: String
     let etag: String
-    let id: YouTubeVideoID
+    var id: YouTubeVideoID
     let snippet: YouTubeSnippet
 
     init() {
@@ -48,7 +48,7 @@ struct YouTubeVideo: Codable {
 
 struct YouTubeVideoID: Codable {
     let kind: String
-    let videoId: String?
+    var videoId: String?
 
     enum CodingKeys: String, CodingKey {
         case kind

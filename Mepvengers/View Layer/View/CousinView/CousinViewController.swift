@@ -12,7 +12,7 @@ protocol CousinViewSpec: AnyObject {
     func UpdateTagCollectionView(cousinTagList : [CousinViewTagModel])
     func UpdateMainCollectionView(googleVideoAPI: GoogleVideoAPI)
     func ShowErrorMessage(ErrorMessage : String)
-    func ReloadTagCollectionView(cellInfo : CousinViewTagModel)
+    func ReloadTagCollectionView(cellInfo :  [YouTubeVideo])
     func RouteVideoPlayerController(cellInfo : YouTubeVideo)
 }
 
@@ -26,23 +26,19 @@ extension CousinViewController : CousinViewSpec
         CousinViewTagList = cousinTagList
     }
     func UpdateMainCollectionView(googleVideoAPI: GoogleVideoAPI){
-        print(Logger.Write(LogLevel.Info)("CousinViewController")(29)("테이블뷰 Reload하는 기능 추가해야함"))
-        
         var updatedItem = self.CousinGoogleAPI.items
         updatedItem.insert(contentsOf: googleVideoAPI.items, at: 0)
         CousinMainCollectionView.performBatchUpdates({
             self.CousinGoogleAPI.items = updatedItem
             let indexPathsToAdd = (self.CousinGoogleAPI.items.count - googleVideoAPI.items.count)..<self.CousinGoogleAPI.items.count
             let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
-            
             CousinMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
         
     }
-    func ReloadTagCollectionView(cellInfo : CousinViewTagModel){
-        //        KakaoAPIModel.documents = kakaoAPI.documents
-        //        homeMainCollectionView.reloadData()
-        //print(cellInfo)
+    func ReloadTagCollectionView(cellInfo : [YouTubeVideo]){
+        CousinGoogleAPI.items = cellInfo
+        CousinMainCollectionView.reloadData()
     }
     func RouteVideoPlayerController(cellInfo: YouTubeVideo){
         let baseController = VideoPlayerSceneBuilder().WithNavigationController()
@@ -152,7 +148,6 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
 class CousinViewController: BaseViewController {
     var CousinViewPresenter : CousinViewPresenterSpec!
     var CousinViewTagList : [CousinViewTagModel] = []
-    var CousinMainCollectionList : [CousinViewMainCollectionModel] = []
     var CousinTagCollectionView = MTagCollectionView() 
     var CousinMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 350, height: 200))
     var CousinGoogleAPI = GoogleVideoAPI()
@@ -174,7 +169,7 @@ class CousinViewController: BaseViewController {
         CousinViewPresenter.loadData()
         CousinViewPresenter.loadTagData()
     }
-    
+
     func NavigationLayout(){
         let titleLabel = UILabel()
         titleLabel.text = "추천 영상"

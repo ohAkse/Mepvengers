@@ -35,7 +35,6 @@ protocol CousinViewPresenterSpec {
 }
 
 class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyFetchUseCase: FetchDataUseCaseSpec, AnyFetchUseCase.DataModel == GoogleVideoAPI {
-    
     var FetchDataUseCaseSpec: AnyFetchUseCase
     var CousinViewSpec : CousinViewSpec!
     var googleAPI = GoogleVideoAPI()
@@ -72,7 +71,7 @@ class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyF
                 let filteredItem = googleResponse.items.filter { $0.id.videoId != nil }
                 googleResponse.items = filteredItem
                 self.googleAPI = googleResponse
-                self.CousinViewSpec.UpdateMainCollectionView(googleVideoAPI: googleResponse)
+                self.CousinViewSpec.ReloadTagCollectionView(cellInfo: self.googleAPI.items)
             } else {
                 self.CousinViewSpec.ShowErrorMessage(ErrorMessage : networkError.localizedDescription)
             }

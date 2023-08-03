@@ -10,17 +10,18 @@ import YouTubeiOSPlayerHelper
 
 protocol VideoPlayerViewSpec: AnyObject {
     func CheckStatus(status : Bool)
-    func LikeButtonClickedReturn(cellinfo : YouTubeVideo)
+    func LikeButtonClickedReturn(cellInfo : GoogleVideoLikeModel)
+    
 }
 extension VideoPlayerViewController : VideoPlayerViewSpec{
-    func LikeButtonClickedReturn(cellinfo : YouTubeVideo){
-        print(Logger.Write(LogLevel.Info)("VideoPlayerViewController")(16)("로컬저장하는방법.."))
+    func LikeButtonClickedReturn(cellInfo : GoogleVideoLikeModel){
+        cellInfo.isLike == false ? VideoLikeButton.setImage(name: "heart") : VideoLikeButton.setImage(name: "heart.fill")
+        VideoIsLike = cellInfo.isLike
     }
-    
     func CheckStatus(status : Bool){
-        print(status)
-    }
+    status == false ? VideoLikeButton.setImage(name: "heart") : VideoLikeButton.setImage(name: "heart.fill")
 
+    }
 }
 extension VideoPlayerViewController : YTPlayerViewDelegate{
     func playerView(_ playerView: YTPlayerView, didChangeTo quality: YTPlaybackQuality) {
@@ -33,10 +34,12 @@ class VideoPlayerViewController: BaseViewController {
     var VideoChannelDescriptionHeader = MTextLabel(text: "영상 소개", isBold: true, fontSize: 20)
     var VideoChannelDescription = MTextLabel(text: "", isBold: false, fontSize: 16)
     var VideoLikeButton = MButton(name : "heart") //좋아요 버튼
-    
+    var VideoLikeModel = GoogleVideoLikeModel()
     var VideoGoogleChannelInfo = YouTubeVideo()
     var VideoPresenterSpec : VideoPlayerPresenterSpec!
     var VideoPlayerView = YTPlayerView()
+    var VideoIsLike = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(VideoPlayerView)
@@ -52,18 +55,26 @@ class VideoPlayerViewController: BaseViewController {
             self.VideoPlayerView.isHidden = false
         }
         VideoChannelDescription.text = VideoGoogleChannelInfo.snippet.videoDescription
-        
         NavigationLayout()
         SetupLayout()
         SetupButtonClickEvent()
+        CheckLikeStatus()
     }
-    
+    func CheckLikeStatus(){
+        VideoPresenterSpec.CheckLikeStatus(videoUrl: VideoGoogleChannelInfo.id.videoId!)
+    }
     func SetupButtonClickEvent(){
         VideoLikeButton.addTarget(self, action: #selector(VideoLikeButtonClicked), for: .touchUpInside)
     }
     
     @objc func VideoLikeButtonClicked(){
-        VideoPresenterSpec.OnLikeButtonClicked(cellInfo: VideoGoogleChannelInfo)
+        if let videoid = VideoGoogleChannelInfo.id.videoId, let thumbnailUrl = VideoGoogleChannelInfo.snippet.thumbnails.medium.url{
+            let VideoLikeModel = GoogleVideoLikeModel(ChannelName: VideoGoogleChannelInfo.snippet.channelTitle, VideoUrl: videoid, isLike: VideoIsLike, SaveTime: Date().GetCurrentTime(),thumbnailUrl: thumbnailUrl)
+            print(VideoLikeModel)
+            VideoPresenterSpec.OnLikeButtonClicked(cellInfo: VideoLikeModel)
+        }else{
+            self.showAlert(title: "에러", message: "비디오 URL이 존재하지 않습니다.")
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

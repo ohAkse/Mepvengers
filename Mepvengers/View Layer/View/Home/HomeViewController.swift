@@ -48,7 +48,7 @@ extension HomeViewController : HomeViewSpec{
         //todo 정리..
         reviewController?.reviewDocument = data
         reviewController?.reviewBlogName = data.blogname
-        reviewController?.reviewBlogUrl = data.url.replacingOccurrences(of: "http", with: "https")
+        reviewController?.reviewBlogUrl = data.url
         reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         if let imageUrl = URL(string: data.thumbnail) {
             let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
@@ -183,7 +183,6 @@ extension HomeViewController : UITextFieldDelegate{
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
         if let touch = touches.first, touch.view != homeSearchTextField {
             homeSearchTextField.resignFirstResponder()
         }

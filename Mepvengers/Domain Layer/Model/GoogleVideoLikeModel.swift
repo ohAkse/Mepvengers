@@ -6,49 +6,30 @@
 //
 
 import Foundation
-struct GoogleLikeModel : Codable{
-    let blogname: String
-    let url: String
-    let IsLike : Bool
-    let SaveTime : String
- 
-    init(blogname: String, url: String, isLike: Bool, SaveTime: String){
-        self.blogname = blogname
-        self.url = url
-        self.IsLike = isLike
-        self.SaveTime = SaveTime
-   
+import RealmSwift
+class GoogleVideoLikeModel : Object, Codable{
+    @Persisted var ChannelName: String = ""
+    @Persisted var VideoUrl: String = ""
+    @Persisted var ThumbnailUrl: String = ""
+    @Persisted var isLike: Bool = false
+    @Persisted var saveTime: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case ChannelName, VideoUrl, isLike, saveTime
     }
-    init(){
-        blogname = ""
-        url = ""
-        IsLike  = false
-        SaveTime = ""
-  
-        
+    
+    init(ChannelName: String, VideoUrl: String, isLike: Bool, SaveTime: String, thumbnailUrl: String) {
+        self.ChannelName = ChannelName
+        self.VideoUrl = VideoUrl
+        self.ThumbnailUrl = thumbnailUrl
+        self.isLike = isLike
+        self.saveTime = SaveTime
+    }
+    override init(){
+        ChannelName = ""
+        VideoUrl = ""
+        saveTime = ""
+        ThumbnailUrl = ""
+        isLike  = false
     }
 }
-
-//
-//struct GoogleLikeModel : Codable{
-//    let blogname: String
-//    let url: String
-//    let IsLike : Bool
-//    let SaveTime : String
-//    let ThumbNail : String
-//    init(blogname: String, url: String, isLike: Bool, SaveTime: String, ThumbNail : String){
-//        self.blogname = blogname
-//        self.url = url
-//        self.IsLike = isLike
-//        self.SaveTime = SaveTime
-//        self.ThumbNail = ThumbNail
-//    }
-//    init(){
-//        blogname = ""
-//        url = ""
-//        IsLike  = false
-//        SaveTime = ""
-//        ThumbNail = ""
-//
-//    }
-//}

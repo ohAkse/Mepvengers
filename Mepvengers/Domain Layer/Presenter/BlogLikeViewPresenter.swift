@@ -10,7 +10,7 @@ import Foundation
 protocol BlogLikePresenterSpec {
     //var eventReceiver: LoginViewEventReceiverable? { get set }
     func loadData()
-    func OnSelectedItem(cellinfo : ReviewModel)
+    func OnSelectedItem(cellinfo : KakaoLikeModel)
 }
 struct BlogLikeViewModel {
     var contentHeader: String
@@ -22,11 +22,11 @@ class BlogViewPresenter: BlogLikePresenterSpec {
     var BlogLikeViewSpec : BlogLikeViewSpec!
     var localKakaoRepositorySpec : LocalKakaoRepositorySpec!
     func loadData() {
-        var KakaoLikeModel = localKakaoRepositorySpec.ReadKakaoBlogData()
-        BlogLikeViewSpec.UpdateCollectionView(cellList: KakaoLikeModel)
+        var KakaoLikeModelList = localKakaoRepositorySpec.ReadKakaoBlogData()
+        BlogLikeViewSpec.UpdateCollectionView(cellList: KakaoLikeModelList)
     }
     
-    func OnSelectedItem(cellinfo : ReviewModel){
+    func OnSelectedItem(cellinfo : KakaoLikeModel){
         BlogLikeViewSpec.RouteReviewController(routeCellInfo: cellinfo)
     }
 }

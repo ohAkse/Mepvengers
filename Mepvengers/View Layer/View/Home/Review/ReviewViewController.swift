@@ -9,28 +9,38 @@ import UIKit
 
 protocol ReviewViewSpec: AnyObject {
     func UpdateMainCollectionView(KakaoAPI : KakaoAPI)
-    func MoreButtonClickedReturn()
+    func MoreButtonClickedReturn(cellInfo : Document)
     func LikeButtonClickedReturn(cellInfo : KakaoLikeModel)
     func ShareButtonClickedReturn()
     func OnReviewCellClickedReturn(cellInfo : Document)
+    func ShowErrorMessage(ErrorMessage : String)
+    func SetLikeStatus(bStatus : Bool)
 }
 extension ReviewViewController : ReviewViewSpec{
+    
+    func SetLikeStatus(bStatus : Bool){
+        reviewIsLike = bStatus
+        reviewIsLike == false ? reviewLikeButton.setImage(name: "heart") : reviewLikeButton.setImage(name: "heart.fill")
+    }
+    func ShowErrorMessage(ErrorMessage : String){
+        self.ShowErrorMessage(ErrorMessage: ErrorMessage)
+    }
+    
     func UpdateMainCollectionView(KakaoAPI : KakaoAPI){
         reviewKakaoAPI = KakaoAPI
         reviewRecommendCollectionView.reloadData()
     }
-    func MoreButtonClickedReturn() {
+    func MoreButtonClickedReturn(cellInfo : Document) {
         let baseController = WebviewSceneBuilder().WithNavigationController()
         let WebviewController = baseController.rootViewController as? WebViewController
-        WebviewController?.webViewUrl = reviewBlogUrl
+        WebviewController?.webViewUrl = cellInfo.url
         navigationController?.pushViewController(WebviewController!, animated: true)
     }
 
     func LikeButtonClickedReturn(cellInfo : KakaoLikeModel) {
         
         cellInfo.isLike == false ? reviewLikeButton.setImage(name: "heart") : reviewLikeButton.setImage(name: "heart.fill")
-        ReviewIsLike = cellInfo.isLike
-        print(Logger.Write(LogLevel.Info)("ReviewViewController")(32)("좋아요 버튼 색깔바꾸는기능 필요"))
+        reviewIsLike = cellInfo.isLike
     }
     func ShareButtonClickedReturn() {
             let link = reviewBlogUrl 
@@ -54,7 +64,7 @@ extension ReviewViewController : ReviewViewSpec{
         let baseController = ReviewSceneBuilder().WithNavigationController()
          let reviewController = baseController.rootViewController as? ReviewViewController
         reviewController?.reviewBlogName = data.blogname
-        reviewController?.reviewBlogUrl = data.url.replacingOccurrences(of: "http", with: "https")
+        reviewController?.reviewBlogUrl = data.url
         reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         if let imageUrl = URL(string: data.thumbnail) {
             let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
@@ -141,7 +151,7 @@ class ReviewViewController: BaseViewController {
     var reviewMoreButton = MButton(name : "", titleText: "더 보기", IsMoreButton: true)
     var reviewShareButton =  MButton(name : "square.and.arrow.up") //공유 버튼
     var reviewLikeButton = MButton(name : "heart") //좋아요 버튼
-    var ReviewIsLike = false
+    var reviewIsLike = false
     var reviewRecommenHeaderLabel = MTextLabel(text : "다른 블로그 글 보기", isBold: true, fontSize: 20)
     var reviewRecommendCollectionView = MMainCollectionView(isHorizontal: true, size: CGSize(width: 150, height: 130))//밑에 추천 음식썸네일
     var reviewBlogUrl = ""
@@ -171,7 +181,11 @@ class ReviewViewController: BaseViewController {
         
         NavigationLayout()
         reviewPresentSpec.LoadData()
+        CheckLikeStatus()
+    }
+    func CheckLikeStatus(){
         
+        reviewPresentSpec.CheckLikeStatus(url: reviewBlogUrl)
     }
     
     func SetupButtonClickEvent(){
@@ -181,7 +195,7 @@ class ReviewViewController: BaseViewController {
     }
 
     @objc func reviewMoreButtonClick(){
-        reviewPresentSpec.MoreButtonClicked()
+        reviewPresentSpec.MoreButtonClicked(cellInfo: reviewDocument)
     }
     
     @objc func reviewShareButtonClick(){
@@ -189,7 +203,7 @@ class ReviewViewController: BaseViewController {
     }
     
     @objc func reviewLikeButtonClick(){
-        let Document = KakaoLikeModel(blogname: reviewDocument.blogname,url: reviewDocument.url, isLike: ReviewIsLike, SaveTime: Date().GetCurrentTime(), ThumbNail: reviewDocument.thumbnail)
+        let Document = KakaoLikeModel(blogname: reviewDocument.blogname,url: reviewDocument.url, isLike: reviewIsLike, SaveTime: Date().GetCurrentTime(), ThumbNail: reviewDocument.thumbnail)
         reviewPresentSpec.LikeButtonClicked(cellInfo: Document)
     }
     

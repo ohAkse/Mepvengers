@@ -21,9 +21,9 @@ struct FetchGoogleUseCase: FetchDataUseCaseSpec {
 struct GoogleFetcher: NetworkGoogleFetchable {
     typealias DataModel = GoogleVideoAPI
     func fetchGoogle(_ keyword: String, completionHandler: @escaping (Result<GoogleVideoAPI, AFError>) -> ()) {
-        //let apiKey = "AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg"
+        let apiKey = "AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg"
         //let apiKey = "AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI"
-        let apiKey = "AIzaSyCqN0aVe_wHhz9kdxED5Qm0k6yNbzvwVAY"
+        //let apiKey = "AIzaSyCqN0aVe_wHhz9kdxED5Qm0k6yNbzvwVAY"
         let searchQuery = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let part = "snippet"
         let urlString = "https://www.googleapis.com/youtube/v3/search?key=\(apiKey)&q=\(searchQuery)&part=\(part)"

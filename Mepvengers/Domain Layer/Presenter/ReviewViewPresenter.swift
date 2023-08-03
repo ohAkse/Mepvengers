@@ -13,11 +13,11 @@ protocol ReviewEventReceiverable: AnyObject {
 }
 
 protocol ReviewViewPresenterSpec {
-    //var eventReceiver: LoginViewEventReceiverable? { get set }
-    func MoreButtonClicked()
+    func MoreButtonClicked(cellInfo : Document)
     func LikeButtonClicked(cellInfo : KakaoLikeModel)
     func ShareButtonClicked()
     func OnReviewCellClicked(cellInfo : Document)
+    func CheckLikeStatus(url : String)
     func LoadData()
 }
 struct ReviewModel {
@@ -28,6 +28,17 @@ struct ReviewModel {
 }
 
 class ReviewViewPresenter : ReviewViewPresenterSpec{
+    func CheckLikeStatus(url : String) {
+        let localData = localKakaoRepositorySpec.ReadKakaoBlogData()
+        for data in localData{
+            if url == data.url{
+                ReviewViewSpec.SetLikeStatus(bStatus: true)
+                return
+            }
+        }
+        ReviewViewSpec.SetLikeStatus(bStatus: false)
+    }
+    
     var ReviewViewSpec : ReviewViewSpec!
     var localKakaoRepositorySpec : LocalKakaoRepositorySpec!
     var kakaoAPI = KakaoAPI()
@@ -45,24 +56,28 @@ class ReviewViewPresenter : ReviewViewPresenterSpec{
                 case .success(let kakaoAPIResponse):
                     self.kakaoAPI = kakaoAPIResponse
                     self.ReviewViewSpec.UpdateMainCollectionView(KakaoAPI: self.kakaoAPI)
-                    print("")
                 case .failure(let error):
-                    print("Error: \(error)")
-                    //completionHandler(.failure(error))
+                    self.ReviewViewSpec.ShowErrorMessage(ErrorMessage: error.localizedDescription)
                 }
             }
     }
     func OnReviewCellClicked(cellInfo: Document) {
         ReviewViewSpec.OnReviewCellClickedReturn(cellInfo : cellInfo)
     }
-    func MoreButtonClicked(){
-        
-        ReviewViewSpec.MoreButtonClickedReturn()
+    func MoreButtonClicked(cellInfo : Document){
+        var replacedUrl = cellInfo
+        if replacedUrl.url.hasPrefix("http://"){
+            replacedUrl.url.replacingOccurrences(of: "http://", with: "https://")
+        }
+        ReviewViewSpec.MoreButtonClickedReturn(cellInfo : replacedUrl)
     }
+    
     func LikeButtonClicked(cellInfo : KakaoLikeModel){
         cellInfo.isLike = cellInfo.isLike == false ? true : false
         if cellInfo.isLike == true{
             localKakaoRepositorySpec.SaveKakaoBlog(kakao: cellInfo)
+        }else{
+            localKakaoRepositorySpec.DeleteKakaoLikeBlog(kakao: cellInfo)
         }
         ReviewViewSpec.LikeButtonClickedReturn(cellInfo: cellInfo)
     }

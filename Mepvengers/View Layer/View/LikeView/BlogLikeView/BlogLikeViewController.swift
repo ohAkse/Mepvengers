@@ -6,30 +6,47 @@
 //
 
 import UIKit
+
+protocol TabmanTabBarDelegate : AnyObject{
+    func willHideAll(_ bHide : Bool)
+}
+
+
 protocol BlogLikeViewSpec{
     func UpdateCollectionView(cellList : [KakaoLikeModel])
-    func RouteReviewController(routeCellInfo : ReviewModel)
+    func RouteReviewController(routeCellInfo : KakaoLikeModel)
 }
 extension BlogLikeViewController : BlogLikeViewSpec{
+
+    
     func UpdateCollectionView(cellList : [KakaoLikeModel]){
         BlogLikeList = cellList
         BlogTableView.reloadData()
         
     }
-    func RouteReviewController(routeCellInfo : ReviewModel){
-        print(Logger.Write(LogLevel.Info)("BlogLikeViewController")(18)("웹뷰로 전환하는 기능 필요할듯.."))
+    func RouteReviewController(routeCellInfo : KakaoLikeModel){
+        let baseController = WebviewSceneBuilder().WithNavigationController()
+        let WebviewController = baseController.rootViewController as? WebViewController
+        var modifiedUrl = routeCellInfo.url
+        if modifiedUrl.hasPrefix("http://"){
+            modifiedUrl = modifiedUrl.replacingOccurrences(of: "http://", with: "https://")
+        }
+        WebviewController?.webViewUrl = modifiedUrl
+       
+        TabmanDelegate?.willHideAll(true)
+        navigationController?.pushViewController(WebviewController!, animated: true)
     }
 }
 
 
 extension BlogLikeViewController : UITableViewDataSource, UITableViewDelegate{
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BlogLikeList.count // 하드코딩
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell?
         if tableView == BlogTableView {
-            print(Logger.Write(LogLevel.Info)("BlogLikeViewController")(30)("더미 데이터를 API데이터 변환 필요"))
             if let cell = tableView.dequeueReusableCell(withIdentifier: "BlogTableViewCell") as? MTableCell {
                 var data = BlogLikeList[indexPath.item]
                 cell.contentLabel.text = data.blogname
@@ -50,7 +67,6 @@ extension BlogLikeViewController : UITableViewDataSource, UITableViewDelegate{
                     }
                     task.resume()
                 }
-               // cell.photoImageView.image = UIImage(named: "search")?.resized(toWidth: 50, toHeight: 150)
                 return cell
             }
         }
@@ -58,23 +74,22 @@ extension BlogLikeViewController : UITableViewDataSource, UITableViewDelegate{
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let cell = tableView.cellForRow(at: indexPath) as! MTableCell
-        BlogLikePresenterSpec.OnSelectedItem(cellinfo: ReviewModel(BlogName: "하드코딩", Cotent: cell.contentLabel.text!, ImageURl: "search", IsLike: false))
+        BlogLikePresenterSpec.OnSelectedItem(cellinfo: BlogLikeList[indexPath.item])
     }
 }
 
 class BlogLikeViewController: BaseViewController {
+    weak var TabmanDelegate : TabmanTabBarDelegate?
     var BlogLikePresenterSpec : BlogLikePresenterSpec!
     var BlogheaderTextLabel = MTextLabel(text : "블로그 좋아요 목록", isBold: true, fontSize: 16) // 좋아요
-    var BlogTableView = MTableView()
+    var BlogTableView = UITableView()
     var BlogLikeList : [KakaoLikeModel] = []
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(BlogheaderTextLabel)
         view.addSubview(BlogTableView)
-        
+        BlogTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         BlogTableView.dataSource = self
         BlogTableView.delegate = self
         BlogTableView.register(MTableCell.self, forCellReuseIdentifier: "BlogTableViewCell")

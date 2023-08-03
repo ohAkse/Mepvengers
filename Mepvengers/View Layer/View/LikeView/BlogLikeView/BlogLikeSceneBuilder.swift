@@ -1,19 +1,18 @@
 //
-//  BlogSceneBuilder.swift
+//  BlogLikeSceneBuilder.swift
 //  Mepvengers
 //
-//  Created by 박유경 on 2023/07/24.
+//  Created by 박유경 on 2023/08/03.
 //
 
 import Foundation
-struct BlogSceneBuilder : ViewBuilderSpec{
+struct BlogLikeSceneBuilder : ViewBuilderSpec{
     func build()->  BlogLikeViewController {
         let blogViewController = BlogLikeViewController()
         let blogPresenterSpec = BlogViewPresenter()
         blogPresenterSpec.localKakaoRepositorySpec = LocalKakaoRepository(fetcher: KakaoLocalFetcher())
         blogViewController.BlogLikePresenterSpec = blogPresenterSpec
         blogPresenterSpec.BlogLikeViewSpec = blogViewController
-        //Present 및 fetch클래스 등록
         return blogViewController
     }
     

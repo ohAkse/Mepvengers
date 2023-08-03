@@ -12,14 +12,27 @@ import Pageboy
 
 extension LikeViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
-        return  TabViewControllers.count
+        return  2
     }
     
     func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
-        TabViewControllers[index]
+      TabViewControllers[index]
+
     }
     
     func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
+        let BaseblogVC = BlogLikeSceneBuilder().WithNavigationController()
+        if let BlogVC = BaseblogVC.viewControllers.first as? BlogLikeViewController {
+            BlogVC.TabmanDelegate = self
+            TabViewControllers.append(BlogVC)
+        
+        }
+        let BaseVideoVC = VideoLikeSceneBuilder().WithNavigationController()
+        if let VideoVC = BaseVideoVC.viewControllers.first as? VideoLikeViewController {
+            VideoVC.TabmanDelegate = self
+            TabViewControllers.append(VideoVC)
+            
+        }
         return nil
     }
     
@@ -29,28 +42,30 @@ extension LikeViewController: PageboyViewControllerDataSource, TMBarDataSource {
         item.title = title
         return item
     }
-    func tabmanViewController(_ tabmanViewController: TabmanViewController, didSelect viewController: UIViewController, at index: Int) {
-        print(index)
-        // 선택한 탭에 대한 이벤트 처리
-    }
-    
-    func tabmanViewController(_ tabmanViewController: TabmanViewController, willSelect viewController: UIViewController, at index: Int) {
-        // 탭이 선택되기 전에 수행할 작업
-        print(index)
-    }
-    
 }
 
-class LikeViewController: TabmanViewController{
+class LikeViewController: TabmanViewController, TabmanTabBarDelegate{
+    func willHideAll(_ bHide: Bool) {
+        //tabBarController?.tabBar.isHidden = true
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     var LikeTBbar : TMBar.ButtonBar?
-    var TabViewControllers : [UIViewController] = [BlogSceneBuilder().WithNavigationController(), VideoLikeSceneBuilder().WithNavigationController()]
+    var TabViewControllers : [UIViewController] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
-        
+
         TopTBBarInit()
         NavigationLayout()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     func TopTBBarInit(){

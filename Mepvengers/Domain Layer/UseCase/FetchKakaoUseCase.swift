@@ -39,8 +39,3 @@ struct KakaoFetcher: NetworkKakaoFetchable {
     }
     
 }
-
-struct KakaoLocalFetcher {
-
-    
-}

@@ -94,6 +94,9 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     }
     
     func onMainItemSelected(cellInfo : Document) {
+        if cellInfo.url.hasPrefix("http://"){
+            cellInfo.url.replacingOccurrences(of: "http://", with: "https://")
+        }
         HomeViewSpec.RouteReviewController(cellinfo: cellInfo)
     }
 }

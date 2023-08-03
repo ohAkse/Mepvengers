@@ -103,6 +103,7 @@ class QuestionViewController: BaseViewController, UITextFieldDelegate {
     var QuestionContent = MTextField(placeHolderText : "문의 사항과 관련된 상세 내용을 적어주세요.")            //문의 내용
     var QuestionConfirmButton = MButton(name : "", titleText: "제출", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))// 확인
     var QuestionCancleButton = MButton(name : "", titleText: "취소", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
+    
     weak var AuthDelegate : EmailAuthDelegate?
     var QuestionPresenterSpec : QuestionViewPresenterSpec!
     
