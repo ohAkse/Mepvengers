@@ -62,7 +62,8 @@ extension ReviewViewController : ReviewViewSpec{
     func OnReviewCellClickedReturn(cellInfo : Document){
         let data = cellInfo
         let baseController = ReviewSceneBuilder().WithNavigationController()
-         let reviewController = baseController.rootViewController as? ReviewViewController
+        let reviewController = baseController.rootViewController as? ReviewViewController
+        reviewController?.reviewDocument = data
         reviewController?.reviewBlogName = data.blogname
         reviewController?.reviewBlogUrl = data.url
         reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
@@ -72,12 +73,10 @@ extension ReviewViewController : ReviewViewSpec{
                     print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
                     return
                 }
-
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         reviewController?.reviewFoodImageView.image = image
-                        self.navigationController!.isNavigationBarHidden = false
-                        self.navigationController!.pushViewController(reviewController!, animated: true)
+                        self.navigationController?.pushViewController(reviewController!, animated: true)
                     }
                 }
             }
