@@ -10,5 +10,5 @@ import Alamofire
 protocol FetchDataUseCaseSpec {
     associatedtype DataModel
     typealias FetchDataModelUseCaseCompletionHandler = (_ books: Result<DataModel, AFError>) -> ()
-    func fetchDataModel(_ keyword : String, _ page : Int, completionHandler: @escaping FetchDataModelUseCaseCompletionHandler)
+    func fetchDataModel(_ keyword : String, _ page : Int, _ pageToken : String?, completionHandler: @escaping FetchDataModelUseCaseCompletionHandler)
 }

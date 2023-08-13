@@ -32,7 +32,7 @@ struct GoogleVideoAPI: Codable {
     }
 }
 
-struct YouTubeVideo: Codable {
+struct YouTubeVideo: Codable,Equatable {
     let kind: String
     let etag: String
     var id: YouTubeVideoID
@@ -44,9 +44,12 @@ struct YouTubeVideo: Codable {
         id = YouTubeVideoID(kind: "", videoId: "")
         snippet = YouTubeSnippet()
     }
+    static func ==(lhs: YouTubeVideo, rhs: YouTubeVideo) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
-struct YouTubeVideoID: Codable {
+struct YouTubeVideoID: Codable,Equatable {
     let kind: String
     var videoId: String?
 

@@ -32,13 +32,12 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     func getCurrentData() -> KakaoAPI {
         return kakaoAPI
     }
-    
-    
     var HomeViewSpec : HomeViewSpec!
     var FetchDataUseCaseSpec: AnyFetchUseCase
     var kakaoAPI = KakaoAPI()
     var keyword = "매운김치"
     var pageCount = 0
+    var pageNextToken = ""
     init(HomeViewSpec: HomeViewSpec, FetchUseCase : AnyFetchUseCase ) {
         self.HomeViewSpec = HomeViewSpec
         self.FetchDataUseCaseSpec = FetchUseCase
@@ -46,15 +45,10 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     
     func loadData() {
 
-        var data = UserDefaults.standard.string(forKey: "kakaoPageCount")
-        if data == nil{
-            pageCount = 1
-        }
-        else{
-            pageCount = Int(data!)!
-        }
+        let data = UserDefaults.standard.string(forKey: "kakaoPageCount")
+        pageCount = (data == nil) ? 0 : Int(data!) ?? 1
         
-        FetchDataUseCaseSpec.fetchDataModel(keyword, pageCount){ (result) in
+        FetchDataUseCaseSpec.fetchDataModel(keyword, pageCount, pageNextToken){ (result) in
             switch result {
             case .success(let kakaoAPI):
                 let filteredDocuments = kakaoAPI.documents.filter { !$0.thumbnail.isEmpty }
@@ -69,7 +63,7 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     
     
     func onSearchMainItem(keyword : String){
-        FetchDataUseCaseSpec.fetchDataModel(keyword,pageCount){ (result) in
+        FetchDataUseCaseSpec.fetchDataModel(keyword,pageCount,pageNextToken){ (result) in
             switch result {
             case .success(let kakaoAPIResponse):
                 let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
@@ -84,7 +78,7 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     }
     
     func onTagItemSelected(cellInfo TagInfo: HomeViewTagModel) {
-        FetchDataUseCaseSpec.fetchDataModel("매운" + TagInfo.category,pageCount){ (result) in
+        FetchDataUseCaseSpec.fetchDataModel("매운" + TagInfo.category,pageCount,pageNextToken){ (result) in
             switch result {
             case .success(let kakaoAPIResponse):
                 let kakaoDocument = kakaoAPIResponse.documents.filter { !$0.thumbnail.isEmpty }
@@ -109,9 +103,9 @@ class HomeViewPresenter<AnyFetchUseCase>: HomeViewPresenterSpec where AnyFetchUs
     }
     
     func onMainItemSelected(cellInfo : Document) {
-        if cellInfo.url.hasPrefix("http://"){
-            cellInfo.url.replacingOccurrences(of: "http://", with: "https://")
-        }
+//        if cellInfo.url.hasPrefix("http://"){
+//            cellInfo.url.replacingOccurrences(of: "http://", with: "https://")
+//        }
         HomeViewSpec.RouteReviewController(cellinfo: cellInfo)
     }
 }

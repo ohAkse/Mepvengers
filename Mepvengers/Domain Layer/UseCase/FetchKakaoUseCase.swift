@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 struct FetchKakaoUseCase: FetchDataUseCaseSpec {
-    func fetchDataModel(_ keyword : String, _ page : Int, completionHandler: @escaping FetchDataModelUseCaseCompletionHandler) {
+    func fetchDataModel(_ keyword: String, _ page: Int, _ pageToken: String?, completionHandler: @escaping FetchDataModelUseCaseCompletionHandler) {
         repository.fetchKakaoBlog(keyword, page, completionHandler : completionHandler)
     }
     // MARK: private

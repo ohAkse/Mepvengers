@@ -26,14 +26,18 @@ extension CousinViewController : CousinViewSpec
         CousinViewTagList = cousinTagList
     }
     func UpdateMainCollectionView(googleVideoAPI: GoogleVideoAPI){
+
         var updatedItem = self.CousinGoogleAPI.items
-        updatedItem.insert(contentsOf: googleVideoAPI.items, at: 0)
+        updatedItem.append(contentsOf: googleVideoAPI.items)
+
+
         CousinMainCollectionView.performBatchUpdates({
             self.CousinGoogleAPI.items = updatedItem
             let indexPathsToAdd = (self.CousinGoogleAPI.items.count - googleVideoAPI.items.count)..<self.CousinGoogleAPI.items.count
             let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
             CousinMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
+
         isLoadingData = false
     }
     func ReloadTagCollectionView(cellInfo : [YouTubeVideo]){

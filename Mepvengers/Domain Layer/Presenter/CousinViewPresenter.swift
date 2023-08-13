@@ -39,6 +39,7 @@ class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyF
     var CousinViewSpec : CousinViewSpec!
     var googleAPI = GoogleVideoAPI()
     var keyword = "실비김치"
+    var nextToken = ""
     var pageCount = 1
     init(CousinViewSpec: CousinViewSpec, FetchUseCase : AnyFetchUseCase ) {
         self.CousinViewSpec = CousinViewSpec
@@ -46,26 +47,58 @@ class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyF
         
     }
     func loadData() {
-        FetchDataUseCaseSpec.fetchDataModel(keyword, pageCount){ (result) in
+        var fetchedVideoIds = Set(googleAPI.items.compactMap { $0.id.videoId })
+        
+        FetchDataUseCaseSpec.fetchDataModel(keyword, pageCount, nextToken) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let googleAPIResponse):
                 var googleResponse = googleAPIResponse
-                let filteredItem = googleResponse.items.filter { $0.id.videoId != nil }
-                googleResponse.items = filteredItem
+                let newItems = googleResponse.items.filter { item in
+                    guard let videoId = item.id.videoId else {
+                        return false
+                    }
+                    return !fetchedVideoIds.contains(videoId)
+                }
+                fetchedVideoIds.formUnion(newItems.compactMap { $0.id.videoId })
+                googleResponse.items = newItems
                 self.googleAPI = googleResponse
+                self.nextToken = googleResponse.nextPageToken
                 self.CousinViewSpec.UpdateMainCollectionView(googleVideoAPI: googleResponse)
             case .failure(let error):
-                self.CousinViewSpec.ShowErrorMessage(ErrorMessage : error.localizedDescription)
+                self.CousinViewSpec.ShowErrorMessage(ErrorMessage: error.localizedDescription)
             }
         }
     }
-    
     func OnMainCellSelectedItem(cellInfo: YouTubeVideo) {
         CousinViewSpec.RouteVideoPlayerController(cellInfo: cellInfo)
     }
     func OnTagSelectedItem(cellInfo : CousinViewTagModel){
-        //test 필요..
-        self.keyword = cellInfo.category
+//요거 주석풀고 해보기
+//        self.keyword = cellInfo.category
+//        var fetchedVideoIds = Set(googleAPI.items.compactMap { $0.id.videoId })
+//
+//        FetchDataUseCaseSpec.fetchDataModel("도로시", pageCount, nextToken) { [weak self] result in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let googleAPIResponse):
+//                var googleResponse = googleAPIResponse
+//                let newItems = googleResponse.items.filter { item in
+//                    guard let videoId = item.id.videoId else {
+//                        return false
+//                    }
+//                    return !fetchedVideoIds.contains(videoId)
+//                }
+//                fetchedVideoIds.formUnion(newItems.compactMap { $0.id.videoId })
+//                googleResponse.items = newItems
+//                self.googleAPI = googleResponse
+//                self.nextToken = googleResponse.nextPageToken
+//                self.CousinViewSpec.UpdateMainCollectionView(googleVideoAPI: googleResponse)
+//            case .failure(let error):
+//                self.CousinViewSpec.ShowErrorMessage(ErrorMessage: error.localizedDescription)
+//            }
+//        }
+        
         APIManager.fetchGoogle(keyword: "매운" + cellInfo.category) { (googleResponse, networkError) in
             if networkError == .empty {
                 var googleResponse = googleResponse

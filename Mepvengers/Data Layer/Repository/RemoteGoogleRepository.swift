@@ -9,12 +9,12 @@ import Foundation
 import Alamofire
 protocol GoogleRepositorySpec {
     typealias FetchGoogleCompletionHandler = (Result<GoogleVideoAPI, AFError>) -> ()
-    func fetchGoogle(_ keyword: String, completionHandler: @escaping FetchGoogleCompletionHandler)
+    func fetchGoogle(_ keyword: String, _ nextPageToken : String, completionHandler: @escaping FetchGoogleCompletionHandler)
 }
 
 protocol NetworkGoogleFetchable {
     associatedtype DataModel: Codable
-    func fetchGoogle(_ keyword: String, completionHandler: @escaping (Result<GoogleVideoAPI, AFError>) -> ())
+    func fetchGoogle(_ keyword: String, _ nextPageToken : String, completionHandler: @escaping (Result<GoogleVideoAPI, AFError>) -> ())
 }
 
 struct RemoteGoogleRepository<AnyNetworkFetchable>: GoogleRepositorySpec where AnyNetworkFetchable: NetworkGoogleFetchable, AnyNetworkFetchable.DataModel == GoogleVideoAPI {
@@ -27,10 +27,11 @@ struct RemoteGoogleRepository<AnyNetworkFetchable>: GoogleRepositorySpec where A
     init(fetcher: AnyNetworkFetchable) {
         self.fetcher = fetcher
     }
-    func fetchGoogle(_ keyword: String, completionHandler: @escaping FetchGoogleCompletionHandler) {
-        fetcher.fetchGoogle(keyword) { response in
+    func fetchGoogle(_ keyword: String, _ nextPageToken : String, completionHandler: @escaping FetchGoogleCompletionHandler) {
+        fetcher.fetchGoogle(keyword, nextPageToken) { response in
             switch response {
             case .success(let googleAPI):
+                UserDefaults.standard.set(String(nextPageToken), forKey:"nextPageToken")
                 completionHandler(.success(googleAPI))
             case .failure(let error):
                 completionHandler(.failure(error))
