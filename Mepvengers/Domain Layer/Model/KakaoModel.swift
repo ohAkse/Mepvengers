@@ -1,3 +1,6 @@
+
+
+
 struct KakaoAPI: Codable {
     var documents: [Document]
     let meta: Meta
@@ -12,14 +15,22 @@ struct KakaoAPI: Codable {
     }
 }
 
-struct Document: Codable {
-    let blogname: String
-    let contents: String
-    let datetime: String
-    let thumbnail: String
-    let title: String
-    let url: String
-
+struct Document: Codable, Hashable {
+    var blogname: String
+    var contents: String
+    var datetime: String
+    var thumbnail: String
+    var title: String
+    var url: String
+    
+    func hash(into hasher: inout Hasher) {
+        
+        hasher.combine(title)
+    }
+    static func == (lhs: Document, rhs: Document) -> Bool {
+       
+        return lhs.title == rhs.title && lhs.datetime == rhs.datetime
+    }
     init(blogname: String, contents: String, datetime: String, thumbnail: String, title: String, url: String) {
         self.blogname = blogname
         self.contents = contents
@@ -42,13 +53,13 @@ struct Meta: Codable {
     let isEnd: Bool
     let pageableCount: Int
     let totalCount: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case isEnd = "is_end"
         case pageableCount = "pageable_count"
         case totalCount = "total_count"
     }
-
+    
     init(isEnd: Bool, pageableCount: Int, totalCount: Int) {
         self.isEnd = isEnd
         self.pageableCount = pageableCount

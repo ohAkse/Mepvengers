@@ -39,13 +39,14 @@ class CousinViewPresenter<AnyFetchUseCase> : CousinViewPresenterSpec  where AnyF
     var CousinViewSpec : CousinViewSpec!
     var googleAPI = GoogleVideoAPI()
     var keyword = "실비김치"
+    var pageCount = 1
     init(CousinViewSpec: CousinViewSpec, FetchUseCase : AnyFetchUseCase ) {
         self.CousinViewSpec = CousinViewSpec
         self.FetchDataUseCaseSpec = FetchUseCase
         
     }
     func loadData() {
-        FetchDataUseCaseSpec.fetchDataModel(keyword){ (result) in
+        FetchDataUseCaseSpec.fetchDataModel(keyword, pageCount){ (result) in
             switch result {
             case .success(let googleAPIResponse):
                 var googleResponse = googleAPIResponse

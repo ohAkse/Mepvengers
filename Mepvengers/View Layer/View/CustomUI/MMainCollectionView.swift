@@ -22,6 +22,13 @@ class MMainCollectionView: UICollectionView {
 
 
 class MMainCollectionViewCell: UICollectionViewCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+        titleLabel.text = ""
+    }
+    
     // 프로퍼티
     var _ImageName : String = ""
     var ImageName: String {

@@ -34,7 +34,7 @@ extension CousinViewController : CousinViewSpec
             let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
             CousinMainCollectionView.insertItems(at: indexPaths)
         }, completion: nil)
-        
+        isLoadingData = false
     }
     func ReloadTagCollectionView(cellInfo : [YouTubeVideo]){
         CousinGoogleAPI.items = cellInfo
@@ -83,7 +83,6 @@ extension CousinViewController: UICollectionViewDelegate, UICollectionViewDataSo
                             } else if let data = data {
                                 if let image = UIImage(data: data) {
                                     DispatchQueue.main.async {
-                                        // 이미지를 셀의 이미지 뷰에 표시
                                         mainCell.imageView.image = image
                                     }
                                 } else {
@@ -151,6 +150,7 @@ class CousinViewController: BaseViewController {
     var CousinTagCollectionView = MTagCollectionView() 
     var CousinMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 350, height: 200))
     var CousinGoogleAPI = GoogleVideoAPI()
+    var isLoadingData = false
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(CousinTagCollectionView)
@@ -188,7 +188,8 @@ class CousinViewController: BaseViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         let frameHeight = scrollView.frame.height
-        if offsetY > contentHeight - frameHeight {
+        if offsetY > contentHeight - frameHeight && !isLoadingData {
+            isLoadingData = true
             CousinViewPresenter.loadData()
         }
     }

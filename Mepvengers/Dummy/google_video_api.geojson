@@ -2,7 +2,7 @@
 //google AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg
 //?part=id.snippet&type=video&Key=AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI &q=실비김&maxResults=10&order=date
 // https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&channelId=UCQkIH55mkTKgecG2HTYAk1Q
-
+//https://www.googleapis.com/youtube/v3/search?key=AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI&q=%EC%8B%A4%EB%B9%84%EA%B9%80%EC%B9%98&pageToken=CAUQAA&part=snippet nextToken =CAUQAA
 {
   "kind": "youtube#searchListResponse",
   "etag": "GmQELsO-_VORDXZU-WP9zUoEQRg",
