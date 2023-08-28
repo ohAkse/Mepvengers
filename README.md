@@ -1,4 +1,4 @@
-# 프로젝트 소개
+## 프로젝트 소개
 프로젝트 인원 : 1인  
 
 개발 기간 : 6월16일~7월3일 및 7월 14(무한스크롤링 관련 API 추가 수정) 및 아이콘추가(8월 23일)로 **총 21일 소요**  
@@ -10,7 +10,7 @@
 프로젝트 구조는 Clean Architecture MVP 구조를 참고하였으며, 각 Layer에 속하는 기능들을 분리하고자 노력하였습니다.  
 
 
-# 시연영상
+## 시연영상
 1)SMTP
 https://drive.google.com/file/d/1uUWimWbzT2hAxA-EKrmXWcTHci48VSnM/view?usp=drive_link
 
@@ -27,15 +27,26 @@ https://drive.google.com/file/d/1DLKz8rfS4Kpu3IqNwuqnHb9jWTdNoxaI/view?usp=drive
 https://drive.google.com/file/d/1cx4hz9qbRO8vEFsm2-NkzCQL9piVK2EL/view?usp=drive_link
 
 
-# 프로젝트 구조
-![스크린샷 2023-08-28 오후 9 26 09](https://github.com/ohAkse/Mepvengers/assets/49290883/da8942cc-708f-4519-ae25-116a88b4e659)  
-[Architecture Diagram Image]  
+## 사용한 기술 스택 (Tech Stack)
+개발언어 언어 : <img src="https://img.shields.io/badge/Swift-F26B00?style=for-the-badge&logo=Swift&logoColor=white">  
+
+외부 라이브러리 : <img src="https://img.shields.io/badge/YoutubeiOSPlayerHelper-D6001C?style=for-the-badge&logo=Youtube&logoColor=white">
+<img src="https://img.shields.io/badge/RealmSwift-F26B00?style=for-the-badge&logo=Realm&logoColor=white">
+<img src="https://img.shields.io/badge/Alamofire-FF6C37?style=for-the-badge&logo=Framework7&logoColor=white">
+<img src="https://img.shields.io/badge/SwiftSMTP-68B604?style=for-the-badge&logo=Swiggy&logoColor=white">
+<img src="https://img.shields.io/badge/Tabman-3776AB?style=for-the-badge&logo=Swiper&logoColor=white">
 
 
+## 프로젝트 구성  
+![스크린샷 2023-08-28 오후 10 22 18](https://github.com/ohAkse/Mepvengers/assets/49290883/47c09a13-557e-40c6-99d3-0d290626ce67)  
+[앱 아키텍쳐 다이어그램]
+  
+    
 ![스크린샷 2023-08-28 오후 6 40 43](https://github.com/ohAkse/Mepvengers/assets/49290883/26258c6a-6dea-409c-8659-ff4ad5cc025d)  
 [개발 프로젝트구조]  
 
-View Lyaer, Domain Layer, Data Layer로 나뉘어져 있습니다.  
+
+# View Lyaer, Domain Layer, Data Layer
 
 **View Laye**r : 화면을 담당하는 View를 담당하는 Layer로써, 사용자에게 보여지는 화면인 View를 관리하게 되며, User Action이 일어 났을때 Domain Layer에 있는 해당 화면의 Presenter에게 데이터를 전달후 Presenter에서 데이터를 가공 및 처리하여 View에게 다시 데이터를 전달받습니다. 전달 받은 데이터를 토대로  View에서 화면을 처리합니다. 이 계층에는 View와 관련된 Custom Components 및 UIController/NavigationController Base를 관리합니다.
 
@@ -44,7 +55,7 @@ View Lyaer, Domain Layer, Data Layer로 나뉘어져 있습니다.
 **Data Layer** : Rest API 통신을 통해 얻은 결과를 토대로 새로운 pageNumber를 갱신 및 Realm으로 저장(Like/Like 해제) 그리고 pagenumber를 저장(userdefaults)하는 역할을 합니다.
 
 
-# 보완해야할점 및 느낀점
+## 보완해야할점 및 느낀점
 
 1)UI/UX : Autolayout 및 콜렉션뷰를 사용하여 출시되어 사용중인 App을 기준으로 참고하였지만 디자인측면에서 일관적이지 않고 리소스를 응용하지 못해 번잡하다는점을 깨달았습니다. "Simple is Best"라는 말처럼 다음 프로젝트 UI 구성은 심플하게 구성할 예정이며, UI의 일관성이 중요하다는 점을 깨달았습니다.
 
@@ -58,7 +69,7 @@ View Lyaer, Domain Layer, Data Layer로 나뉘어져 있습니다.
 (우측 링크에서 메모리 누수 관련하여 처리 하는 부분 확인 가능 : https://github.com/ohAkse/TodoList) 
 
 
-# 향후 계획
+## 향후 계획
 본 프로젝트는 개발 당시 Swift 및 IOS UIKit에 대한 지식이 부족한 상태로 개발을 진행하다보니 전반적으로 코드 퀄리티나 완성도는 낮다고 생각합니다.  
 하지만 현재(약 Swift/IOS 공부한지 2달이 지난 지금(8.28) IOS 개발 IDE인 Xcode도 익숙해지고, Swift와 UIKit의 흐름도를 어느정도 파악한 지금 댜음 프로젝트를 통해 느꼈었던 점을 보완하여 완성도가 있는 프로젝트를 만들고자 공부하고 있습니다.
 
