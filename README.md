@@ -11,20 +11,15 @@
 
 
 ## 시연영상
-1)SMTP
-https://drive.google.com/file/d/1uUWimWbzT2hAxA-EKrmXWcTHci48VSnM/view?usp=drive_link
+1. 로그인 영상 - [SMTP](https://drive.google.com/file/d/1uUWimWbzT2hAxA-EKrmXWcTHci48VSnM/view?usp=drive_link)
 
-2)Blog
-https://drive.google.com/file/d/1ZDZatRelbRNYwKvnjk4q8bazHhoMFoE3/view?usp=drive_link  
+2. 블로그 영상 - [Blog](https://drive.google.com/file/d/1ZDZatRelbRNYwKvnjk4q8bazHhoMFoE3/view?usp=drive_link)
+   - 2-1. 블로그 검색 영상 -[Search](https://drive.google.com/file/d/1QWtG92Ti8MXP4JfMw5jNZmIGqRzbRFCa/view?usp=drive_link)
 
-2-1)Search
-https://drive.google.com/file/d/1QWtG92Ti8MXP4JfMw5jNZmIGqRzbRFCa/view?usp=drive_link
+3. 유튜브 영상 - [Youtube](https://drive.google.com/file/d/1DLKz8rfS4Kpu3IqNwuqnHb9jWTdNoxaI/view?usp=drive_link)
 
-3)Youtube
-https://drive.google.com/file/d/1DLKz8rfS4Kpu3IqNwuqnHb9jWTdNoxaI/view?usp=drive_link
+4. Like(북마크) 영상 -[Bookmark(Like)](https://drive.google.com/file/d/1cx4hz9qbRO8vEFsm2-NkzCQL9piVK2EL/view?usp=drive_link)
 
-4)Bookmark(Like)
-https://drive.google.com/file/d/1cx4hz9qbRO8vEFsm2-NkzCQL9piVK2EL/view?usp=drive_link
 
 *용량의 문제로 인해 링크로 대체합니다.
 
