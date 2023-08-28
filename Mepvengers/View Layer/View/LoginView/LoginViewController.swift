@@ -44,7 +44,7 @@ extension LoginViewController : LoginViewSpec{
 
 class LoginViewController: BaseViewController, UITextFieldDelegate {
     var LoginViewPresenterSpec : LoginViewPresenterSpec!
-    var LoginImageView : UIImageView = UIImageView(image: UIImage(named: "search"))
+    var LoginImageView : UIImageView = UIImageView(image: UIImage(named: "kimchiwarrior"))
     var LoginEmailTextHeader : MTextLabel = MTextLabel(text : "이메일", isBold: false, fontSize: 16)
     var LoginEmailTextField : MTextField = MTextField(placeHolderText : "이메일을 입력해 주세요", text: "segassdc1@naver.com") // 이메일 내용
     var LoginConfirmButton : MButton = MButton(name : "", titleText: "제출", IsMoreButton: false, bgColor: UIColor(red: 192, green: 192, blue: 192))
@@ -59,7 +59,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SkipStartScene(bSkip: true)
+        SkipStartScene(bSkip: false)
         
         view.addSubview(LoginImageView)
         view.addSubview(LoginEmailTextHeader)
