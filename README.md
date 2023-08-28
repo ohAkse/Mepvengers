@@ -26,6 +26,7 @@ https://drive.google.com/file/d/1DLKz8rfS4Kpu3IqNwuqnHb9jWTdNoxaI/view?usp=drive
 4)Bookmark(Like)
 https://drive.google.com/file/d/1cx4hz9qbRO8vEFsm2-NkzCQL9piVK2EL/view?usp=drive_link
 
+*용량의 문제로 인해 링크로 대체합니다.
 
 ## 사용한 기술 스택 (Tech Stack)
 개발언어 언어 : <img src="https://img.shields.io/badge/Swift-F26B00?style=for-the-badge&logo=Swift&logoColor=white">  
