@@ -8,9 +8,6 @@
 import Foundation
 import SwiftSMTP
 import UIKit
-protocol LoginViewEventReceiverable: AnyObject {
-    func receivedEventOfSetupViews(with setupModel: CousinViewSetupModel)
-}
 struct LoginViewSetupModel {
     var LoginEmailTextHeader: String
     var LoginEmailPlacerHolderText: String
@@ -18,7 +15,6 @@ struct LoginViewSetupModel {
 }
 
 protocol LoginViewPresenterSpec {
-    //var eventReceiver: LoginViewEventReceiverable? { get set }
     func TextFieldShouldReturn(with emailText: String)
     func CheckValidationEmailCode(with Code : Int, from : Mail.User, to : Mail.User)
     func StartTimer()
@@ -28,7 +24,7 @@ protocol LoginViewPresenterSpec {
 
 class LoginViewPresenter : LoginViewPresenterSpec{
     
-    weak var LoginViewSpec : LoginViewProtocol?
+    weak var LoginViewSpec : LoginViewSpec?
     var smtp = SMTP(hostname: "smtp.naver.com", email: "segassdc1@naver.com", password: "dbrud0629!@")
     var CheckEmailAuthTimer : Timer?
     var CheckTime = 0

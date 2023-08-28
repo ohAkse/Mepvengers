@@ -1,8 +1,8 @@
-//https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&type=video
-//동영상 실행하는건 http:youtube.com/embed/{videoID} -> ex  https://www.youtube.com/embed/ntnO4gqrhC8  channelID를 넣어 조회를 할경우 채널주인의 영상 채널이 나옴..
-//ex) https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&channelId=UCQkIH55mkTKgecG2HTYAk1Q  channelId가 UCQkIH55mkTKgecG2HTYAk1Q인것만 조회됨..
-// 주로 쓰이는건 q(검색 질의어), key(API key값), part(snippet이 Id보다 좀더 자세히나옴), channelId(채널이름), type(video) 등
-// 자세한건 https://developers.google.com/youtube/v3/docs/videos?hl=ko에서..
+//유튜브 GET https://www.googleapis.com/youtube/v3/search
+//google AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg
+//?part=id.snippet&type=video&Key=AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI &q=실비김&maxResults=10&order=date
+// https://www.googleapis.com/youtube/v3/search?q=실비김치&key=AIzaSyDECVcGYd-BgsU81W--DTXUcKn5A6YQKQg&part=snippet&channelId=UCQkIH55mkTKgecG2HTYAk1Q
+//https://www.googleapis.com/youtube/v3/search?key=AIzaSyCTE4Pk_YHxEsvgYKrYKeYy9rBaCM-GqbI&q=%EC%8B%A4%EB%B9%84%EA%B9%80%EC%B9%98&pageToken=CAUQAA&part=snippet nextToken =CAUQAA
 {
   "kind": "youtube#searchListResponse",
   "etag": "GmQELsO-_VORDXZU-WP9zUoEQRg",

@@ -12,7 +12,10 @@ import YouTubeiOSPlayerHelper
 struct VideoPlayerSceneBuilder : ViewBuilderSpec{
     func build()->  VideoPlayerViewController {
         let videoPlayerViewController = VideoPlayerViewController()
-        //Present 및 fetch클래스 등록
+        var videoPlayerPresenter = VideoViewPresenter()
+        videoPlayerPresenter.localGoogleRepositorySpec = LocalGoogleRepository(fetcher: GoogleLocalFetcher())
+        videoPlayerPresenter.VideoPlayerViewSpec = videoPlayerViewController
+        videoPlayerViewController.VideoPresenterSpec = videoPlayerPresenter
         return videoPlayerViewController
     }
     

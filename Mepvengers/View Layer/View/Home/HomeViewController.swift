@@ -10,44 +10,144 @@ import SwiftUI
 import Alamofire
 import Foundation
 import Kingfisher
-import RealmSwift
-let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5)
-let colorSet: [UIColor] = [.systemRed, .systemOrange, .systemYellow, .systemGreen, .systemBlue, .systemPurple]
+
+
+protocol HomeViewSpec: AnyObject {
+    func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] )
+    func UpdateMainCollectionView(homeMainCollectionModel : KakaoAPI)
+    func ReloadCollectionView(kakaoAPI : KakaoAPI)
+    func RouteReviewController(cellinfo : Document)
+    func ShowErrorAlertDialog(message : String)
+}
+extension HomeViewController : HomeViewSpec{
+    func UpdateTagCollectionView(homeTagList : [HomeViewTagModel] ){
+        self.HometagList = homeTagList
+    }
+    func UpdateMainCollectionView(homeMainCollectionModel: KakaoAPI) {
+        var updatedDocuments = self.KakaoAPIModel.documents
+        updatedDocuments.append(contentsOf: homeMainCollectionModel.documents)
+        homeMainCollectionView.performBatchUpdates({
+            self.KakaoAPIModel.documents = updatedDocuments
+            let indexPathsToAdd = (self.KakaoAPIModel.documents.count - homeMainCollectionModel.documents.count)..<self.KakaoAPIModel.documents.count
+            let indexPaths = indexPathsToAdd.map { IndexPath(item: $0, section: 0) }
+            homeMainCollectionView.insertItems(at: indexPaths)
+        }, completion: nil)
+        isLoadingData = false
+    }
+    func ReloadCollectionView(kakaoAPI : KakaoAPI){
+        KakaoAPIModel.documents = kakaoAPI.documents
+        homeMainCollectionView.reloadData()
+        
+    }
+    func RouteReviewController(cellinfo : Document)
+    {
+        let data = cellinfo
+        let baseController = ReviewSceneBuilder().WithNavigationController()
+        let reviewController = baseController.rootViewController as? ReviewViewController
+        
+        //todo 정리..
+        reviewController?.reviewDocument = data
+        reviewController?.reviewBlogName = data.blogname
+        reviewController?.reviewBlogUrl = data.url
+        reviewController?.reviewContentLabel.text = data.contents.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        if let imageUrl = URL(string: data.thumbnail) {
+            let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                if let error = error {
+                    print(Logger.Write(LogLevel.Error)("HomeViewController")(128)("error -> \(error.localizedDescription)"))
+                    return
+                }
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        reviewController?.reviewFoodImageView.image = image
+                        self.navigationController?.pushViewController(reviewController!, animated: true)
+                    }
+                }
+            }
+            task.resume()
+        }
+        
+    }
+    func ShowErrorAlertDialog(message : String){
+        DispatchQueue.main.async{
+            self.showAlert(title: "에러", message: message)
+        }
+    }
+}
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView === homeTagCollectionView
         {
-            return dummyData.count
+            return HometagList.count
         }else{
-            return dummyData1.count
+            return KakaoAPIModel.documents.count
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height
+        if offsetY > contentHeight - frameHeight && !isLoadingData {
+            isLoadingData = true
+            homeViewPresenter.loadData()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
         if collectionView === homeTagCollectionView {
             cell = homeTagCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeTagCollectionViewCell", for: indexPath)
             if let tagCell = cell as? MTagCollectionViewCell  {
-                if indexPath.item < dummyData.count && indexPath.item < dummyImageName.count {
-                    let data = dummyData[indexPath.item]
-                    tagCell.titleLabel.text = data
-                    tagCell.imageView.image = UIImage(named: dummyImageName[indexPath.item])
+                if indexPath.item < HometagList.count{
+                    let data = HometagList[indexPath.item]
+                    tagCell.titleLabel.text = data.category
                 }
             }
         } else {
-            cell = homeMainCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeMainCollectionViewCell", for: indexPath)
+            cell = homeMainCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeMainCollectionViewCell", for: indexPath)  as? MMainCollectionViewCell
             if let mainCell = cell as? MMainCollectionViewCell {
-                if indexPath.item < dummyData1.count && indexPath.item < dummyImageName1.count {
-                    let data = dummyData1[indexPath.item]
-                    mainCell.titleLabel.text = data
-                    mainCell.imageView.image = UIImage(named: dummyImageName1[indexPath.item])
+                if !KakaoAPIModel.documents.isEmpty && indexPath.item < KakaoAPIModel.documents.count{
+                    let data = KakaoAPIModel.documents[indexPath.item]
+                    
+                    mainCell.titleLabel.text = data.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+                    if let imageUrl = URL(string: data.thumbnail) {
+                        let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                            if let error = error {
+                                print(Logger.Write(LogLevel.Error)("HomeViewController")(92)("error -> \(error.localizedDescription)"))
+                                return
+                            }
+                            if let data = data, let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    if let currentIndexPath = collectionView.indexPath(for: mainCell), currentIndexPath == indexPath {
+                                        // 이미지 설정 시 현재 셀이 원하는 셀과 일치하는 경우에만 설정
+                                        mainCell.imageView.image = image
+                                    }
+                                }
+                            }
+                        }
+                        task.resume()
+                    }
                 }
             }
         }
         return cell ?? UICollectionViewCell()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView === homeMainCollectionView{
+            print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
+            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
+                homeViewPresenter.onMainItemSelected(cellInfo: KakaoAPIModel.documents[indexPath.item])
+            }
+        }else{
+            if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
+                homeViewPresenter.onTagItemSelected(cellInfo:  HometagList[indexPath.item])
+            }
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var cellSize: CGSize = CGSize(width: 50, height: 50) // 기본 셀 크기
         if collectionView === homeTagCollectionView{
@@ -70,40 +170,35 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cellSize
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        if collectionView === homeMainCollectionView{
-            print(Logger.Write(LogLevel.Info)("HomeViewController")(83)("더미 데이터를 API데이터 변환 필요"))
-            if let cell = collectionView.cellForItem(at: indexPath) as? MMainCollectionViewCell {
-                let baseController = ReviewSceneBuilder().WithNavigationController()
-                let reviewController = baseController.rootViewController as? ReviewViewController
-                reviewController?.BlogName = "ABC"
-                reviewController?.reviewFoodImageView.image = UIImage(named: "search")
-                reviewController?.reviewContentLabel.text = "향이 익숙하지 않았는데 <b>실비</b> <b>김치</b>는 양념만 따로 냉동해서 라면 끓여 먹을 때마다 넣어 먹어주면 너무 좋습니다. 매운 <b>실비</b> <b>김치</b> 후기 매운 음식 좋아하시는 분들은 다 아실텐데 선화동  본점은...".replacingOccurrences(of: "</b>", with:"" ).replacingOccurrences(of: "<b>", with: "")
-                navigationController?.pushViewController(reviewController!, animated: true)
-            }
-        }else{
-            if let cell = collectionView.cellForItem(at: indexPath) as? MTagCollectionViewCell {
-                print(cell.titleLabel.text!)
-            }
-            
-        }
-    }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        return g_sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        return g_sectionInsets.left
     }
 }
 
-
+extension HomeViewController : UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        homeSearchTextField.resignFirstResponder()
+        homeViewPresenter.onSearchMainItem(keyword: textField.text!)
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        if let touch = touches.first, touch.view != homeSearchTextField {
+            homeSearchTextField.resignFirstResponder()
+        }
+    }
+}
 
 class HomeViewController: BaseViewController, EmailAuthDelegate{
-    
-    var homeViewPresenter =  HomeViewPresenter()
+    var HometagList : [HomeViewTagModel] = []
+    var KakaoAPIModel  = KakaoAPI()
+    var homeViewPresenter :  HomeViewPresenterSpec!
     var homeTableView : MTableView? //밑에 사진, 글 등
     var homeTableViewController = MTableViewController() //
     var homeTagCollectionView =  MTagCollectionView()// 오른쪽으로 스와이프 하면서 태그를 통한 이미지 갱신
@@ -112,6 +207,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
     var homeTopBarButton = MNavigationBarButton(width : 40,height : 40,buttonType : ["question"])
     var homeRecommendLabel =  MTextLabel(text : "블로그 추천 음식", isBold: true, fontSize : 20)
     var homeMainCollectionView = MMainCollectionView(isHorizontal: false,  size: CGSize(width: 150, height: 150))
+    var isLoadingData = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,8 +223,12 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         homeMainCollectionView.dataSource = self
         homeMainCollectionView.register(MMainCollectionViewCell.self, forCellWithReuseIdentifier: "HomeMainCollectionViewCell")
         
+        homeSearchTextField.delegate = self
+        
         NavigationLayout()
         SetupLayout()
+        homeViewPresenter.loadData()
+        homeViewPresenter.loadTagData()
         
     }
     
@@ -137,12 +237,11 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         case EmailResult.Success:
             Toast.showToast(message: "제출이 완료되었습니다.", errorMessage: [], font: UIFont.systemFont(ofSize: 14.0), controllerView: self)
         default:
-            print("")
+            print("error")
         }
     }
     
     func SetupLayout(){
-
         homeTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             homeTagCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -157,7 +256,7 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
             homeSearchTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             homeSearchTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -20),
             homeSearchTextField.heightAnchor.constraint(equalToConstant: 30) //
-        ]) 
+        ])
         
         homeRecommendLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -195,9 +294,10 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
         
         let backItem = UIBarButtonItem()
         backItem.title = "뒤로 가기"
+        backItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backItem
     }
-
+    
     
     @objc func Question(){
         let baseController = QuestionSceneBuilder().WithNavigationController()
@@ -207,7 +307,6 @@ class HomeViewController: BaseViewController, EmailAuthDelegate{
     }
     
 }
-
 
 //#if DEBUG // UI 레이아웃 잡기..
 //extension HomeViewController: UIViewControllerRepresentable {

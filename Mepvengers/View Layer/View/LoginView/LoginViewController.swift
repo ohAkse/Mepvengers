@@ -8,14 +8,14 @@
 import UIKit
 import SwiftSMTP
 
-protocol LoginViewProtocol: AnyObject {
+protocol LoginViewSpec: AnyObject {
     func CloseView()
     func ShowErrorMessage(ErrorMessage : String)
     func UpdateTimer(seconds : Int )
     func SetAlertWithTextField()
 }
 
-extension LoginViewController : LoginViewProtocol{
+extension LoginViewController : LoginViewSpec{
     func SetAlertWithTextField() {
         DispatchQueue.main.async {
             self.SetupAlertController()
@@ -59,6 +59,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SkipStartScene(bSkip: true)
+        
         view.addSubview(LoginImageView)
         view.addSubview(LoginEmailTextHeader)
         view.addSubview(LoginEmailTextField)
@@ -101,11 +103,16 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         }
         return true
     }
+    func SkipStartScene(bSkip : Bool){
+        if bSkip == true{
+            print(Logger.Write(LogLevel.Info)("LoginViewController")(106)("인증 작업 필요없이 바로 넘김 -> 이함수 없애면 원복"))
+            StartHomeViewControllerInfo()
+            navigationController?.navigationBar.isHidden = true
+        }
+    }
+ 
     
     override func viewWillAppear(_ animated: Bool){
-//        print(Logger.Write(LogLevel.Info)("LoginViewController")(106)("인증 작업 필요없이 바로 넘김 -> 이함수 없애면 원복"))
-//        StartHomeViewControllerInfo()
-//        navigationController?.navigationBar.isHidden = true
     }
     
     @objc func ConfirmButtonClicked(){

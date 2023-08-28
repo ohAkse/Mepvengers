@@ -8,10 +8,14 @@ import Foundation
 import UIKit
 struct HomeSceneBuilder : ViewBuilderSpec{
     func build()->  HomeViewController {
-        let rootViewController = HomeViewController()
-        //Present 및 fetch클래스 등록
+        let homeViewController = HomeViewController()
+        let remoteRepository = RemoteKakaoBlogRepository(fetcher: KakaoFetcher())
+        let fetchKakaoUseCase = FetchKakaoUseCase(repository: remoteRepository)
+        let homeViewPresenter = HomeViewPresenter<FetchKakaoUseCase>(HomeViewSpec: homeViewController, FetchUseCase: fetchKakaoUseCase)
+        homeViewPresenter.HomeViewSpec = homeViewController
+        homeViewController.homeViewPresenter = homeViewPresenter
 
-        return rootViewController
+        return homeViewController
     }
     
 }

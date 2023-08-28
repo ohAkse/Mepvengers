@@ -26,10 +26,9 @@ class BaseNavigationController: UINavigationController {
     }
     
     private func updatedTheme() {
-        //navigationBar.barStyle = UIBarStyle.yellow
         interactivePopGestureRecognizer?.isEnabled = true
         navigationBar.isTranslucent = false
-        navigationBar.backgroundColor = .gray
+        navigationBar.backgroundColor = .white
         navigationBar.barTintColor = ThemeColor.pureBlack.color
         navigationBar.tintColor = ThemeColor.pureWhite.color
         navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]

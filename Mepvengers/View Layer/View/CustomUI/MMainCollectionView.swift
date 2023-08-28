@@ -22,6 +22,13 @@ class MMainCollectionView: UICollectionView {
 
 
 class MMainCollectionViewCell: UICollectionViewCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageView.image = nil
+        titleLabel.text = ""
+    }
+    
     // 프로퍼티
     var _ImageName : String = ""
     var ImageName: String {
@@ -79,7 +86,8 @@ class MMainCollectionViewCell: UICollectionViewCell {
     }
     private func setupCell() {
         // 배경색 설정
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = UIColor.white
+        self.alpha = 0.9
         
         // 라운드 처리
         self.layer.cornerRadius = 10
@@ -94,7 +102,7 @@ class MMainCollectionViewCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7) // 이미지 뷰 높이 설정 (컨텐트 뷰 높이의 80%)
+            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.9) // 이미지 뷰 높이 설정 (컨텐트 뷰 높이의 80%)
         ])
         
         // 텍스트 레이블 추가

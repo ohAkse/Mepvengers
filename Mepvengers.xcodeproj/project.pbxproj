@@ -12,10 +12,28 @@
 		5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */; };
 		5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */; };
 		5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2912702A6FF22B000A8FCE /* UIAlertController.swift */; };
+		5F2E5DFB2A741226005BDB2F /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E5DFA2A741226005BDB2F /* Array.swift */; };
 		5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */; };
+		5F497B7F2A734BD80006A1FB /* BlogLikeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B7E2A734BD80006A1FB /* BlogLikeViewPresenter.swift */; };
+		5F497B812A73913A0006A1FB /* VideoLikeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B802A73913A0006A1FB /* VideoLikeViewPresenter.swift */; };
+		5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */; };
+		5F6302282A78F2D5009673E0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6302272A78F2D5009673E0 /* WebViewController.swift */; };
+		5F63022A2A78FFBF009673E0 /* WebViewSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6302292A78FFBF009673E0 /* WebViewSceneBuilder.swift */; };
+		5F63022C2A7946D8009673E0 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F63022B2A7946D8009673E0 /* UIColor.swift */; };
+		5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5DE2A77599C003B7C21 /* APIManager.swift */; };
+		5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5F75C5E12A777DA3003B7C21 /* SwiftyJSON */; };
+		5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */; };
+		5F79ED222A79FB8200487310 /* FetchGoogleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */; };
+		5F79ED242A7A0CEE00487310 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED232A7A0CEE00487310 /* NetworkError.swift */; };
+		5F79ED262A7A9FAA00487310 /* RemoteKakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED252A7A9FAA00487310 /* RemoteKakaoRepository.swift */; };
+		5F79ED282A7A9FD300487310 /* RemoteGoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED272A7A9FD300487310 /* RemoteGoogleRepository.swift */; };
+		5F79ED2A2A7AA0DC00487310 /* LocalKakaoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED292A7AA0DC00487310 /* LocalKakaoRepository.swift */; };
+		5F79ED2C2A7AA0E700487310 /* LocalGoogleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED2B2A7AA0E700487310 /* LocalGoogleRepository.swift */; };
+		5F79ED2E2A7AAF3100487310 /* KakaoLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED2D2A7AAF3100487310 /* KakaoLikeModel.swift */; };
+		5F79ED302A7AAF4200487310 /* GoogleVideoLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED2F2A7AAF4200487310 /* GoogleVideoLikeModel.swift */; };
+		5F79ED322A7AB41200487310 /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED312A7AB41200487310 /* DateTime.swift */; };
+		5F79ED342A7AC3D800487310 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F79ED332A7AC3D800487310 /* MigrationManager.swift */; };
 		5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5F8B1CE42A6E38E70023BA85 /* Tabman */; };
-		5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */; };
-		5F8B1CF52A6E76270023BA85 /* VideoLikeViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF42A6E76270023BA85 /* VideoLikeViewSpec.swift */; };
 		5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */; };
 		5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA04F5E2A63E0CA006E6FA6 /* AppDelegate.swift */; };
 		5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA04F602A63E0CA006E6FA6 /* SceneDelegate.swift */; };
@@ -40,6 +58,11 @@
 		5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */; };
 		5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */; };
 		5FC05C0C2A66C69100B12A03 /* CousinViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */; };
+		5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */; };
+		5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */; };
+		5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */; };
+		5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */; };
+		5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */; };
 		5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651B2A64D5B50016C79D /* BaseViewController.swift */; };
 		5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */; };
 		5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */; };
@@ -52,6 +75,9 @@
 		5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */; };
 		5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */; };
 		5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */; };
+		5FEDF4112A7B5736001D75E7 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEDF4102A7B5736001D75E7 /* Sequence.swift */; };
+		5FEDF4132A7B6CE2001D75E7 /* BlogLikeSceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEDF4122A7B6CE2001D75E7 /* BlogLikeSceneBuilder.swift */; };
+		5FF6BC8F2A78274200170342 /* FetchKakaoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */; };
 		613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D5040AF080804EBA38775F /* Pods_Mepvengers.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,9 +87,26 @@
 		5F1F9C4E2A696EA600E3FB00 /* LoginSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneBuilder.swift; sourceTree = "<group>"; };
 		5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogLikeViewController.swift; sourceTree = "<group>"; };
 		5F2912702A6FF22B000A8FCE /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		5F2E5DFA2A741226005BDB2F /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewPresenter.swift; sourceTree = "<group>"; };
-		5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogSceneBuilder.swift; sourceTree = "<group>"; };
-		5F8B1CF42A6E76270023BA85 /* VideoLikeViewSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewSpec.swift; sourceTree = "<group>"; };
+		5F497B7E2A734BD80006A1FB /* BlogLikeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogLikeViewPresenter.swift; sourceTree = "<group>"; };
+		5F497B802A73913A0006A1FB /* VideoLikeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewPresenter.swift; sourceTree = "<group>"; };
+		5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeSceneBuilder.swift; sourceTree = "<group>"; };
+		5F6302272A78F2D5009673E0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		5F6302292A78FFBF009673E0 /* WebViewSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewSceneBuilder.swift; sourceTree = "<group>"; };
+		5F63022B2A7946D8009673E0 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		5F75C5DE2A77599C003B7C21 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataUseCaseSpec.swift; sourceTree = "<group>"; };
+		5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGoogleUseCase.swift; sourceTree = "<group>"; };
+		5F79ED232A7A0CEE00487310 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		5F79ED252A7A9FAA00487310 /* RemoteKakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKakaoRepository.swift; sourceTree = "<group>"; };
+		5F79ED272A7A9FD300487310 /* RemoteGoogleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGoogleRepository.swift; sourceTree = "<group>"; };
+		5F79ED292A7AA0DC00487310 /* LocalKakaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalKakaoRepository.swift; sourceTree = "<group>"; };
+		5F79ED2B2A7AA0E700487310 /* LocalGoogleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalGoogleRepository.swift; sourceTree = "<group>"; };
+		5F79ED2D2A7AAF3100487310 /* KakaoLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLikeModel.swift; sourceTree = "<group>"; };
+		5F79ED2F2A7AAF4200487310 /* GoogleVideoLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVideoLikeModel.swift; sourceTree = "<group>"; };
+		5F79ED312A7AB41200487310 /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		5F79ED332A7AC3D800487310 /* MigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLikeViewController.swift; sourceTree = "<group>"; };
 		5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mepvengers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FA04F5E2A63E0CA006E6FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +138,11 @@
 		5FC05C042A66C01A00B12A03 /* CousinSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CousinSceneBuilder.swift; sourceTree = "<group>"; };
 		5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPresenter.swift; sourceTree = "<group>"; };
 		5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CousinViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewPresenter.swift; sourceTree = "<group>"; };
+		5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleVideoModel.swift; sourceTree = "<group>"; };
+		5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoModel.swift; sourceTree = "<group>"; };
 		5FE1651B2A64D5B50016C79D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5FE1651D2A64D5C80016C79D /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5FE165252A64D7D40016C79D /* ViewBuilderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilderSpec.swift; sourceTree = "<group>"; };
@@ -109,6 +157,9 @@
 		5FED380B2A6AC4F100CADAA3 /* google_video_api.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = google_video_api.geojson; sourceTree = "<group>"; };
 		5FED38102A6AD30300CADAA3 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		5FED38122A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSceneBuilder.swift; sourceTree = "<group>"; };
+		5FEDF4102A7B5736001D75E7 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		5FEDF4122A7B6CE2001D75E7 /* BlogLikeSceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogLikeSceneBuilder.swift; sourceTree = "<group>"; };
+		5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchKakaoUseCase.swift; sourceTree = "<group>"; };
 		68A7AAEDA7EADAEC5FC6CFDA /* Pods-Mepvengers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.debug.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.debug.xcconfig"; sourceTree = "<group>"; };
 		9A42A90DA341D908A0BA45F7 /* Pods-Mepvengers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mepvengers.release.xcconfig"; path = "Target Support Files/Pods-Mepvengers/Pods-Mepvengers.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +172,7 @@
 				5F1F9C282A69336500E3FB00 /* SwiftSMTP in Frameworks */,
 				5F8B1CE52A6E38E70023BA85 /* Tabman in Frameworks */,
 				613D62B17153445333001232 /* Pods_Mepvengers.framework in Frameworks */,
+				5F75C5E22A777DA3003B7C21 /* SwiftyJSON in Frameworks */,
 				5FED380E2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,11 +189,31 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
+		5F75C5DD2A77598E003B7C21 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				5F75C5DE2A77599C003B7C21 /* APIManager.swift */,
+				5F79ED332A7AC3D800487310 /* MigrationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		5F75C5EA2A778E52003B7C21 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				5F79ED252A7A9FAA00487310 /* RemoteKakaoRepository.swift */,
+				5F79ED272A7A9FD300487310 /* RemoteGoogleRepository.swift */,
+				5F79ED292A7AA0DC00487310 /* LocalKakaoRepository.swift */,
+				5F79ED2B2A7AA0E700487310 /* LocalGoogleRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		5F8B1CEE2A6E75730023BA85 /* BlogLikeView */ = {
 			isa = PBXGroup;
 			children = (
-				5F8B1CF12A6E75BF0023BA85 /* BlogSceneBuilder.swift */,
 				5F29126E2A6F62E8000A8FCE /* BlogLikeViewController.swift */,
+				5FEDF4122A7B6CE2001D75E7 /* BlogLikeSceneBuilder.swift */,
 			);
 			path = BlogLikeView;
 			sourceTree = "<group>";
@@ -149,8 +221,8 @@
 		5F8B1CF32A6E760C0023BA85 /* VideoLikeView */ = {
 			isa = PBXGroup;
 			children = (
-				5F8B1CF42A6E76270023BA85 /* VideoLikeViewSpec.swift */,
 				5F8B1CF62A6E76350023BA85 /* VideoLikeViewController.swift */,
+				5F497B822A7396150006A1FB /* VideoLikeSceneBuilder.swift */,
 			);
 			path = VideoLikeView;
 			sourceTree = "<group>";
@@ -204,10 +276,8 @@
 		5FA04F742A63E426006E6FA6 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				5F75C5EA2A778E52003B7C21 /* Repository */,
 				5FC05C0D2A66C7A600B12A03 /* Enum */,
-				5FC05C082A66C54D00B12A03 /* Presenter */,
-				5FC05C072A66C54300B12A03 /* UseCase */,
-				5FC05C062A66C51500B12A03 /* DataModel */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -215,6 +285,10 @@
 		5FA04F752A63E432006E6FA6 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
+				5F75C5DD2A77598E003B7C21 /* Manager */,
+				5FCFB5C62A72A61A00273DE0 /* Model */,
+				5FC05C072A66C54300B12A03 /* UseCase */,
+				5FC05C082A66C54D00B12A03 /* Presenter */,
 			);
 			path = "Domain Layer";
 			sourceTree = "<group>";
@@ -232,6 +306,9 @@
 		5FA04F772A63E5D1006E6FA6 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5F2E5DFA2A741226005BDB2F /* Array.swift */,
+				5F79ED312A7AB41200487310 /* DateTime.swift */,
+				5FEDF4102A7B5736001D75E7 /* Sequence.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -292,6 +369,8 @@
 			children = (
 				5FC05BFD2A66565900B12A03 /* ReviewViewController.swift */,
 				5FAED9542A67A1BC006E89FC /* ReviewSceneBuilder.swift */,
+				5F6302272A78F2D5009673E0 /* WebViewController.swift */,
+				5F6302292A78FFBF009673E0 /* WebViewSceneBuilder.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -306,16 +385,12 @@
 			path = CousinView;
 			sourceTree = "<group>";
 		};
-		5FC05C062A66C51500B12A03 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModel;
-			sourceTree = "<group>";
-		};
 		5FC05C072A66C54300B12A03 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				5F75C5F52A77A009003B7C21 /* FetchDataUseCaseSpec.swift */,
+				5FF6BC8E2A78274200170342 /* FetchKakaoUseCase.swift */,
+				5F79ED212A79FB8200487310 /* FetchGoogleUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -326,6 +401,11 @@
 				5FC05C092A66C68300B12A03 /* HomeViewPresenter.swift */,
 				5FC05C0B2A66C69100B12A03 /* CousinViewPresenter.swift */,
 				5F4562DA2A70E20300160023 /* LoginViewPresenter.swift */,
+				5FCFB5C02A7217A400273DE0 /* QuestionViewPresenter.swift */,
+				5FCFB5C22A7217C400273DE0 /* ReviewViewPresenter.swift */,
+				5FCFB5C42A7217F500273DE0 /* VideoPlayerViewPresenter.swift */,
+				5F497B7E2A734BD80006A1FB /* BlogLikeViewPresenter.swift */,
+				5F497B802A73913A0006A1FB /* VideoLikeViewPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -333,8 +413,20 @@
 		5FC05C0D2A66C7A600B12A03 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				5F79ED232A7A0CEE00487310 /* NetworkError.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		5FCFB5C62A72A61A00273DE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5FCFB5C72A72A62900273DE0 /* GoogleVideoModel.swift */,
+				5FCFB5CF2A72A8E500273DE0 /* KakaoModel.swift */,
+				5F79ED2D2A7AAF3100487310 /* KakaoLikeModel.swift */,
+				5F79ED2F2A7AAF4200487310 /* GoogleVideoLikeModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5FE1651F2A64D5CF0016C79D /* Home */ = {
@@ -399,6 +491,7 @@
 			children = (
 				5FE165512A652CF40016C79D /* UIImage.swift */,
 				5F2912702A6FF22B000A8FCE /* UIAlertController.swift */,
+				5F63022B2A7946D8009673E0 /* UIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -451,6 +544,7 @@
 				5F1F9C272A69336500E3FB00 /* SwiftSMTP */,
 				5FED380D2A6ACF1A00CADAA3 /* YouTubeiOSPlayerHelper */,
 				5F8B1CE42A6E38E70023BA85 /* Tabman */,
+				5F75C5E12A777DA3003B7C21 /* SwiftyJSON */,
 			);
 			productName = Mepvengers;
 			productReference = 5FA04F5B2A63E0CA006E6FA6 /* Mepvengers.app */;
@@ -484,6 +578,7 @@
 				5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 				5FED380C2A6ACF1A00CADAA3 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 				5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */,
+				5F75C5E02A777DA3003B7C21 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 5FA04F5C2A63E0CA006E6FA6 /* Products */;
 			projectDirPath = "";
@@ -554,45 +649,70 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FAED9702A67FC2E006E89FC /* GlobalDummy.swift in Sources */,
+				5F6302282A78F2D5009673E0 /* WebViewController.swift in Sources */,
 				5FE1651C2A64D5B50016C79D /* BaseViewController.swift in Sources */,
-				5F8B1CF22A6E75BF0023BA85 /* BlogSceneBuilder.swift in Sources */,
 				5FAED9752A6834AB006E89FC /* QuestionViewController.swift in Sources */,
-				5F8B1CF52A6E76270023BA85 /* VideoLikeViewSpec.swift in Sources */,
 				5FA04F5F2A63E0CA006E6FA6 /* AppDelegate.swift in Sources */,
+				5F497B812A73913A0006A1FB /* VideoLikeViewPresenter.swift in Sources */,
+				5FEDF4132A7B6CE2001D75E7 /* BlogLikeSceneBuilder.swift in Sources */,
 				5FAED9582A67A2CB006E89FC /* MTableView.swift in Sources */,
+				5F497B832A7396150006A1FB /* VideoLikeSceneBuilder.swift in Sources */,
 				5FC05BFE2A66565900B12A03 /* ReviewViewController.swift in Sources */,
+				5F79ED242A7A0CEE00487310 /* NetworkError.swift in Sources */,
 				5FAED9602A67A3A2006E89FC /* MTextLabel.swift in Sources */,
 				5FAED9642A67A40B006E89FC /* MNavigationItem.swift in Sources */,
 				5FC05C0A2A66C68300B12A03 /* HomeViewPresenter.swift in Sources */,
 				5FAED95E2A67A377006E89FC /* MTextField.swift in Sources */,
 				5FAED95C2A67A347006E89FC /* MTagCollectionView.swift in Sources */,
 				5FED38132A6AD31300CADAA3 /* VideoPlayerSceneBuilder.swift in Sources */,
+				5F79ED222A79FB8200487310 /* FetchGoogleUseCase.swift in Sources */,
+				5F79ED2A2A7AA0DC00487310 /* LocalKakaoRepository.swift in Sources */,
+				5FEDF4112A7B5736001D75E7 /* Sequence.swift in Sources */,
 				5FAED9552A67A1BC006E89FC /* ReviewSceneBuilder.swift in Sources */,
+				5F75C5F62A77A009003B7C21 /* FetchDataUseCaseSpec.swift in Sources */,
 				5F4562DB2A70E20300160023 /* LoginViewPresenter.swift in Sources */,
 				5FC05C052A66C01A00B12A03 /* CousinSceneBuilder.swift in Sources */,
+				5FCFB5D02A72A8E500273DE0 /* KakaoModel.swift in Sources */,
+				5F79ED282A7A9FD300487310 /* RemoteGoogleRepository.swift in Sources */,
 				5F8B1CF72A6E76350023BA85 /* VideoLikeViewController.swift in Sources */,
 				5FAED9772A6834C1006E89FC /* QuestionSceneBuilder.swift in Sources */,
 				5FAED96C2A67C39A006E89FC /* MButton.swift in Sources */,
+				5F75C5DF2A77599C003B7C21 /* APIManager.swift in Sources */,
+				5F497B7F2A734BD80006A1FB /* BlogLikeViewPresenter.swift in Sources */,
 				5FE1652B2A64DCD00016C79D /* HomeViewController.swift in Sources */,
 				5F29126F2A6F62E8000A8FCE /* BlogLikeViewController.swift in Sources */,
+				5F63022C2A7946D8009673E0 /* UIColor.swift in Sources */,
 				5FC05C032A66B02B00B12A03 /* CousinViewController.swift in Sources */,
+				5FCFB5C52A7217F500273DE0 /* VideoPlayerViewPresenter.swift in Sources */,
+				5FCFB5C32A7217C400273DE0 /* ReviewViewPresenter.swift in Sources */,
+				5FF6BC8F2A78274200170342 /* FetchKakaoUseCase.swift in Sources */,
 				5FED38082A6A547800CADAA3 /* Toast.swift in Sources */,
 				5FED38112A6AD30300CADAA3 /* VideoPlayerViewController.swift in Sources */,
+				5FCFB5C12A7217A400273DE0 /* QuestionViewPresenter.swift in Sources */,
 				5FE1651E2A64D5C80016C79D /* BaseNavigationController.swift in Sources */,
 				5F2912712A6FF22B000A8FCE /* UIAlertController.swift in Sources */,
 				5F1F9C4D2A696E8A00E3FB00 /* LoginViewController.swift in Sources */,
+				5F79ED2E2A7AAF3100487310 /* KakaoLikeModel.swift in Sources */,
 				5FA04F612A63E0CA006E6FA6 /* SceneDelegate.swift in Sources */,
+				5F79ED342A7AC3D800487310 /* MigrationManager.swift in Sources */,
 				5FE165262A64D7D40016C79D /* ViewBuilderSpec.swift in Sources */,
 				5FAED95A2A67A30E006E89FC /* MTabbarView.swift in Sources */,
 				5FE165292A64D9360016C79D /* Theme.swift in Sources */,
 				5FAED9622A67A3CB006E89FC /* MMainCollectionView.swift in Sources */,
 				5FC05C0C2A66C69100B12A03 /* CousinViewPresenter.swift in Sources */,
 				5FE165302A64E4CB0016C79D /* HomeSceneBuilder.swift in Sources */,
+				5F79ED262A7A9FAA00487310 /* RemoteKakaoRepository.swift in Sources */,
+				5FCFB5C82A72A62900273DE0 /* GoogleVideoModel.swift in Sources */,
 				5FE165542A6550B80016C79D /* Logger.swift in Sources */,
+				5F2E5DFB2A741226005BDB2F /* Array.swift in Sources */,
 				5F1F9C4F2A696EA600E3FB00 /* LoginSceneBuilder.swift in Sources */,
 				5FE165522A652CF40016C79D /* UIImage.swift in Sources */,
+				5F79ED2C2A7AA0E700487310 /* LocalGoogleRepository.swift in Sources */,
 				5FAED96A2A67A59D006E89FC /* LikeSceneBuilder.swift in Sources */,
 				5FAED9682A67A56C006E89FC /* LikeViewController.swift in Sources */,
+				5F79ED322A7AB41200487310 /* DateTime.swift in Sources */,
+				5F63022A2A78FFBF009673E0 /* WebViewSceneBuilder.swift in Sources */,
+				5F79ED302A7AAF4200487310 /* GoogleVideoLikeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +932,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		5F75C5E02A777DA3003B7C21 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		5F8B1CE32A6E38E70023BA85 /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman.git";
@@ -835,6 +963,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5F1F9C262A69336500E3FB00 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
 			productName = SwiftSMTP;
+		};
+		5F75C5E12A777DA3003B7C21 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F75C5E02A777DA3003B7C21 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 		5F8B1CE42A6E38E70023BA85 /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;

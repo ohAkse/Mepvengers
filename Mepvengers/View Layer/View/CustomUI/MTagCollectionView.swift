@@ -12,7 +12,7 @@ class MTagCollectionView: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 70, height: 50)
+        layout.itemSize = CGSize(width: 100, height: 40)
         super.init(frame: .zero, collectionViewLayout: layout)
     }
 
@@ -22,31 +22,11 @@ class MTagCollectionView: UICollectionView {
 }
 
 class MTagCollectionViewCell: UICollectionViewCell {
-    // 프로퍼티
-
-
-//    var _url : URL? = URL(string: "")
-//    var Url: URL?{
-//       get {
-//          return _url
-//       }
-//       set(newVal) {
-//           _url = newVal
-//       }
-//    }
     
-    var imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "search"))
-        imageView.clipsToBounds = true
-        
-        return imageView
-    }()
-    
-    // 텍스트 레이블
     var titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 50)))
+        let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     
@@ -64,32 +44,20 @@ class MTagCollectionViewCell: UICollectionViewCell {
     }
     private func setupCell() {
         // 배경색 설정
-        self.backgroundColor = UIColor.lightGray
-        
+        self.backgroundColor = UIColor.random()
         // 라운드 처리
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
     }
     
     private func setupViews() {
-        // 이미지 뷰 추가
-        contentView.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7) // 이미지 뷰 높이 설정 (컨텐트 뷰 높이의 80%)
-        ])
-        
-        // 텍스트 레이블 추가
         contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor), // 이미지 뷰 아래에 여백 추가
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 }
