@@ -34,14 +34,13 @@
 
 
 ## 프로젝트 구성  
-![스크린샷 2023-08-28 오후 10 22 18](https://github.com/ohAkse/Mepvengers/assets/49290883/47c09a13-557e-40c6-99d3-0d290626ce67)  
-[앱 아키텍쳐 다이어그램]
-  
-    
-![스크린샷 2023-08-28 오후 6 40 43](https://github.com/ohAkse/Mepvengers/assets/49290883/26258c6a-6dea-409c-8659-ff4ad5cc025d)  
+![스크린샷 2023-08-28 오후 10 22 18](https://github.com/ohAkse/Mepvengers/assets/49290883/e2836bf5-60c5-4d28-852f-61f798a1e1af)
+[앱 아키텍쳐 다이어그램]    
+   
+
+<img width="460" alt="스크린샷 2023-08-28 오후 10 32 22" src="https://github.com/ohAkse/Mepvengers/assets/49290883/3efc0e8a-7d92-42be-b8e6-22e5d256c4bd">
+
 [개발 프로젝트구조]  
-
-
 # View Lyaer, Domain Layer, Data Layer
 
 **View Laye**r : 화면을 담당하는 View를 담당하는 Layer로써, 사용자에게 보여지는 화면인 View를 관리하게 되며, User Action이 일어 났을때 Domain Layer에 있는 해당 화면의 Presenter에게 데이터를 전달후 Presenter에서 데이터를 가공 및 처리하여 View에게 다시 데이터를 전달받습니다. 전달 받은 데이터를 토대로  View에서 화면을 처리합니다. 이 계층에는 View와 관련된 Custom Components 및 UIController/NavigationController Base를 관리합니다.
