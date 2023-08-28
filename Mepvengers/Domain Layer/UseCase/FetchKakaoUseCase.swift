@@ -27,7 +27,7 @@ struct KakaoFetcher: NetworkKakaoFetchable {
             "Authorization": "KakaoAK " + apiKey
         ]
         print(page)
-        AF.request(apiUrl, method: .get, parameters: ["query": keyword, "page" : page, "size" : "10"], headers: headers)
+        AF.request(apiUrl, method: .get, parameters: ["query": keyword, "page" : page + 1, "size" : "10"], headers: headers)
             .responseDecodable(of: KakaoAPI.self) { response in
                 switch response.result {
                 case .success(let kakaoAPIResponse):
